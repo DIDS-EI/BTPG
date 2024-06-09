@@ -1,4 +1,4 @@
-# BTGym
+# BTPGym
 
  Platform and Benchmark for Behavior Tree Planning in Everyday Service Robots. Based on [VirtualHome](http://virtual-home.org/) v2.3.0
 
@@ -7,13 +7,13 @@
 
 Create a conda environment.
 ```shell
-conda create --name btgym python=3.9
-conda activate btgym
+conda create --name BTPGym python=3.9
+conda activate BTPGym
 ```
 
-Install BTGym.
+Install BTPGym.
 ```shell
-cd BTGym
+cd BTPGym
 pip install -e .
 ```
 
@@ -34,5 +34,4 @@ Download the VirtualHome executable for your platform (Only Windows is tested no
 ```python
 python test_exp/main.py
 ```
-
 
