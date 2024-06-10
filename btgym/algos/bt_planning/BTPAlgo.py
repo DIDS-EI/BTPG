@@ -620,3 +620,31 @@ class BTPAlgo:
             self.btml_string += '}\n'
         return self.btml_string
 
+    def get_cost(self):
+        # 开始从初始状态运行行为树，测试
+        state = self.start
+        steps = 0
+        current_cost = 0
+        current_tick_time = 0
+        val, obj, cost, tick_time = self.bt.cost_tick(state, 0, 0)  # tick行为树，obj为所运行的行动
+
+        current_tick_time += tick_time
+        current_cost += cost
+        while val != 'success' and val != 'failure':  # 运行直到行为树成功或失败
+            state = state_transition(state, obj)
+            val, obj, cost, tick_time = self.bt.cost_tick(state, 0, 0)
+            current_cost += cost
+            current_tick_time += tick_time
+            if (val == 'failure'):
+                print("bt fails at step", steps)
+                error = True
+                break
+            steps += 1
+            if (steps >= 500):  # 至多运行500步
+                break
+        if not self.goal <= state:  # 错误解，目标条件不在执行后状态满足
+            print("wrong solution", steps)
+            error = True
+            return current_cost
+        else:  # 正确解，满足目标条件
+            return current_cost

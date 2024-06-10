@@ -8,8 +8,8 @@ np.random.seed(seed)
 
 
 class OBTEA(BTPAlgo):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
     def run_algorithm_selTree(self, start, goal, actions, merge_time=99999999):
 
@@ -58,8 +58,8 @@ class OBTEA(BTPAlgo):
             #  Find the condition for the shortest cost path
             current_pair = heapq.heappop(self.nodes)
             min_cost = current_pair.cond_leaf.min_cost
-            self.expanded.append(current_pair)
             c = current_pair.cond_leaf.content
+            self.expanded.append(c)
 
             if self.verbose:
                 print("\nSelecting condition node for expansion:", current_pair.cond_leaf.content)
@@ -97,7 +97,7 @@ class OBTEA(BTPAlgo):
             if self.time_limit != None and time.time() - start_time > self.time_limit:
                 self.time_limit_exceeded = True
                 bt = self.post_processing(current_pair, goal_cond_act_pair, subtree, bt, child_to_parent,
-                                          cond_to_condActSeq,success=False)
+                                          cond_to_condActSeq)
                 return bt, min_cost, self.time_limit_exceeded
 
             if self.verbose:
@@ -125,7 +125,7 @@ class OBTEA(BTPAlgo):
                         # Pruning operation: the current condition is a superset of a previously expanded condition
                         valid = True
                         for expanded_condition in self.expanded:
-                            if expanded_condition.content <= c_attr:
+                            if expanded_condition <= c_attr:
                                 valid = False
                                 break
 

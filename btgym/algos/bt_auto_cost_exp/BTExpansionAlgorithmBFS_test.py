@@ -143,7 +143,7 @@ def check_conflict(conds):
     return False
 
 class BTalgorithmBFS:
-    def __init__(self, verbose=False, llm_reflect=False, llm=None, messages=None, priority_act_ls=None, time_limit=None, \
+    def __init__(self, verbose=False, act_tree_verbose=False, llm=None, messages=None, priority_act_ls=None, time_limit=None, \
                  consider_priopity=False, heuristic_choice=-1,output_just_best=True,exp=False,exp_cost=False,
                  max_expanded_num=100):
         self.bt = None

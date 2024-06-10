@@ -162,7 +162,7 @@ def check_conflict(conds):
 
 
 class OBTEAlgorithm:
-    def __init__(self, verbose=False, llm_reflect=False, llm=None, messages=None, priority_act_ls=None, time_limit=None, \
+    def __init__(self, verbose=False, act_tree_verbose=False, llm=None, messages=None, priority_act_ls=None, time_limit=None, \
                  consider_priopity=False, heuristic_choice=-1,output_just_best=True,exp=False,exp_cost=False,
                  max_expanded_num=100):
         self.bt = None
@@ -194,7 +194,7 @@ class OBTEAlgorithm:
 
         self.act_bt = None
 
-        self.llm_reflect = llm_reflect
+        self.act_tree_verbose = act_tree_verbose
         self.llm = llm
         self.messages = messages
         self.priority_act_ls = priority_act_ls
@@ -503,7 +503,7 @@ class OBTEAlgorithm:
 
 
             # 调用大模型
-            if self.llm_reflect:
+            if self.act_tree_verbose:
                 # if len(self.expanded) % 2000 == 0 and len(self.expanded) >= 100:
                 #     print(len(self.expanded))
                 # if len(self.expanded) % 1000 == 0 and len(self.expanded)>=100:

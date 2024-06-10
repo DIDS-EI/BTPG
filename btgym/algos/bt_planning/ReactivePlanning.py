@@ -9,8 +9,8 @@ np.random.seed(seed)
 
 
 class ReactivePlanning(BTPAlgo):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
     def run_algorithm_selTree(self, start, goal, actions, merge_time=99999999):
         start_time = time.time()

@@ -118,7 +118,7 @@ class HOBTEA(BTPAlgo):
 
 
             # 调用大模型
-            if self.llm_reflect:
+            if self.act_tree_verbose:
                 # if len(self.expanded) % 2000 == 0 and len(self.expanded) >= 100:
                 #     print(len(self.expanded))
                 # if len(self.expanded) % 1000 == 0 and len(self.expanded)>=100:

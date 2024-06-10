@@ -62,7 +62,7 @@ def get_SR(scene, algo_str, just_best,exe_times=5,data_num=100,p=0.2,difficulty=
                               priority_act_ls=priority_opt_act, key_predicates=[],
                               key_objects=[],
                               selected_algorithm=algo_str, mode="big",
-                              llm_reflect=False, time_limit=5,
+                              act_tree_verbose=False, time_limit=5,
                               heuristic_choice=heuristic_choice, exp=False, exp_cost=False, output_just_best=just_best,
                               theory_priority_act_ls=opt_act)
 

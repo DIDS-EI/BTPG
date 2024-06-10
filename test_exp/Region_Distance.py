@@ -48,7 +48,7 @@ def get_algo(d,ld,difficulty, scene, algo_str, max_epoch, data_num, save_csv=Fal
                           priority_act_ls=priority_opt_act, key_predicates=[],
                           key_objects=[],
                           selected_algorithm=algo_str, mode="big",
-                          llm_reflect=False, time_limit=None,
+                          act_tree_verbose=False, time_limit=None,
                           heuristic_choice=heuristic_choice,exp=False,exp_cost=True,output_just_best=False,
                           theory_priority_act_ls=opt_act,max_expanded_num=max_epoch)
 

@@ -183,7 +183,7 @@ def extract_llm_from_instr(llm,default_prompt_file,instruction,cur_cond_set,\
 
     return goal_set, priority_act_ls, key_predicates, key_objects, messages
 
-def llm_reflect(llm, messages, reflect_prompt):
+def act_tree_verbose(llm, messages, reflect_prompt):
     messages.append({"role": "user", "content": reflect_prompt})
     answer = llm.request(message=messages)
     messages.append({"role": "assistant", "content": answer})

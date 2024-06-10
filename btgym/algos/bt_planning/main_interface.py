@@ -19,14 +19,14 @@ from btgym.algos.bt_planning.tools import get_btml
 import os
 from btgym.utils import ROOT_PATH
 os.chdir(f'{ROOT_PATH}/../test_exp')
-from z_benchmark.Attraction.tools import modify_condition_set_Random_Perturbations
+from test_exp.Execution_Robustnes.tools import modify_condition_set_Random_Perturbations
 
 # 封装好的主接口
 class BTExpInterface:
     def __init__(self, behavior_lib, cur_cond_set, priority_act_ls=[], key_predicates=[], key_objects=[], selected_algorithm="opt",
                  mode="big",
-                 bt_algo_opt=True, llm_reflect=False, llm=None, messages=None, action_list=None,use_priority_act=True,time_limit=None,
-                 heuristic_choice=-1,output_just_best=True,exp=False,exp_cost=False,max_expanded_num=None,
+                 bt_algo_opt=True, act_tree_verbose=False, llm=None, messages=None, action_list=None,use_priority_act=True,time_limit=None,
+                 heuristic_choice=-1,output_just_best=True,exp_expand=False,exp_cost=False,max_expanded_num=None,
                  theory_priority_act_ls=None):
         """
         Initialize the BTOptExpansion with a list of actions.
@@ -40,7 +40,7 @@ class BTExpInterface:
         self.time_limit=time_limit
 
         self.output_just_best = output_just_best
-        self.exp = exp
+        self.exp_expand = exp_expand
         self.exp_cost = exp_cost
         self.max_expanded_num=max_expanded_num
 
@@ -100,7 +100,7 @@ class BTExpInterface:
                                                        self.selected_algorithm)
 
         self.has_processed = False
-        self.llm_reflect = llm_reflect
+        self.act_tree_verbose = act_tree_verbose
         self.llm = llm
         self.messages = messages
 
@@ -113,37 +113,36 @@ class BTExpInterface:
         :return: A btml string representing the outcome of the behavior tree.
         """
         self.goal = goal
-        if not self.exp_cost:
+        if not self.exp_cost and not self.exp_expand:
             if self.selected_algorithm == "opt":
-                self.algo = HOBTEA(verbose=False, \
-                                              act_tree_verbose=self.llm_reflect, \
+                self.algo = HOBTEA(verbose=False,act_tree_verbose=self.act_tree_verbose, \
                                               priority_act_ls=self.priority_act_ls,time_limit=self.time_limit,
-                                              heuristic_choice = self.heuristic_choice,output_just_best=self.output_just_best )
+                                              output_just_best=self.output_just_best )
             elif self.selected_algorithm == "obtea":
-                self.algo = OBTEA(verbose=False, \
-                                              act_tree_verbose=self.llm_reflect, \
+                self.algo = OBTEA(verbose=False, act_tree_verbose=self.act_tree_verbose, \
                                               priority_act_ls=self.priority_act_ls, time_limit=self.time_limit,
-                                              heuristic_choice=self.heuristic_choice,output_just_best=self.output_just_best,
-                                          exp=self.exp,theory_priority_act_ls=self.theory_priority_act_ls)
+                                              output_just_best=self.output_just_best)
             elif self.selected_algorithm == "bfs":
-                self.algo = BTExpansion(verbose=False,time_limit = self.time_limit,output_just_best=self.output_just_best,
-                                           priority_act_ls=self.priority_act_ls,theory_priority_act_ls=self.theory_priority_act_ls)
+                self.algo = BTExpansion(verbose=False, act_tree_verbose=self.act_tree_verbose, \
+                                              priority_act_ls=self.priority_act_ls, time_limit=self.time_limit,
+                                              output_just_best=self.output_just_best)
             elif self.selected_algorithm == "weak":
-                self.algo = ReactivePlanning(verbose=False,time_limit = self.time_limit,\
-                                             output_just_best=self.output_just_best,priority_act_ls=self.priority_act_ls)
+                self.algo = ReactivePlanning(verbose=False, act_tree_verbose=self.act_tree_verbose, \
+                                              priority_act_ls=self.priority_act_ls, time_limit=self.time_limit,
+                                              output_just_best=self.output_just_best)
             else:
                 print("Error in algorithm selection: This algorithm does not exist.")
         else:
             if self.selected_algorithm == "opt":
                 self.algo = OptBTExpAlgorithm_test(verbose=False, \
-                                              llm_reflect=self.llm_reflect, llm=self.llm, messages=self.messages, \
+                                              act_tree_verbose=self.act_tree_verbose, llm=self.llm, messages=self.messages, \
                                               priority_act_ls=self.priority_act_ls,time_limit=self.time_limit,
                                               consider_priopity = self.consider_priopity,exp_cost=self.exp_cost,
                                               heuristic_choice = self.heuristic_choice,output_just_best=self.output_just_best,\
                                                    exp=self.exp,max_expanded_num=self.max_expanded_num)
             elif self.selected_algorithm == "obtea":
                 self.algo = OBTEAlgorithm_test(verbose=False, \
-                                              llm_reflect=self.llm_reflect, llm=self.llm, messages=self.messages, \
+                                              act_tree_verbose=self.act_tree_verbose, llm=self.llm, messages=self.messages, \
                                               priority_act_ls=self.priority_act_ls, time_limit=self.time_limit,
                                               consider_priopity=self.consider_priopity,exp_cost=self.exp_cost,
                                               heuristic_choice=self.heuristic_choice,output_just_best=self.output_just_best,\
@@ -154,12 +153,6 @@ class BTExpInterface:
                                                 max_expanded_num=self.max_expanded_num)
             else:
                 print("Error in algorithm selection: This algorithm does not exist.")
-            # elif self.selected_algorithm == "baseline":
-            #     self.algo = OptBTExpAlgorithm_BaseLine(verbose=False, \
-            #                                   llm_reflect=self.llm_reflect, llm=self.llm, messages=self.messages, \
-            #                                   priority_act_ls=self.priority_act_ls)
-            # elif self.selected_algorithm == "opt-h":
-            #     self.algo = OptBTExpAlgorithmHeuristics(verbose=False)
 
 
         self.algo.clear()

@@ -32,8 +32,8 @@ for i,goal_str in enumerate(['IsIn_milk_fridge']):
     algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
                           priority_act_ls=[], key_predicates=[],
                           key_objects=[],
-                          selected_algorithm="opt", mode="big",
-                          llm_reflect=False, time_limit=15,
+                          selected_algorithm="bfs", mode="big",
+                          act_tree_verbose=False, time_limit=15,
                           heuristic_choice=0,output_just_best=True)
 
     goal_set = goal_transfer_str(goal_str)

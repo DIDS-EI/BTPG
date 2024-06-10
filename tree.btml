@@ -1,0 +1,2 @@
+selector
+    cond IsIn(milk,fridge)

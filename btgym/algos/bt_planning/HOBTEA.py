@@ -8,41 +8,8 @@ np.random.seed(seed)
 
 
 class HOBTEA(BTPAlgo):
-    def __init__(self, verbose=False, act_tree_verbose=False,
-                 priority_act_ls=None, time_limit=None,\
-                 output_just_best=True,heuristic_choice = -1):
-        # super().__init__()
-        self.bt = None
-        self.bt_merge = True
-        self.merge_time = 5
-        self.bt_without_merge = None
-
-        self.start = None
-        self.goal = None
-        self.actions = None
-        self.min_cost = float('inf')
-
-        self.nodes = []
-        self.tree_size = 0
-
-        self.expanded = []  # Conditions for storing expanded nodes
-        self.expanded_num=0
-        self.traversed = []  # Conditions for storing nodes that have been put into the priority queue
-
-
-        self.verbose = verbose
-        self.output_just_best = output_just_best
-
-        self.act_bt = None
-        self.act_tree_verbose = act_tree_verbose
-
-
-        self.act_cost_dic = {}
-        self.time_limit_exceeded = False
-        self.time_limit = time_limit
-
-        self.priority_act_ls = priority_act_ls
-
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
     def run_algorithm_selTree(self, start, goal, actions, merge_time=99999999):
         '''
         Run the planning algorithm to calculate a behavior tree from the initial state, goal state, and available actions
@@ -112,8 +79,8 @@ class HOBTEA(BTPAlgo):
             # min_cost = float('inf')
             current_pair = heapq.heappop(self.nodes)
             min_cost = current_pair.cond_leaf.min_cost
-            self.expanded.append(current_pair)
             c = current_pair.cond_leaf.content
+            self.expanded.append(c)
 
             if self.verbose:
                 print("\nSelecting condition node for expansion:", current_pair.cond_leaf.content)
@@ -175,7 +142,7 @@ class HOBTEA(BTPAlgo):
                         # Pruning
                         valid = True
                         for expanded_condition in self.expanded:
-                            if expanded_condition.cond_leaf.content <= c_attr:
+                            if expanded_condition <= c_attr:
                                 valid = False
                                 break
 
