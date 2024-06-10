@@ -10,9 +10,7 @@ np.random.seed(seed)
 
 class BTExpansion(BTPAlgo):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.bt_merge = False
-        print("self.bt_merge:",self.bt_merge)
+        super().__init__(bt_merge=False, **kwargs)
 
     def run_algorithm_selTree(self, start, goal, actions, merge_time=99999999):
         '''

@@ -45,10 +45,10 @@ class CondActPair:
 class BTPAlgo:
     def __init__(self, verbose=False, act_tree_verbose=False,
                  priority_act_ls=None, time_limit=None,\
-                 output_just_best=True):
+                 output_just_best=True,bt_merge=True):
 
         self.bt = None
-        self.bt_merge = True
+        self.bt_merge = bt_merge
         self.merge_time = 5
         self.bt_without_merge = None
 
