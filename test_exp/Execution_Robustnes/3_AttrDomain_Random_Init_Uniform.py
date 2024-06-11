@@ -3,7 +3,7 @@ import os
 import random
 import concurrent.futures
 from btgym.utils import ROOT_PATH
-os.chdir(f'{ROOT_PATH}/../z_benchmark')
+os.chdir(f'{ROOT_PATH}/../test_exp')
 from tools import modify_condition_set_Random_Perturbations,setup_environment,modify_condition_set
 import time
 import re
@@ -12,11 +12,11 @@ import btgym
 from btgym.utils.tools import collect_action_nodes
 from btgym.utils.read_dataset import read_dataset
 from btgym.algos.llm_client.tools import goal_transfer_str
-from btgym.algos.bt_autogen.main_interface import BTExpInterface
+from btgym.algos.bt_planning.main_interface import BTExpInterface
 from btgym.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
 
 from btgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
-from btgym.envs.virtualhome.exec_lib._base.VHAction import VHAction
+from btgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
 from btgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
 from btgym.envs.RobotHow.exec_lib._base.RHAction import RHAction
 import concurrent.futures
@@ -31,9 +31,9 @@ def get_SR(scene, algo_str, just_best,exe_times=5,data_num=100,p=0.2,difficulty=
     AVG_SR = 0
 
     # 导入数据
-    data_path = f"{ROOT_PATH}/../z_benchmark/data/{scene}_{difficulty}_100_processed_data.txt"
+    data_path = f"{ROOT_PATH}/../test_exp/data/{scene}_{difficulty}_100_processed_data.txt"
     data = read_dataset(data_path)
-    llm_data_path = f"{ROOT_PATH}/../z_benchmark/llm_data/{scene}_{difficulty}_100_llm_data.txt"
+    llm_data_path = f"{ROOT_PATH}/../test_exp/llm_data/{scene}_{difficulty}_100_llm_data.txt"
     llm_data = read_dataset(llm_data_path)
     env, cur_cond_set = setup_environment(scene)
 
@@ -66,7 +66,7 @@ def get_SR(scene, algo_str, just_best,exe_times=5,data_num=100,p=0.2,difficulty=
                               key_objects=[],
                               selected_algorithm=algo_str, mode="big",
                               act_tree_verbose=False, time_limit=5,
-                              heuristic_choice=heuristic_choice, exp=False, exp_cost=False, output_just_best=just_best,
+                              heuristic_choice=heuristic_choice, exp_record = False, output_just_best=just_best,
                               theory_priority_act_ls=opt_act)
 
         goal_set = goal_transfer_str(goal_str)

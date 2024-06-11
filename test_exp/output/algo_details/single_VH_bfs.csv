@@ -1,0 +1,6 @@
+Goal,Optimal_Actions,LLM_Optimal_Actions,Vital_Action_Predicates,Vital_Objects,Time_Limit_Exceeded,Error,Expanded_Number,Planning_Time_Total,Current_Cost,Action_Number,Recorded_Action_List,Tick_Time
+IsIn_chips_stove,"['Walk_chips', 'RightGrab_chips', 'Walk_stove', 'Open_stove', 'RightPutIn_chips_stove']","['Walk_chips', 'RightGrab_chips', 'Walk_stove', 'RightPut_chips_stove']","['Walk', 'RightGrab', 'Open', 'RightPutIn']","['chips', 'stove']",False,True,11,0.03500795364379883,0,0,[],428
+IsIn_book_cabinet,"['Walk_book', 'RightGrab_book', 'Walk_cabinet', 'Open_cabinet', 'RightPutIn_book_cabinet']","['Walk_book', 'RightGrab_book', 'Walk_cabinet', 'RightPut_book_cabinet']","['Walk', 'RightGrab', 'Open', 'RightPutIn']","['book', 'cabinet']",False,True,11,0.03500699996948242,0,0,[],428
+IsNear_self_tv,['Walk_tv'],['Walk_tv'],['Walk'],['tv'],False,False,4,0.003000974655151367,15,1,['Walk(tv)'],24
+IsOpen_fridge,"['Walk_fridge', 'Open_fridge']","['Walk_fridge', 'Open_fridge']","['Walk', 'Open']",['fridge'],False,False,11,0.022005796432495117,18,2,"['Walk(fridge)', 'Open(fridge)']",26
+IsNear_self_milk,['Walk_milk'],['Walk_milk'],['Walk'],['milk'],False,False,4,0.002000570297241211,15,1,['Walk(milk)'],16

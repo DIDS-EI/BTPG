@@ -1,0 +1,6 @@
+Goal,Optimal_Actions,LLM_Optimal_Actions,Vital_Action_Predicates,Vital_Objects,Time_Limit_Exceeded,Error,Expanded_Number,Planning_Time_Total,Current_Cost,Action_Number,Recorded_Action_List,Tick_Time
+IsIn_milk_fridge,"['Walk_milk', 'RightGrab_milk', 'Walk_fridge', 'PlugIn_fridge', 'Open_fridge', 'RightPutIn_milk_fridge']","['Walk_milk', 'RightGrab_milk', 'Walk_fridge', 'Open_fridge', 'RightPutIn_milk_fridge']","['Walk', 'RightGrab', 'PlugIn', 'Open', 'RightPutIn']","['milk', 'fridge']",False,True,11,0.07101583480834961,0,0,[],437
+IsSwitchedOn_fridge,"['Walk_fridge', 'PlugIn_fridge', 'SwitchOn_fridge']","['Walk_fridge', 'SwitchOn_fridge']","['Walk', 'PlugIn', 'SwitchOn']",['fridge'],False,False,11,0.26061439514160156,31,3,"['Walk(fridge)', 'PlugIn(fridge)', 'SwitchOn(fridge)']",1804
+IsSwitchedOn_oven,"['Walk_oven', 'PlugIn_oven', 'SwitchOn_oven']","['Walk_oven', 'SwitchOn_oven']","['Walk', 'PlugIn', 'SwitchOn']",['oven'],False,False,11,0.41764187812805176,31,3,"['Walk(oven)', 'PlugIn(oven)', 'SwitchOn(oven)']",4822
+IsNear_self_tv,['Walk_tv'],['Walk_tv'],['Walk'],['tv'],False,False,6,0.06001400947570801,15,1,['Walk(tv)'],16
+IsPlugged_microwave,"['Walk_microwave', 'PlugIn_microwave']","['Walk_microwave', 'PlugIn_microwave']","['Walk', 'PlugIn']",['microwave'],False,False,11,0.19518184661865234,23,2,"['Walk(microwave)', 'PlugIn(microwave)']",38

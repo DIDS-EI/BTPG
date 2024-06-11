@@ -65,8 +65,8 @@ def plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, d
                                   key_objects=[],
                                   selected_algorithm=algo_str, mode="big",
                                   act_tree_verbose=False, time_limit=5,
-                                  heuristic_choice=heuristic_choice,exp_expand=True,exp_cost=False,output_just_best=False,
-                                  theory_priority_act_ls=opt_act)
+                                  heuristic_choice=heuristic_choice,exp_record=True,output_just_best=False,
+                                  theory_priority_act_ls=opt_act,max_expanded_num=max_epoch)
 
             goal_set = goal_transfer_str(goal_str)
             start_time = time.time()
@@ -105,13 +105,17 @@ def plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, d
             detail_rows.append(new_row)
 
             if percentages_type == 'expanded':
-                corr_ratio = algo.algo.expanded_percentages
+                corr_ratio = algo.algo.expanded_percentages_ls
+                print(len(corr_ratio))
+                print(corr_ratio)
+                print(len(algo.algo.expanded_act_ls_ls))
+                print(algo.algo.expanded_act_ls_ls)
                 if not error and not time_limit_exceeded and corr_ratio[-1] <99:
                     # Recalculate once more
                     corr_ratio=[]
                     for expanded_act in algo.algo.expanded_act_ls_ls:
                         corr_ratio.append(calculate_priority_percentage(expanded_act, record_act_ls))
-                # print(corr_ratio)
+
 
             elif percentages_type == 'traversed':
                 corr_ratio = algo.algo.traversed_percentages
@@ -127,7 +131,7 @@ def plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, d
 
         # save detail to csv
         detailed_df = pd.DataFrame.from_records(detail_rows)
-        save_path = f'./algo_details/{difficulty}_{scene}_{algo_str_complete}.csv'
+        save_path = f'./output/algo_details/{difficulty}_{scene}_{algo_str_complete}.csv'
         detailed_df.to_csv(save_path, index=False)
 
         # Save all epoch data
@@ -135,7 +139,7 @@ def plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, d
             if heuristic_choice == 0: algo_str = 'opt_h0'
             if heuristic_choice == 1: algo_str = 'opt_h1'
             df = pd.DataFrame(corr_ratio_all)
-            file_path = f'./percentage_output/{percentages_type}_{difficulty}_{scene}_{algo_str_complete}.csv'
+            file_path = f'./output/percentage_output/{percentages_type}_{difficulty}_{scene}_{algo_str_complete}.csv'
             df.to_csv(file_path, index=False, header=False)
 
 
@@ -159,17 +163,17 @@ def plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, d
     plt.title(f'{percentages_type} ratio in {scene} ({difficulty})')
     plt.legend()
     plt.grid(True)
-    plt.savefig(f'./percentage_images/{percentages_type}_{difficulty}_{scene}.png', dpi=100)
+    plt.savefig(f'./output/percentage_images/{percentages_type}_{difficulty}_{scene}.png', dpi=100)
     plt.show()
 
-max_epoch = 2000
-data_num = 100
+max_epoch = 10
+data_num = 5
 algo_type = ['opt_h0','opt_h0_llm', 'obtea', 'bfs']   # 'opt_h0','opt_h0_llm', 'obtea', 'bfs',      'opt_h1','weak'
 
 for percentages_type in ['expanded']:  # 'expanded', 'traversed', 'cost'
-    for difficulty in ['single', 'multi']:  # 'single', 'multi'
+    for difficulty in ['single']:  # 'single', 'multi'
         print(f"============ percentages_type = {percentages_type}, difficulty = {difficulty} =============")
-        for scene in ['RH', 'RHS', 'RW', 'VH']:  # 'RH', 'RHS', 'RW', 'VH'
+        for scene in ['VH']:  # 'RW' , 'VH', 'RHS', RH'
             print(f"++++++++++ scene = {scene} ++++++++++")
             plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, data_num, save_csv=True)
 

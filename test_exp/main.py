@@ -3,12 +3,11 @@ import time
 import btgym
 from btgym.algos.llm_client.tools import goal_transfer_str
 from btgym.algos.bt_planning.main_interface import BTExpInterface
-
-from btgym.utils.tools import collect_action_nodes
+from btgym.utils.tools import *
 from btgym.utils.goal_generator.vh_gen import VirtualHomeGoalGen
 
-data_num = 100
-max_goal_num=500
+
+max_goal_num=5
 diffcult_type= "single" #"single"  #"mix" "multi"
 scene = "VH" # RH RHS RW
 
@@ -18,12 +17,8 @@ goal_ls = goal_gen.random_generate_goals(max_goal_num ,diffcult_type=diffcult_ty
 # for goal in goal_ls:
 #     print(goal)
 
-from btgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
-env = btgym.make("VH-PutMilkInFridge")
-cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)", "IsStanding(self)"}
-cur_cond_set |= {f'IsClose({arg})' for arg in VHAction.CanOpenPlaces}
-cur_cond_set |= {f'IsSwitchedOff({arg})' for arg in VHAction.HasSwitchObjects}
-big_actions = collect_action_nodes(env.behavior_lib)
+env, cur_cond_set = setup_environment(scene)
+
 
 # for i,goal_str in enumerate(goal_ls):
 for i,goal_str in enumerate(['IsIn_milk_fridge']):

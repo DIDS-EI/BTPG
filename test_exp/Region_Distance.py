@@ -49,7 +49,7 @@ def get_algo(d,ld,difficulty, scene, algo_str, max_epoch, data_num, save_csv=Fal
                           key_objects=[],
                           selected_algorithm=algo_str, mode="big",
                           act_tree_verbose=False, time_limit=None,
-                          heuristic_choice=heuristic_choice,exp=False,exp_cost=True,output_just_best=False,
+                          heuristic_choice=heuristic_choice,exp_record=False,output_just_best=False,
                           theory_priority_act_ls=opt_act,max_expanded_num=max_epoch)
 
     start_time = time.time()
@@ -84,21 +84,12 @@ def process_dataset(i, d, ld, difficulty, scene, algo_type, max_epoch, data_num)
         algo_results = []
 
         if algo_str in ['opt_h0', 'opt_h0_llm', 'obtea']:
-            for c_leaf in algo.algo.expanded:
-                c = c_leaf.content
-                error, state, act_num, current_cost, record_act_ls, current_tick_time = algo.execute_bt(
-                    goal_set[0], c, verbose=False)
-                algo_results.append(act_num)
-        else:
-            # for c in algo.algo.traversed_new:
             for c in algo.algo.expanded:
                 error, state, act_num, current_cost, record_act_ls, current_tick_time = algo.execute_bt(
                     goal_set[0], c, verbose=False)
-                # print("c:", c, "record_act_ls:", record_act_ls)
                 algo_results.append(act_num)
 
         results[algo_str] = algo_results
-    # print(results)
     for key, value in results.items():
         if value!=[]:
             print(f'Key: {key}, len(value): {len(value)}, value[-1]: {value[-1]})')
@@ -123,9 +114,9 @@ for difficulty in ['single', 'multi']:  # 'single', 'multi'
             'bfs': []
         }
 
-        data_path = f"{ROOT_PATH}/../z_benchmark/data/{scene}_{difficulty}_100_processed_data.txt"
+        data_path = f"{ROOT_PATH}/../test_exp/data/{scene}_{difficulty}_100_processed_data.txt"
         data = read_dataset(data_path)
-        llm_data_path = f"{ROOT_PATH}/../z_benchmark/llm_data/{scene}_{difficulty}_100_llm_data.txt"
+        llm_data_path = f"{ROOT_PATH}/../test_exp/llm_data/{scene}_{difficulty}_100_llm_data.txt"
         llm_data = read_dataset(llm_data_path)
         env, cur_cond_set = tools.setup_environment(scene)
 
@@ -153,7 +144,7 @@ for difficulty in ['single', 'multi']:  # 'single', 'multi'
         # Create DataFrame from dictionary
         df = pd.DataFrame.from_dict(all_results, orient='index').transpose()
         # Creating a filename using the scene and difficulty
-        filename = f'{ROOT_PATH}/../z_benchmark/output_algo_act_num/{scene}_{difficulty}_maxep={max_epoch}_act_num.csv'
+        filename = f'{ROOT_PATH}/../test_exp/output/output_algo_act_num/{scene}_{difficulty}_maxep={max_epoch}_act_num.csv'
         # Save DataFrame to CSV
         df.to_csv(filename, index=False)
         print(f'Data saved to {filename}')

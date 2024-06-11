@@ -79,8 +79,5 @@ def read_environment(filename,style=False):
 
 
 if __name__ == '__main__':
-    # example = read_dataset('C:/Users/yangz/Desktop/dataset0429.txt')
-    # print(example[0])
-
     env = read_environment('environment.txt')
     print(env[1])

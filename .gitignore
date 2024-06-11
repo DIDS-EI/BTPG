@@ -1,5 +1,3 @@
-
-simulators/virtualhome/windows/.gitkeep
 simulators/virtualhome/windows/MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll
 simulators/virtualhome/windows/MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll
 simulators/virtualhome/windows/MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser

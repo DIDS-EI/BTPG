@@ -80,7 +80,6 @@ class BTPAlgo:
 
     def clear(self):
         self.bt = None
-        self.bt_merge = True
         self.merge_time = 5
         self.bt_without_merge = None
 
@@ -442,11 +441,10 @@ class BTPAlgo:
 
         merge_time = min(merge_time, 500)
 
-        # 只针对第一层合并，之后要考虑层层递归合并
         bt = ControlBT(type='cond')
         sbtree = ControlBT(type='?')
-        # gc_node = Leaf(type='cond', content=self.goal, mincost=0)  # 为了统一，都成对出现
-        # sbtree.add_child([copy.deepcopy(gc_node)])  # 子树首先保留所扩展结
+        # gc_node = Leaf(type='cond', content=self.goal, mincost=0)  # For uniformity, they always appear in pairs
+        # sbtree.add_child([copy.deepcopy(gc_node)])  # The subtree initially retains the expanded nodes
         bt.add_child([sbtree])
 
         parnode = bt_sel.children[0]
@@ -458,7 +456,7 @@ class BTPAlgo:
                     stack.append(child)
                     time_stack.append(0)
                     continue
-                # 检查合并的条件，前面一个的条件包含了后面的条件，把包含部分提取出来
+                # Check the conditions for merging. If the conditions of the previous node contain those of the latter node, extract the overlapping parts
                 last_child = stack[-1]
                 last_time = time_stack[-1]
 
@@ -478,14 +476,14 @@ class BTPAlgo:
                         a1_node = last_child.children[1]
                         a2_node = child.children[1]
 
-                        # set1<=set2,此时set2对应的动作永远不会执行
+                        # set1 <= set2, in this case, the action corresponding to set2 will never execute
                         if (c1 == set() and isinstance(last_child.children[1], Leaf) and isinstance(child.children[1],
                                                                                                     Leaf) \
                                 and isinstance(last_child.children[1].content, Action) and isinstance(
                                     child.children[1].content, Action)):
                             continue
 
-                        # 再写一个特殊情况处理，三个结点动作last 遇到 两个结点 且动作相同
+                        # Handle a special case where the action "last" in three nodes encounters two nodes with the same action
                         if len(last_child.children) == 3 and \
                                 isinstance(last_child.children[2], Leaf) and isinstance(child.children[1], Leaf) \
                                 and isinstance(last_child.children[2].content, Action) and isinstance(
@@ -499,7 +497,7 @@ class BTPAlgo:
                             time_stack.append(0)
                             continue
 
-                        # 判断动作相不相同
+                        # Check if actions are the same
                         if isinstance(last_child.children[1], Leaf) and isinstance(child.children[1], Leaf) \
                                 and isinstance(last_child.children[1].content, Action) and isinstance(
                             child.children[1].content, Action) \
@@ -585,9 +583,9 @@ class BTPAlgo:
                             self.btml_string += " " * ((level + 1) * 4) + "cond " + str(c) + "\n"
 
                 elif child.type == 'cond':
-                    # 直接添加cond及其内容，不需要特别处理根节点下多个cond的情况
+                    # Directly add cond and its content without special handling for multiple conds under the root node
                     # self.btml_string += indent + "cond " + ', '.join(map(str, child.content)) + "\n"
-                    # 对每个条件独立添加，确保它们各占一行
+                    # Add each condition independently, ensuring each occupies a separate line
                     if act_bt_tree == False:
                         for c in child.content:
                             self.btml_string += indent + "cond " + str(c) + "\n"
@@ -597,10 +595,10 @@ class BTPAlgo:
             elif isinstance(child, ControlBT):
                 if child.type == '?':
                     self.btml_string += indent + "selector\n"
-                    self.dfs_btml_indent(child, level + 1, act_bt_tree=act_bt_tree)  # 增加缩进级别
+                    self.dfs_btml_indent(child, level + 1, act_bt_tree=act_bt_tree)  # Increase indentation level
                 elif child.type == '>':
                     self.btml_string += indent + "sequence\n"
-                    self.dfs_btml_indent(child, level + 1, act_bt_tree=act_bt_tree)  # 增加缩进级别
+                    self.dfs_btml_indent(child, level + 1, act_bt_tree=act_bt_tree)  # Increase indentation level
 
     def get_btml(self, use_braces=True, act_bt_tree=False):
 
@@ -621,16 +619,16 @@ class BTPAlgo:
         return self.btml_string
 
     def get_cost(self):
-        # 开始从初始状态运行行为树，测试
+        # Start running the behavior tree from the initial state to test
         state = self.start
         steps = 0
         current_cost = 0
         current_tick_time = 0
-        val, obj, cost, tick_time = self.bt.cost_tick(state, 0, 0)  # tick行为树，obj为所运行的行动
+        val, obj, cost, tick_time = self.bt.cost_tick(state, 0, 0)  # tick behavior tree, obj is the executed action
 
         current_tick_time += tick_time
         current_cost += cost
-        while val != 'success' and val != 'failure':  # 运行直到行为树成功或失败
+        while val != 'success' and val != 'failure':  # Run until the behavior tree succeeds or fails
             state = state_transition(state, obj)
             val, obj, cost, tick_time = self.bt.cost_tick(state, 0, 0)
             current_cost += cost
@@ -640,11 +638,30 @@ class BTPAlgo:
                 error = True
                 break
             steps += 1
-            if (steps >= 500):  # 至多运行500步
+            if (steps >= 500):  # Run at most 500 steps
                 break
-        if not self.goal <= state:  # 错误解，目标条件不在执行后状态满足
+        if not self.goal <= state:  # Incorrect solution: goal condition is not satisfied in the final state
             print("wrong solution", steps)
             error = True
             return current_cost
-        else:  # 正确解，满足目标条件
+        else:  # Correct solution: goal condition is satisfied
             return current_cost
+
+
+    # Tools: Return all initial states that can reach the goal state
+    def get_all_state_leafs(self):
+        state_leafs = []
+
+        nodes_ls = []
+        nodes_ls.append(self.bt)
+        while len(nodes_ls) != 0:
+            parnode = nodes_ls[0]
+            for child in parnode.children:
+                if isinstance(child, Leaf):
+                    if child.type == "cond":
+                        state_leafs.append(child.content)
+                elif isinstance(child, ControlBT):
+                    nodes_ls.append(child)
+            nodes_ls.pop(0)
+
+        return state_leafs
