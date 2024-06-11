@@ -3,44 +3,45 @@ import os
 import matplotlib.pyplot as plt
 from collections import Counter
 import random
-from btgym.utils import ROOT_PATH
+from btpgym.utils import ROOT_PATH
 import pandas as pd
 import numpy as np
 import time
 import Execution_Robustnes.tools as tools
 import re
-import btgym
-from btgym.utils.tools import collect_action_nodes
-from btgym.utils.read_dataset import read_dataset
-from btgym.algos.llm_client.tools import goal_transfer_str
-from btgym.algos.bt_planning.main_interface import BTExpInterface
-from btgym.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
-from btgym.envs.RobotHow.exec_lib._base.RHAction import RHAction
-from btgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
-from btgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
-from btgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
+import btpgym
+from btpgym.utils.tools import collect_action_nodes
+from btpgym.utils.read_dataset import read_dataset
+from btpgym.utils.tools import setup_environment
+from btpgym.algos.llm_client.tools import goal_transfer_str
+from btpgym.algos.bt_planning.main_interface import BTExpInterface
+from btpgym.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
+from btpgym.envs.RobotHow.exec_lib._base.RHAction import RHAction
+from btpgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
+from btpgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
+from btpgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
 os.chdir(f'{ROOT_PATH}/../test_exp')
-from btgym.algos.bt_planning.tools import calculate_priority_percentage
+from btpgym.algos.bt_planning.tools import calculate_priority_percentage
 
 def plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, data_num, save_csv=False):
     data_path = f"{ROOT_PATH}/../test_exp/data/{scene}_{difficulty}_100_processed_data.txt"
     data = read_dataset(data_path)
     llm_data_path = f"{ROOT_PATH}/../test_exp/llm_data/{scene}_{difficulty}_100_llm_data.txt"
     llm_data = read_dataset(llm_data_path)
-    env, cur_cond_set = tools.setup_environment(scene)
+    env, cur_cond_set = setup_environment(scene)
 
     mean_corr_ratio = []  # Store the mean for 5 algorithms
     std_corr_ratio = []  # Store the std for 5 algorithms
-    for algo_str in algo_type:  # "opt_h0", "opt_h1", "obtea", "bfs"
+    for algo_str in algo_type:  # "hobtea_h0", "hobtea_h1", "obtea", "bfs"
         print(f"\n======== Start {algo_str} !! =============")
         corr_ratio_all = []  # Record the ratio for each data
 
         heuristic_choice = -1  # obtea, bfs
         algo_str_complete = algo_str
-        if algo_str == "opt_h0": heuristic_choice = 0
-        elif algo_str == "opt_h0_llm":heuristic_choice = 0
-        elif algo_str == "opt_h1": heuristic_choice = 1
-        if algo_str in ['opt_h0', 'opt_h1',"opt_h0_llm"]: algo_str = 'opt'
+        if algo_str == "hobtea_h0": heuristic_choice = 0
+        elif algo_str == "hobtea_h0_llm":heuristic_choice = 0
+        elif algo_str == "hobtea_h1": heuristic_choice = 1
+        if algo_str in ['hobtea_h0', 'hobtea_h1',"hobtea_h0_llm"]: algo_str = 'hobtea'
 
         # Recording result details
         detail_rows = []
@@ -53,13 +54,13 @@ def plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, d
 
             priority_opt_act=[]
             # small action space
-            if algo_str_complete == "opt_h0_llm":
+            if algo_str_complete == "hobtea_h0_llm":
                 priority_opt_act = act_str_process(ld['Optimal Actions'], already_split=True)
                 # print("llm_opt_act:",priority_opt_act)
                 # print("opt_act:", opt_act)
-            elif "opt" in algo_str_complete:
+            elif "hobtea" in algo_str_complete:
                 priority_opt_act=opt_act
-            print("opt_act",opt_act)
+            print("hobtea_act",opt_act)
             algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
                                   priority_act_ls=priority_opt_act, key_predicates=[],
                                   key_objects=[],
@@ -136,8 +137,8 @@ def plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, d
 
         # Save all epoch data
         if save_csv == True:
-            if heuristic_choice == 0: algo_str = 'opt_h0'
-            if heuristic_choice == 1: algo_str = 'opt_h1'
+            if heuristic_choice == 0: algo_str = 'hobtea_h0'
+            if heuristic_choice == 1: algo_str = 'hobtea_h1'
             df = pd.DataFrame(corr_ratio_all)
             file_path = f'./output/percentage_output/{percentages_type}_{difficulty}_{scene}_{algo_str_complete}.csv'
             df.to_csv(file_path, index=False, header=False)
@@ -168,7 +169,7 @@ def plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, d
 
 max_epoch = 10
 data_num = 5
-algo_type = ['opt_h0','opt_h0_llm', 'obtea', 'bfs']   # 'opt_h0','opt_h0_llm', 'obtea', 'bfs',      'opt_h1','weak'
+algo_type = ['hobtea_h0','hobtea_h0_llm', 'obtea', 'bfs']   # 'hobtea_h0','hobtea_h0_llm', 'obtea', 'bfs', 'weak'
 
 for percentages_type in ['expanded']:  # 'expanded', 'traversed', 'cost'
     for difficulty in ['single']:  # 'single', 'multi'

@@ -1,23 +1,23 @@
-from btgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
-import btgym
-from btgym.utils.tools import collect_action_nodes
+from btpgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
+import btpgym
+from btpgym.utils.tools import collect_action_nodes
 
 
 
 # ===================== RoboWaiter ========================
-from btgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
-env = btgym.make("RWEnv")
-cur_cond_set = env.agents[0].condition_set = {'RobotNear(Bar)', 'Holding(Nothing)'}
-cur_cond_set |= {f'Exists({arg})' for arg in RWAction.all_object - {'Coffee', 'Water', 'Dessert'}}
-cur_cond_set |= {f'Exists({arg})' for arg in RWAction.all_object - {'Coffee', 'Water', 'Dessert'}}
-big_actions = collect_action_nodes(env.behavior_lib)
-print(f"Collected a total of {len(RWAction.AllObject)} objects")
+# from btpgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
+# env = btpgym.make("RW")
+# cur_cond_set = env.agents[0].condition_set = {'RobotNear(Bar)', 'Holding(Nothing)'}
+# cur_cond_set |= {f'Exists({arg})' for arg in RWAction.all_object - {'Coffee', 'Water', 'Dessert'}}
+# cur_cond_set |= {f'Exists({arg})' for arg in RWAction.all_object - {'Coffee', 'Water', 'Dessert'}}
+# big_actions = collect_action_nodes(env.behavior_lib)
+# print(f"Collected a total of {len(RWAction.AllObject)} objects")
 
 
 # ===================== VirtualHome ========================
-# from btgym.envs.virtualhome.exec_lib._base.VHAction import VHAction
+# from btpgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
 #
-# env = btgym.make("VH-PutMilkInFridge")
+# env = btpgym.make("VH")
 # cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)",
 #                                               "IsStanding(self)"}
 # cur_cond_set |= {f'IsClose({arg})' for arg in VHAction.CanOpenPlaces}
@@ -27,8 +27,8 @@ print(f"Collected a total of {len(RWAction.AllObject)} objects")
 
 
 # ===================== RobotHow-Small ========================
-# from btgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
-# env = btgym.make("VHT-Small")
+# from btpgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
+# env = btpgym.make("RHS")
 # cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)",
 #                                               "IsStanding(self)"}
 # cur_cond_set |= {f'IsClose({arg})' for arg in RHSAction.CAN_OPEN}
@@ -38,15 +38,15 @@ print(f"Collected a total of {len(RWAction.AllObject)} objects")
 
 
 # ===================== RobotHow ========================
-from btgym.envs.RobotHow.exec_lib._base.RHAction import RHAction as RHB
+from btpgym.envs.RobotHow.exec_lib._base.RHAction import RHAction as RH
 
-env = btgym.make("VHT-PutMilkInFridge")
+env = btpgym.make("RH")
 cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)",
                                               "IsStanding(self)"}
-cur_cond_set |= {f'IsClose({arg})' for arg in RHB.CAN_OPEN}
-cur_cond_set |= {f'IsSwitchedOff({arg})' for arg in RHB.HAS_SWITCH}
-cur_cond_set |= {f'IsUnplugged({arg})' for arg in RHB.HAS_PLUG}
-print(f"Collected a total of {len(RHB.AllObject)} objects")
+cur_cond_set |= {f'IsClose({arg})' for arg in RH.CAN_OPEN}
+cur_cond_set |= {f'IsSwitchedOff({arg})' for arg in RH.HAS_SWITCH}
+cur_cond_set |= {f'IsUnplugged({arg})' for arg in RH.HAS_PLUG}
+print(f"Collected a total of {len(RH.AllObject)} objects")
 big_actions = collect_action_nodes(env.behavior_lib)
 
 

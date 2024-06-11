@@ -1,23 +1,23 @@
 import copy
 import os
 import random
-from btgym.utils import ROOT_PATH
+from btpgym.utils import ROOT_PATH
 os.chdir(f'{ROOT_PATH}/../test_exp')
 from tools import *
 import time
 import re
 import pandas as pd
-import btgym
-from btgym.utils.tools import collect_action_nodes
-from btgym.utils.read_dataset import read_dataset
-from btgym.algos.llm_client.tools import goal_transfer_str
-from btgym.algos.bt_planning.main_interface import BTExpInterface
-from btgym.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
-
-from btgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
-from btgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
-from btgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
-from btgym.envs.RobotHow.exec_lib._base.RHAction import RHAction
+import btpgym
+from btpgym.utils.tools import collect_action_nodes
+from btpgym.utils.read_dataset import read_dataset
+from btpgym.algos.llm_client.tools import goal_transfer_str
+from btpgym.algos.bt_planning.main_interface import BTExpInterface
+from btpgym.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
+from btpgym.utils.tools import setup_environment
+from btpgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
+from btpgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
+from btpgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
+from btpgym.envs.RobotHow.exec_lib._base.RHAction import RHAction
 import concurrent.futures
 
 SENCE_ACT_DIC={"RW":RWAction,
@@ -38,11 +38,11 @@ def get_SR(scene, algo_str, just_best,exe_times=5,data_num=100,difficulty="multi
 
     algo_str_complete = algo_str
     heuristic_choice = -1
-    if algo_str == "opt_h0" or algo_str == "opt_h0_llm":
+    if algo_str == "hobtea_h0" or algo_str == "hobtea_h0_llm":
         heuristic_choice = 0
-    elif algo_str == "opt_h1":
+    elif algo_str == "hobtea_h1":
         heuristic_choice = 1
-    if algo_str in ['opt_h0', 'opt_h1', "opt_h0_llm"]: algo_str = 'opt'
+    if algo_str in ['hobtea_h0', 'hobtea_h1', "hobtea_h0_llm"]: algo_str = 'hobtea'
 
 
     for i, (d, ld) in enumerate(zip(data[:data_num], llm_data[:data_num])):
@@ -53,11 +53,11 @@ def get_SR(scene, algo_str, just_best,exe_times=5,data_num=100,difficulty="multi
 
         priority_opt_act = []
         # small action space
-        if algo_str_complete == "opt_h0_llm":
+        if algo_str_complete == "hobtea_h0_llm":
             priority_opt_act = act_str_process(ld['Optimal Actions'], already_split=True)
             # print("llm_opt_act:", priority_opt_act)
             # print("opt_act:", opt_act)
-        elif "opt" in algo_str_complete:
+        elif "hobtea" in algo_str_complete:
             priority_opt_act = opt_act
 
         if choose_max_exp:
@@ -101,12 +101,12 @@ def get_SR(scene, algo_str, just_best,exe_times=5,data_num=100,difficulty="multi
         # with open(file_path, 'w') as file:
         #     file.write(ptml_string)
         # # read and execute
-        # from btgym import BehaviorTree
+        # from btpgym import BehaviorTree
         # bt = BehaviorTree(file_name + ".btml", env.behavior_lib)
         # # bt.print()
         # bt.draw()
         pair_num=0
-        if algo_str_complete in ['opt_h0','opt_h0_llm', 'obtea']:
+        if algo_str_complete in ['hobtea_h0','hobtea_h0_llm', 'obtea']:
             pair_num = len(algo.algo.expanded)
         else:
             pair_num = algo.algo.traversed_state_num
@@ -144,7 +144,7 @@ def compute_sr_and_update_df(index_key, scene, just_best, exe_times, data_num, d
 
 
 
-algorithms = ['opt_h0','opt_h0_llm', 'obtea', 'bfs']  # 'opt_h0','opt_h0_llm', 'obtea', 'bfs'
+algorithms = ['hobtea_h0','hobtea_h0_llm', 'obtea', 'bfs']  # 'hobtea_h0','hobtea_h0_llm', 'obtea', 'bfs'
 scenes = ['RW', 'VH', 'RHS', 'RH']  # 'RW', 'VH', 'RHS', 'RH'
 just_best_bts = [False] # True, False
 

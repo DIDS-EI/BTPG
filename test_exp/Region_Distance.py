@@ -3,24 +3,25 @@ import os
 import matplotlib.pyplot as plt
 from collections import Counter
 import random
-from btgym.utils import ROOT_PATH
+from btpgym.utils import ROOT_PATH
 import pandas as pd
 import numpy as np
 import time
 import Execution_Robustnes.tools as tools
 import re
-import btgym
-from btgym.utils.tools import collect_action_nodes
-from btgym.utils.read_dataset import read_dataset
-from btgym.algos.llm_client.tools import goal_transfer_str
-from btgym.algos.bt_planning.main_interface import BTExpInterface
-from btgym.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
-from btgym.envs.RobotHow.exec_lib._base.RHAction import RHAction
-from btgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
-from btgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
-from btgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
+import btpgym
+from btpgym.utils.tools import collect_action_nodes
+from btpgym.utils.read_dataset import read_dataset
+from btpgym.utils.tools import setup_environment
+from btpgym.algos.llm_client.tools import goal_transfer_str
+from btpgym.algos.bt_planning.main_interface import BTExpInterface
+from btpgym.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
+from btpgym.envs.RobotHow.exec_lib._base.RHAction import RHAction
+from btpgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
+from btpgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
+from btpgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
 os.chdir(f'{ROOT_PATH}/../test_exp')
-from btgym.algos.bt_planning.tools  import calculate_priority_percentage
+from btpgym.algos.bt_planning.tools  import calculate_priority_percentage
 
 def get_algo(d,ld,difficulty, scene, algo_str, max_epoch, data_num, save_csv=False):
     goal_str = ' & '.join(d["Goals"])
@@ -29,20 +30,20 @@ def get_algo(d,ld,difficulty, scene, algo_str, max_epoch, data_num, save_csv=Fal
 
     heuristic_choice = -1  # obtea, bfs
     algo_str_complete = algo_str
-    if algo_str == "opt_h0": heuristic_choice = 0
-    elif algo_str == "opt_h0_llm":heuristic_choice = 0
-    elif algo_str == "opt_h1": heuristic_choice = 1
-    if algo_str in ['opt_h0', 'opt_h1',"opt_h0_llm"]: algo_str = 'opt'
+    if algo_str == "hobtea_h0": heuristic_choice = 0
+    elif algo_str == "hobtea_h0_llm":heuristic_choice = 0
+    elif algo_str == "hobtea_h1": heuristic_choice = 1
+    if algo_str in ['hobtea_h0', 'hobtea_h1',"hobtea_h0_llm"]: algo_str = 'hobtea'
 
     priority_opt_act=[]
     # small action space
-    if algo_str_complete == "opt_h0_llm":
+    if algo_str_complete == "hobtea_h0_llm":
         priority_opt_act = act_str_process(ld['Optimal Actions'], already_split=True)
         # print("llm_opt_act:",priority_opt_act)
         # print("opt_act:", opt_act)
-    elif "opt" in algo_str_complete:
+    elif "hobtea" in algo_str_complete:
         priority_opt_act=opt_act
-    print("opt_act",opt_act)
+    print("hobtea_act",opt_act)
 
     algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
                           priority_act_ls=priority_opt_act, key_predicates=[],
@@ -83,7 +84,7 @@ def process_dataset(i, d, ld, difficulty, scene, algo_type, max_epoch, data_num)
         algo = get_algo(d, ld, difficulty, scene, algo_str, max_epoch, data_num, save_csv=True)
         algo_results = []
 
-        if algo_str in ['opt_h0', 'opt_h0_llm', 'obtea']:
+        if algo_str in ['hobtea_h0', 'hobtea_h0_llm', 'obtea']:
             for c in algo.algo.expanded:
                 error, state, act_num, current_cost, record_act_ls, current_tick_time = algo.execute_bt(
                     goal_set[0], c, verbose=False)
@@ -100,7 +101,7 @@ def process_dataset(i, d, ld, difficulty, scene, algo_type, max_epoch, data_num)
 
 max_epoch = 50
 data_num = 100
-algo_type = ['opt_h0','opt_h0_llm', 'obtea', 'bfs']   # 'opt_h0','opt_h0_llm', 'obtea', 'bfs',      'opt_h1','weak'
+algo_type = ['hobtea_h0','hobtea_h0_llm', 'obtea', 'bfs']   # 'opt_h0','opt_h0_llm', 'obtea', 'bfs',      'opt_h1','weak'
 
 
 import concurrent.futures
@@ -108,8 +109,8 @@ for difficulty in ['single', 'multi']:  # 'single', 'multi'
     for scene in ['VH','RHS','RH']:  # 'RH', 'RHS', 'RW', 'VH'
 
         algo_act_num_ls = {
-            'opt_h0': [],
-            'opt_h0_llm': [],
+            'hobtea_h0': [],
+            'hobtea_h0_llm': [],
             'obtea': [],
             'bfs': []
         }
@@ -118,7 +119,7 @@ for difficulty in ['single', 'multi']:  # 'single', 'multi'
         data = read_dataset(data_path)
         llm_data_path = f"{ROOT_PATH}/../test_exp/llm_data/{scene}_{difficulty}_100_llm_data.txt"
         llm_data = read_dataset(llm_data_path)
-        env, cur_cond_set = tools.setup_environment(scene)
+        env, cur_cond_set = setup_environment(scene)
 
         # for i, (d,ld) in enumerate(zip(data[:data_num],llm_data[:data_num])):
         #     print("data:", i, "difficulty:",difficulty, "scene:",scene,)

@@ -1,33 +1,33 @@
 import time
 
-import btgym
-from btgym.algos.llm_client.tools import goal_transfer_str
-from btgym.algos.bt_planning.main_interface import BTExpInterface
-from btgym.utils.tools import *
-from btgym.utils.goal_generator.vh_gen import VirtualHomeGoalGen
+import btpgym
+from btpgym.algos.llm_client.tools import goal_transfer_str
+from btpgym.algos.bt_planning.main_interface import BTExpInterface
+from btpgym.utils.tools import *
+from btpgym.utils.goal_generator.vh_gen import VirtualHomeGoalGen
 
 
 max_goal_num=5
-diffcult_type= "single" #"single"  #"mix" "multi"
+diffcult_type= "mix" #"single"  #"mix" "multi"
 scene = "VH" # RH RHS RW
 
 # ===================== VirtualHome ========================
 goal_gen = VirtualHomeGoalGen()
 goal_ls = goal_gen.random_generate_goals(max_goal_num ,diffcult_type=diffcult_type)
-# for goal in goal_ls:
-#     print(goal)
+for goal in goal_ls:
+    print(goal)
 
 env, cur_cond_set = setup_environment(scene)
 
 
 # for i,goal_str in enumerate(goal_ls):
-for i,goal_str in enumerate(['IsIn_milk_fridge']):
+for i,goal_str in enumerate(['IsIn_milk_fridge & IsClose_fridge']):
     print("i:", i, "goal_str:", goal_str)
 
     algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
                           priority_act_ls=[], key_predicates=[],
                           key_objects=[],
-                          selected_algorithm="opt", mode="big",
+                          selected_algorithm="hobtea", mode="big",
                           act_tree_verbose=False, time_limit=15,
                           heuristic_choice=0,output_just_best=True)
 
@@ -54,7 +54,21 @@ file_path = f'./{file_name}.btml'
 with open(file_path, 'w') as file:
     file.write(ptml_string)
 # read and execute
-from btgym import BehaviorTree
+from btpgym import BehaviorTree
 bt = BehaviorTree(file_name + ".btml", env.behavior_lib)
 # bt.print()
 bt.draw()
+
+# Simulate execution in a simulated scenario.
+goal_str = 'IsIn_milk_fridge & IsClose_fridge'
+goal = goal_transfer_str(goal_str)[0]
+print(f"goal: {goal}") # {'IsIn(milk,fridge)', 'IsClose(fridge)'}
+
+env.agents[0].bind_bt(bt)
+env.reset()
+is_finished = False
+while not is_finished:
+    is_finished = env.step()
+    if goal <= env.agents[0].condition_set:
+        is_finished=True
+env.close()

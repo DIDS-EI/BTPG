@@ -81,50 +81,70 @@ HOBTEA uses OpenAI's GPT-3.5 as the language model. You need to have an OpenAI A
 After the installation process, you can run BTPG by:
 
 ```python
-import btgym
+import btpgym
 import time
-from btgym.utils.tools import *
-from btgym.algos.bt_planning.main_interface import BTExpInterface
-from btgym.algos.llm_client.tools import goal_transfer_str
+from btpgym import BehaviorTree
+from btpgym.utils.tools import *
+from btpgym.algos.bt_planning.main_interface import BTExpInterface
+from btpgym.algos.llm_client.tools import goal_transfer_str
 
-scene = "VH"
+# Initialize environment and conditions
+scene = "VH" # RW RH RHS
 env, cur_cond_set = setup_environment(scene)
+goal_str = 'IsIn_milk_fridge & IsClose_fridge'
 
-goal_str = 'IsIn_milk_fridge'
+# Transfer goal string to goal set
+goal_set = goal_transfer_str(goal_str) # [{'IsIn(milk, fridge)', 'IsClose(fridge)'}]
+
+# Initialize Behavior Tree Planning Interface
 algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
                       priority_act_ls=[], key_predicates=[],
                       key_objects=[],
-                      selected_algorithm="opt", mode="big",
+                      selected_algorithm="hobtea", mode="big",
                       act_tree_verbose=False, time_limit=15,
-                      heuristic_choice=0,output_just_best=True)
-
-goal_set = goal_transfer_str(goal_str)
-
-start_time = time.time()
+                      heuristic_choice=0, output_just_best=True)
+# Process goal set
 algo.process(goal_set)
-end_time = time.time()
-planning_time_total = end_time - start_time
-
 time_limit_exceeded = algo.algo.time_limit_exceeded
-
 ptml_string, cost, expanded_num = algo.post_process()
-error, state, act_num, current_cost, record_act_ls,ticks = algo.execute_bt(goal_set[0], cur_cond_set, verbose=False)
 
-print(f"\x1b[32m Goal:{goal_str} \n Executed {act_num} action steps\x1b[0m",
-      "\x1b[31mERROR\x1b[0m" if error else "",
-      "\x1b[31mTIMEOUT\x1b[0m" if time_limit_exceeded else "")
-print("current_cost:", current_cost, "expanded_num:", expanded_num, "planning_time_total:", planning_time_total)
+# Execute Behavior Tree
+error, state, act_num, current_cost, record_act_ls, ticks = algo.execute_bt(
+    goal_set[0], cur_cond_set, verbose=False
+)
 
-# visualization
+# Output results
+print(
+    f"\x1b[32m Goal: {goal_str} \n Executed {act_num} action steps\x1b[0m",
+    "\x1b[31mERROR\x1b[0m" if error else "",
+    "\x1b[31mTIMEOUT\x1b[0m" if time_limit_exceeded else ""
+)
+print("Current cost:", current_cost, "Expanded nodes:", expanded_num)
+
+# Save Behavior Tree to file
 file_name = "tree"
 file_path = f'./{file_name}.btml'
 with open(file_path, 'w') as file:
     file.write(ptml_string)
-# read and execute
-from btgym import BehaviorTree
-bt = BehaviorTree(file_name + ".btml", env.behavior_lib)
+
+# Load and visualize Behavior Tree
+bt = BehaviorTree(file_path, env.behavior_lib)
 bt.print()
 bt.draw()
+
+# Simulate execution in a simulated scenario
+goal = goal_set[0]
+print(f"Goal: {goal}")  
+env.agents[0].bind_bt(bt)
+env.reset()
+
+is_finished = False
+while not is_finished:
+    is_finished = env.step()
+    if goal <= env.agents[0].condition_set:
+        is_finished = True
+
+env.close()
 ```
 
 
