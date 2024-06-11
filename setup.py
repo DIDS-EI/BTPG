@@ -7,7 +7,7 @@ with open('requirements.txt') as f:
 setup(
     name='BTPG',
     version='0.1.0',
-    packages=['btpgym'],
+    packages=['btgym'],
     install_requires=required,
     author='DIDSL-EI',
     author_email='',

@@ -264,7 +264,7 @@ def setup_environment(scene):
 
     elif scene == "VH":
         # ===================== VirtualHome ========================
-        from btgym.envs.virtualhome.exec_lib._base.VHAction import VHAction
+        from btgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
         env = btgym.make("VH-PutMilkInFridge")
         cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)",
                                                       "IsStanding(self)"}
