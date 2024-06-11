@@ -1,41 +1,19 @@
 selector
+    cond IsOn(bananas,kitchentable)
     sequence
-        cond IsIn(milk,fridge)
-        cond IsClose(fridge)
-    sequence
-        cond IsLeftHandEmpty(self)
+        cond IsLeftHolding(self,bananas)
         selector
-            selector
-                selector
-                    sequence
-                        cond IsNear(self,fridge)
-                        selector
-                            sequence
-                                cond IsOpen(fridge)
-                                selector
-                                    sequence
-                                        cond IsIn(milk,fridge)
-                                        act Close(fridge)
-                                    sequence
-                                        cond IsRightHolding(self,milk)
-                                        act RightPutIn(milk,fridge)
-                            sequence
-                                cond IsRightHolding(self,milk)
-                                cond IsClose(fridge)
-                                act Open(fridge)
-                    sequence
-                        cond IsStanding(self)
-                        cond IsRightHolding(self,milk)
-                        cond IsClose(fridge)
-                        act Walk(fridge)
-                sequence
-                    cond IsStanding(self)
-                    cond IsNear(self,milk)
-                    cond IsClose(fridge)
-                    cond IsRightHandEmpty(self)
-                    act RightGrab(milk)
+            sequence
+                cond IsNear(self,kitchentable)
+                act LeftPut(bananas,kitchentable)
             sequence
                 cond IsStanding(self)
-                cond IsClose(fridge)
-                cond IsRightHandEmpty(self)
-                act Walk(milk)
+                act Walk(kitchentable)
+    sequence
+        cond IsLeftHandEmpty(self)
+        cond IsStanding(self)
+        selector
+            sequence
+                cond IsNear(self,bananas)
+                act LeftGrab(bananas)
+            act Walk(bananas)
