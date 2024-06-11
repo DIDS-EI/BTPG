@@ -583,3 +583,4 @@ simulators/robowaiter/CafeSimulator/Manifest_DebugFiles_Win64.txt
 simulators/robowaiter/CafeSimulator/Manifest_NonUFSFiles_Win64.txt
 simulators/robowaiter/CafeSimulator/Manifest_UFSFiles_Win64.txt
 simulators/robowaiter/CafeSimulator/CafeSimulator.exe
+/Output/script/
