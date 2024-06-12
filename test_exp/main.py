@@ -1,10 +1,10 @@
 import time
 
-import btpgym
-from btpgym.algos.llm_client.tools import goal_transfer_str
-from btpgym.algos.bt_planning.main_interface import BTExpInterface
-from btpgym.utils.tools import *
-from btpgym.utils.goal_generator.vh_gen import VirtualHomeGoalGen
+import btpg
+from btpg.algos.llm_client.tools import goal_transfer_str
+from btpg.algos.bt_planning.main_interface import BTExpInterface
+from btpg.utils.tools import *
+from btpg.utils.goal_generator.vh_gen import VirtualHomeGoalGen
 
 
 max_goal_num=5
@@ -57,7 +57,7 @@ file_path = f'./{file_name}.btml'
 with open(file_path, 'w') as file:
     file.write(ptml_string)
 # read and execute
-from btpgym import BehaviorTree
+from btpg import BehaviorTree
 bt = BehaviorTree(file_name + ".btml", env.behavior_lib)
 # bt.print()
 bt.draw()

@@ -3,25 +3,25 @@ import os
 import matplotlib.pyplot as plt
 from collections import Counter
 import random
-from btpgym.utils import ROOT_PATH
+from btpg.utils import ROOT_PATH
 import pandas as pd
 import numpy as np
 import time
 import Execution_Robustnes.tools as tools
 import re
-import btpgym
-from btpgym.utils.tools import collect_action_nodes
-from btpgym.utils.read_dataset import read_dataset
-from btpgym.utils.tools import setup_environment
-from btpgym.algos.llm_client.tools import goal_transfer_str
-from btpgym.algos.bt_planning.main_interface import BTExpInterface
-from btpgym.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
-from btpgym.envs.RobotHow.exec_lib._base.RHAction import RHAction
-from btpgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
-from btpgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
-from btpgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
+import btpg
+from btpg.utils.tools import collect_action_nodes
+from btpg.utils.read_dataset import read_dataset
+from btpg.utils.tools import setup_environment
+from btpg.algos.llm_client.tools import goal_transfer_str
+from btpg.algos.bt_planning.main_interface import BTExpInterface
+from btpg.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
+from btpg.envs.RobotHow.exec_lib._base.RHAction import RHAction
+from btpg.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
+from btpg.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
+from btpg.envs.VirtualHome.exec_lib._base.VHAction import VHAction
 os.chdir(f'{ROOT_PATH}/../test_exp')
-from btpgym.algos.bt_planning.tools import calculate_priority_percentage
+from btpg.algos.bt_planning.tools import calculate_priority_percentage
 
 def plot_percentage(percentages_type, difficulty, scene, algo_type, max_epoch, data_num, save_csv=False):
     data_path = f"{ROOT_PATH}/../test_exp/data/{scene}_{difficulty}_100_processed_data.txt"

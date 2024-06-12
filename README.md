@@ -1,6 +1,6 @@
-# BTPGym
+# BTPG
 
- Platform and Benchmark for Behavior Tree Planning in Everyday Service Robots. Based on RoboWaiter and [VirtualHome](http://virtual-home.org/) v2.3.0
+A Platform and Benchmark for Behavior Tree Planning in Everyday Service Robots. Based on RoboWaiter and [VirtualHome](http://virtual-home.org/) v2.3.0
 
 ![Python Version](images/python39.svg)
 ![GitHub license](images/license.svg)
@@ -34,7 +34,7 @@ pip install -e .
 
 ### 2. Download the RoboWaiter executable (Only Windows is tested now):
 
-👉 [Download Simulator](https://drive.google.com/file/d/1ZQ_Muf3b8kPgit-cIsf0VxsrMGKX8cx7/view?usp=sharing)
+👉 [Download RoboWaiter](https://drive.google.com/file/d/1ZQ_Muf3b8kPgit-cIsf0VxsrMGKX8cx7/view?usp=sharing)
 
 Download the simulator, unzip it, and run `CafeSimulator.exe` to open the simulator. The simulator will display an empty scene, awaiting the code to generate the scene and complete robot interactions.
 ## 📂 Directory Structure
@@ -81,20 +81,20 @@ HOBTEA uses OpenAI's GPT-3.5 as the language model. You need to have an OpenAI A
 After the installation process, you can run BTPG by:
 
 ```python
-import btpgym
+import btpg
 import time
-from btpgym import BehaviorTree
-from btpgym.utils.tools import *
-from btpgym.algos.bt_planning.main_interface import BTExpInterface
-from btpgym.algos.llm_client.tools import goal_transfer_str
+from btpg import BehaviorTree
+from btpg.utils.tools import *
+from btpg.algos.bt_planning.main_interface import BTExpInterface
+from btpg.algos.llm_client.tools import goal_transfer_str
 
 # Initialize environment and conditions
-scene = "VH" # RW RH RHS
+scene = "VH"  # RW RH RHS
 env, cur_cond_set = setup_environment(scene)
 goal_str = 'IsIn_milk_fridge & IsClose_fridge'
 
 # Transfer goal string to goal set
-goal_set = goal_transfer_str(goal_str) # [{'IsIn(milk, fridge)', 'IsClose(fridge)'}]
+goal_set = goal_transfer_str(goal_str)  # [{'IsIn(milk, fridge)', 'IsClose(fridge)'}]
 
 # Initialize Behavior Tree Planning Interface
 algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
@@ -134,7 +134,7 @@ bt.draw()
 
 # Simulate execution in a simulated scenario
 goal = goal_set[0]
-print(f"Goal: {goal}")  
+print(f"Goal: {goal}")
 env.agents[0].bind_bt(bt)
 env.reset()
 

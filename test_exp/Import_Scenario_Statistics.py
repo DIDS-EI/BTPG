@@ -1,12 +1,12 @@
-from btpgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
-import btpgym
-from btpgym.utils.tools import collect_action_nodes
+from btpg.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
+import btpg
+from btpg.utils.tools import collect_action_nodes
 
 
 
 # ===================== RoboWaiter ========================
-# from btpgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
-# env = btpgym.make("RW")
+# from btpg.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
+# env = btpg.make("RW")
 # cur_cond_set = env.agents[0].condition_set = {'RobotNear(Bar)', 'Holding(Nothing)'}
 # cur_cond_set |= {f'Exists({arg})' for arg in RWAction.all_object - {'Coffee', 'Water', 'Dessert'}}
 # cur_cond_set |= {f'Exists({arg})' for arg in RWAction.all_object - {'Coffee', 'Water', 'Dessert'}}
@@ -15,9 +15,9 @@ from btpgym.utils.tools import collect_action_nodes
 
 
 # ===================== VirtualHome ========================
-# from btpgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
+# from btpg.envs.VirtualHome.exec_lib._base.VHAction import VHAction
 #
-# env = btpgym.make("VH")
+# env = btpg.make("VH")
 # cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)",
 #                                               "IsStanding(self)"}
 # cur_cond_set |= {f'IsClose({arg})' for arg in VHAction.CanOpenPlaces}
@@ -27,8 +27,8 @@ from btpgym.utils.tools import collect_action_nodes
 
 
 # ===================== RobotHow-Small ========================
-# from btpgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
-# env = btpgym.make("RHS")
+# from btpg.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
+# env = btpg.make("RHS")
 # cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)",
 #                                               "IsStanding(self)"}
 # cur_cond_set |= {f'IsClose({arg})' for arg in RHSAction.CAN_OPEN}
@@ -38,9 +38,9 @@ from btpgym.utils.tools import collect_action_nodes
 
 
 # ===================== RobotHow ========================
-from btpgym.envs.RobotHow.exec_lib._base.RHAction import RHAction as RH
+from btpg.envs.RobotHow.exec_lib._base.RHAction import RHAction as RH
 
-env = btpgym.make("RH")
+env = btpg.make("RH")
 cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)",
                                               "IsStanding(self)"}
 cur_cond_set |= {f'IsClose({arg})' for arg in RH.CAN_OPEN}

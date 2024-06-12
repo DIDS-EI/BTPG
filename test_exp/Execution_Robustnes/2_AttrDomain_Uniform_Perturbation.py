@@ -1,24 +1,24 @@
 import copy
 import os
 import random
-from btpgym.utils import ROOT_PATH
+from btpg.utils import ROOT_PATH
 os.chdir(f'{ROOT_PATH}/../test_exp')
 from tools import modify_condition_set_Random_Perturbations
-from btpgym.utils.tools import setup_environment
+from btpg.utils.tools import setup_environment
 import time
 import re
 import pandas as pd
-import btpgym
-from btpgym.utils.tools import collect_action_nodes
-from btpgym.utils.read_dataset import read_dataset
-from btpgym.algos.llm_client.tools import goal_transfer_str
-from btpgym.algos.bt_planning.main_interface import BTExpInterface
-from btpgym.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
+import btpg
+from btpg.utils.tools import collect_action_nodes
+from btpg.utils.read_dataset import read_dataset
+from btpg.algos.llm_client.tools import goal_transfer_str
+from btpg.algos.bt_planning.main_interface import BTExpInterface
+from btpg.algos.llm_client.tools import goal_transfer_str, act_str_process, act_format_records
 import concurrent.futures
-from btpgym.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
-from btpgym.envs.VirtualHome.exec_lib._base.VHAction import VHAction
-from btpgym.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
-from btpgym.envs.RobotHow.exec_lib._base.RHAction import RHAction
+from btpg.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
+from btpg.envs.VirtualHome.exec_lib._base.VHAction import VHAction
+from btpg.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
+from btpg.envs.RobotHow.exec_lib._base.RHAction import RHAction
 
 SENCE_ACT_DIC={"RW":RWAction,
                "VH":VHAction,
