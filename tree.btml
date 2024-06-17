@@ -10,8 +10,8 @@ selector
                 cond IsStanding(self)
                 act Walk(kitchentable)
     sequence
-        cond IsLeftHandEmpty(self)
         cond IsStanding(self)
+        cond IsLeftHandEmpty(self)
         selector
             sequence
                 cond IsNear(self,bananas)

@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: BTPG
+Version: 0.1.0
+Summary:  Platform and Benchmark for Behavior TreePlanning in Everyday Service Robots
+Home-page: https://github.com/DIDSL-EI/BTPG
+Author: DIDSL-EI
+Author-email: 
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+License-File: LICENSE
+Requires-Dist: certifi~=2019.3.9
+Requires-Dist: chardet==3.0.4
+Requires-Dist: idna==2.8
+Requires-Dist: matplotlib>=3.4.2
+Requires-Dist: networkx==2.3
+Requires-Dist: numpy>=1.19.3
+Requires-Dist: pillow>=8.3.1
+Requires-Dist: plotly==3.10.0
+Requires-Dist: requests>=1.21.0
+Requires-Dist: ipdb==0.13.9
+Requires-Dist: termcolor==1.1.0
+Requires-Dist: tqdm==4.31.1
+Requires-Dist: urllib3>=1.24.3
+Requires-Dist: antlr4-python3-runtime~=4.13.1
+Requires-Dist: py_trees~=2.2.3
+Requires-Dist: shortuuid~=1.0.11
+Requires-Dist: autopep8~=2.0.4
+Requires-Dist: openai
+Requires-Dist: sympy~=1.12

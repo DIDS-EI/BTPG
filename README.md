@@ -2,7 +2,7 @@
 
 A Platform and Benchmark for Behavior Tree Planning in Everyday Service Robots. Based on RoboWaiter and [VirtualHome](http://virtual-home.org/) v2.3.0
 
-![Python Version](images/python39.svg)
+![Python Version](images/python310.svg)
 ![GitHub license](images/license.svg)
 
 
@@ -13,7 +13,7 @@ A Platform and Benchmark for Behavior Tree Planning in Everyday Service Robots. 
 ### Create a conda environment
 
 ```shell
-conda create --name BTPG python=3.9
+conda create --name BTPG python=3.10
 conda activate BTPG
 ```
 
