@@ -40,7 +40,7 @@ Download the simulator, unzip it, and run `CafeSimulator.exe` to open the simula
 ## 📂 Directory Structure
 
 ```
-btgym
+btpg
 │
 ├── agent - Configuration for intelligent agents.
 ├── algos - Training and decision-making algorithms.
