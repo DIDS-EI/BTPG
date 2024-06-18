@@ -37,3 +37,4 @@ pyqt5
 scikit-learn~=1.5.0
 translate~=3.6.1
 spacy
+psutil
