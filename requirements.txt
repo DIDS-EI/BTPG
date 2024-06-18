@@ -3,8 +3,8 @@ chardet==3.0.4
 idna==2.8
 matplotlib>=3.4.2
 networkx==2.3
-numpy>=1.19.3
-opencv-python==4.10.10.82
+numpy
+opencv-python
 pillow>=8.3.1
 plotly==3.10.0
 requests>=1.21.0
@@ -17,8 +17,6 @@ py_trees~=2.2.3
 shortuuid~=1.0.11
 autopep8~=2.0.4
 openai
-sympy~=1.12
-
 antlr4-python3-runtime
 py_trees
 shortuuid~=1.0.11
@@ -38,4 +36,4 @@ colorama~=0.4.6
 pyqt5
 scikit-learn~=1.5.0
 translate~=3.6.1
-spacy~=3.7.5
+spacy

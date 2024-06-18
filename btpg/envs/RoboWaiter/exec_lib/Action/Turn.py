@@ -1,5 +1,6 @@
 from btpg.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
 import itertools
+from btpg.behavior_tree import Status
 class Turn(RWAction):
     can_be_expanded = True
     num_args = 2
@@ -46,4 +47,13 @@ class Turn(RWAction):
         self.agent.condition_set |= (self.info["add"])
         self.agent.condition_set -= self.info["del_set"]
 
-        # self.agent.condition_set.add(f"IsSwitchedOn({self.args[0]})")
+    def _update(self) -> Status:
+        if self.scene.show_ui:
+            self.scene.get_obstacle_point(self.scene.db, self.status, map_ratio=self.scene.map_ratio)
+
+        self.scene.move_task_area(self.op_type)
+        self.scene.op_task_execute(self.op_type)
+        if self.scene.show_ui:
+            self.scene.get_obstacle_point(self.scene.db, self.status, map_ratio=self.scene.map_ratio)
+
+        return Status.RUNNING

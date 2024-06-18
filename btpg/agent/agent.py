@@ -1,6 +1,7 @@
 
 class Agent(object):
     env = None
+    scene = None
     response_frequency = 1
 
     def __init__(self):

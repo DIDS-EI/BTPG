@@ -56,6 +56,7 @@ class BehaviorTree(ptree.trees.BehaviourTree):
         def func(node):
             node.agent = agent
             node.env = agent.env
+            node.scene = agent.scene
 
         traverse_and_modify_tree(self.root,func)
 

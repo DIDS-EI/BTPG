@@ -24,6 +24,7 @@ env, cur_cond_set = setup_environment(scene)
 # for i,goal_str in enumerate(['IsIn_milk_fridge & IsClose_fridge']):
 goal_str ='IsOn_bananas_kitchentable' #'IsIn_milk_fridge & IsClose_fridge'
 # goal_str ='IsSwitchedOn_faucet' #RHS
+# goal_str ='On_Coffee_Table1' # RW
 print("goal_str:", goal_str)
 
 algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
@@ -68,7 +69,7 @@ bt.draw()
 goal = goal_transfer_str(goal_str)[0]
 print(f"goal: {goal}") # {'IsIn(milk,fridge)', 'IsClose(fridge)'}
 
-if scene=="VH":
+if scene in ["VH","RW"]:
     env.agents[0].bind_bt(bt)
     env.reset()
     is_finished = False

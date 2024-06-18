@@ -3,7 +3,6 @@ chardet==3.0.4
 idna==2.8
 matplotlib>=3.4.2
 networkx==2.3
-numpy>=1.19.3
 pillow>=8.3.1
 plotly==3.10.0
 requests>=1.21.0
