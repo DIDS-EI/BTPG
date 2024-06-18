@@ -1,4 +1,19 @@
 selector
-    cond RobotNear(WaterStation)
+    cond IsOn(bananas,kitchentable)
     sequence
-        act MoveTo(WaterStation)
+        cond IsLeftHolding(self,bananas)
+        selector
+            sequence
+                cond IsNear(self,kitchentable)
+                act LeftPut(bananas,kitchentable)
+            sequence
+                cond IsStanding(self)
+                act Walk(kitchentable)
+    sequence
+        cond IsLeftHandEmpty(self)
+        cond IsStanding(self)
+        selector
+            sequence
+                cond IsNear(self,bananas)
+                act LeftGrab(bananas)
+            act Walk(bananas)
