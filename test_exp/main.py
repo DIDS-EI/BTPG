@@ -22,7 +22,7 @@ env, cur_cond_set = setup_environment(scene)
 
 # for i,goal_str in enumerate(goal_ls):
 # for i,goal_str in enumerate(['IsIn_milk_fridge & IsClose_fridge']):
-goal_str ='IsOn_bananas_kitchentable' #'IsIn_milk_fridge & IsClose_fridge'
+goal_str = 'IsIn_bananas_fridge & IsClose_fridge' #'IsOn_bananas_kitchentable'
 # goal_str ='IsSwitchedOn_faucet' #RHS
 # goal_str ='On_Coffee_Table1' # RW
 print("goal_str:", goal_str)

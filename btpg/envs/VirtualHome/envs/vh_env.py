@@ -9,9 +9,9 @@ class VHEnvTest(VHEnv):
 
 
     def reset(self):
-        self.load_scenario(6) # 18
-
-        self.comm.add_character('Chars/Female1')
+        self.load_scenario(18) # 18 6
+        self.comm.add_character('Chars/male1')
+        # self.comm.add_character('Chars/Female1')
 
     def task_finished(self):
         if {"IsIn(milk,fridge)","IsClosed(fridge)"} <= self.agents[0].condition_set:

@@ -44,6 +44,7 @@ class VHEnv(Env):
                 pass
 
     def run_script(self,script,verbose=False,camera_mode="PERSON_FROM_BACK"):
+        camera_mode = "FIRST_PERSON"#"PERSON_FROM_BACK" #"FIRST_PERSON" #"AUTO"
         success, message = self.comm.render_script(script, recording=True,skip_animation=False, frame_rate=10, camera_mode=[camera_mode],
                                find_solution=True)
 

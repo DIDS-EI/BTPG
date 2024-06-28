@@ -1,19 +1,30 @@
 selector
-    cond IsOn(bananas,kitchentable)
     sequence
-        cond IsLeftHolding(self,bananas)
+        cond On(Coffee,Table3)
+        cond Active(AC)
+    sequence
+        cond Active(AC)
+        selector
+            selector
+                sequence
+                    cond Holding(Coffee)
+                    selector
+                        sequence
+                            cond RobotNear(Table3)
+                            act PutDown(Coffee,Table3)
+                        act MoveTo(Table3)
+                sequence
+                    cond RobotNear(Coffee)
+                    cond Holding(Nothing)
+                    act PickUp(Coffee)
+            sequence
+                cond Holding(Nothing)
+                cond Exists(Coffee)
+                act MoveTo(Coffee)
+    sequence
+        cond Holding(Nothing)
         selector
             sequence
-                cond IsNear(self,kitchentable)
-                act LeftPut(bananas,kitchentable)
-            sequence
-                cond IsStanding(self)
-                act Walk(kitchentable)
-    sequence
-        cond IsLeftHandEmpty(self)
-        cond IsStanding(self)
-        selector
-            sequence
-                cond IsNear(self,bananas)
-                act LeftGrab(bananas)
-            act Walk(bananas)
+                cond Exists(Coffee)
+                act Turn(AC,On)
+            act Make(Coffee)

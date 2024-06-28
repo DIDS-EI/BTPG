@@ -19,8 +19,8 @@ for goal in goal_ls:
 
 env, cur_cond_set = setup_environment(scene)
 
-# goal_str ='On_Coffee_Table1'
-goal_str ='RobotNear_WaterStation'
+goal_str ='On_Coffee_Table3 & Active_AC'
+# goal_str ='RobotNear_WaterStation'
 print("goal_str:", goal_str)
 
 algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
@@ -56,7 +56,7 @@ with open(file_path, 'w') as file:
 # read and execute
 from btpg import BehaviorTree
 bt = BehaviorTree(file_name + ".btml", env.behavior_lib)
-# bt.print()
+bt.print()
 bt.draw()
 
 # Simulate execution in a simulated scenario.
@@ -65,9 +65,12 @@ bt.draw()
 goal = goal_transfer_str(goal_str)[0]
 print(f"goal: {goal}") # {'IsIn(milk,fridge)', 'IsClose(fridge)'}
 
+
+
 if scene in ["VH","RW"]:
     env.agents[0].bind_bt(bt)
     env.reset()
+    time.sleep(5)
     is_finished = False
     while not is_finished:
         is_finished = env.step()

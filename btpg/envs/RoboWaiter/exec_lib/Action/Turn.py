@@ -13,7 +13,32 @@ class Turn(RWAction):
 
     def __init__(self, *args):
         super().__init__(*args)
+        self.target_obj = self.args[0]
+        self.op = self.args[1]
+        self.op_type = 13
 
+        if self.target_obj=="AC":
+            self.op_type = 13
+        elif self.target_obj=="ACTemperature":
+            if self.op == 'Up':
+                self.op_type = 14
+            elif self.op == 'Down':
+                self.op_type = 15
+        elif self.target_obj=="TubeLight":
+            if self.op == 'On':
+                self.op_type = 6
+            elif self.op == 'Off':
+                self.op_type = 8
+        elif self.target_obj=="HallLight":
+            if self.op == 'On':
+                self.op_type = 9
+            elif self.op == 'Off':
+                self.op_type = 10
+        elif self.target_obj=="Curtain":
+            if self.op == 'On':
+                self.op_type = 12
+            elif self.op == 'Off':
+                self.op_type = 11
     @classmethod
     def get_info(cls,*arg):
         info = {}
