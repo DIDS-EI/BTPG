@@ -34,7 +34,7 @@ pip install -e .
 
 ### 2. Download the RoboWaiter executable (Only Windows is tested now):
 
-👉 [Download RoboWaiter](https://drive.google.com/file/d/1ZQ_Muf3b8kPgit-cIsf0VxsrMGKX8cx7/view?usp=sharing)
+👉 [Download RoboWaiter](https://drive.google.com/file/d/1ayAQZbPOyQV2W-V_ZdYv6AoqLOg0zvm1/view?usp=sharing)
 
 Download the simulator, unzip it, and run `CafeSimulator.exe` to open the simulator. The simulator will display an empty scene, awaiting the code to generate the scene and complete robot interactions.
 ## 📂 Directory Structure
