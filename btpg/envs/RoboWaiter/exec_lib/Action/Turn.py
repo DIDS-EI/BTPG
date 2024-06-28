@@ -43,6 +43,7 @@ class Turn(RWAction):
     def get_info(cls,*arg):
         info = {}
         info["pre"] = set()
+        info["del_set"] = set()
         if arg[0] == "TubeLight" or arg[0] == "HallLight" or arg[0] == 'AC':
             info["pre"] |= {f'Holding(Nothing)'}
             if arg[1] == "On":
