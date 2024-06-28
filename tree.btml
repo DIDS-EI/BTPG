@@ -18,8 +18,8 @@ selector
                     cond Holding(Nothing)
                     act PickUp(Coffee)
             sequence
-                cond Holding(Nothing)
                 cond Exists(Coffee)
+                cond Holding(Nothing)
                 act MoveTo(Coffee)
     sequence
         cond Holding(Nothing)
