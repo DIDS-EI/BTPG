@@ -8,9 +8,7 @@ import random
 import re
 
 from btpg.envs.RoboWaiter.exec_lib._base.RWAction import RWAction as RW
-from btpg.envs.VirtualHome.exec_lib._base.VHAction import VHAction as VH
-from btpg.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction as RHS
-from btpg.envs.RobotHow.exec_lib._base.RHAction import RHAction as RH
+
 
 
 # modify_condition_set: change_location

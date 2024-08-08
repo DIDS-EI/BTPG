@@ -14,12 +14,12 @@ selector
                             act PutDown(Coffee,Table3)
                         act MoveTo(Table3)
                 sequence
-                    cond RobotNear(Coffee)
                     cond Holding(Nothing)
+                    cond RobotNear(Coffee)
                     act PickUp(Coffee)
             sequence
-                cond Exists(Coffee)
                 cond Holding(Nothing)
+                cond Exists(Coffee)
                 act MoveTo(Coffee)
     sequence
         cond Holding(Nothing)
