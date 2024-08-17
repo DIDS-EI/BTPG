@@ -1,7 +1,7 @@
 selector
     sequence
-        cond On(Coffee,Table3)
         cond Active(AC)
+        cond On(Coffee,Table3)
     sequence
         cond Active(AC)
         selector
