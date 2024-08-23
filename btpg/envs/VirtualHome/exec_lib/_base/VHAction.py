@@ -6,17 +6,30 @@ class VHAction(Action):
     num_args = 1
 
 
-    SurfacePlaces = {"kitchentable","plate","nightstand","desk","cabinet","bathroomcounter","stove"} # put
+    SurfacePlaces = {"kitchentable","plate","nightstand","desk","cabinet","bathroomcounter","stove","bed","sink","kitchencabinet"} # put
     SittablePlaces =  {"bed","sofa","chair","Bench"}  # sit
-    CanOpenPlaces= {"fridge","dishwasher","microwave","stove","cabinet"}  # open
-    CanPutInPlaces={"fridge","dishwasher","microwave","stove","cabinet"}  # put in
-    Objects={"bananas",'chicken', 'cutlets','breadslice','chips','chocolatesyrup',
-             'cupcake','milk','juice','wine',
+    CanOpenPlaces= {"fridge","dishwasher","microwave","stove","cabinet","garbagecan","kitchencabinet"}  # open
+    CanPutInPlaces={"fridge","dishwasher","microwave","stove","cabinet","sink","garbagecan","kitchencabinet"}  # put in
+    Objects={"bananas",'chicken', 'cutlets','breadslice','chips','chocolatesyrup',"poundcake","clothespile",
+             'cupcake','milk','juice','wine',"magazine",
              'cutleryknife','fryingpan','dishbowl','plate',
-             'book',"waterglass"
+             'book',"waterglass","pillow","paper","cereal","condimentshaker","notes","clock"
              }  # grab
-    HasSwitchObjects = {"tv","faucet","lightswitch","dishwasher","coffeemaker","toaster","microwave",
+    HasSwitchObjects = {"tv","faucet","lightswitch","dishwasher","coffeemaker","toaster","microwave","stove",
                         "tablelamp","computer"}  # switch on #candle  cellphone wallphone washingmachine不行# faucet 浴室龙头
+
+
+    # SurfacePlaces = {"kitchentable","plate","nightstand","desk","cabinet","bathroomcounter","stove"} # put
+    # SittablePlaces =  {"bed","sofa","chair","Bench"}  # sit
+    # CanOpenPlaces= {"fridge","dishwasher","microwave","stove","cabinet"}  # open
+    # CanPutInPlaces={"fridge","dishwasher","microwave","stove","cabinet"}  # put in
+    # Objects={"bananas",'chicken', 'cutlets','breadslice','chips','chocolatesyrup',
+    #          'cupcake','milk','juice','wine',
+    #          'cutleryknife','fryingpan','dishbowl','plate',
+    #          'book',"waterglass"
+    #          }  # grab
+    # HasSwitchObjects = {"tv","faucet","lightswitch","dishwasher","coffeemaker","toaster","microwave",
+    #                     "tablelamp","computer"}  # switch on #candle  cellphone wallphone washingmachine不行# faucet 浴室龙头
 
 
     AllObject = SurfacePlaces | SittablePlaces | CanOpenPlaces | CanPutInPlaces | Objects |\

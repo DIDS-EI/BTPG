@@ -112,7 +112,10 @@ class BTPAlgo:
             while tmp_pair != g_cond_anc_pair:
                 tmp_seq_struct = cond_to_condActSeq[tmp_pair]
                 output_stack.append(tmp_seq_struct)
-                tmp_pair = child_to_parent[tmp_pair]
+                if tmp_pair  in child_to_parent:
+                    tmp_pair = child_to_parent[tmp_pair]
+                else:
+                    break
 
             while output_stack != []:
                 tmp_seq_struct = output_stack.pop()

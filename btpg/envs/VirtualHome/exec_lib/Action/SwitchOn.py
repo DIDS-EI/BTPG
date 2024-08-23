@@ -14,6 +14,11 @@ class SwitchOn(VHAction):
     def get_info(cls,*arg):
         info = {}
         info["pre"]={"IsLeftHandEmpty(self)",f"IsNear(self,{arg[0]})",f"IsSwitchedOff({arg[0]})"} # IsLeftHandEmpty()至少有一只手是空闲的
+
+        if arg[0] in cls.CAN_OPEN:
+            info["pre"]={f"IsClose({arg[0]})"} #
+
+
         info["add"]={f"IsSwitchedOn({arg[0]})"}
         info["del_set"] = {f"IsSwitchedOff({arg[0]})"}
         info["cost"] = 8

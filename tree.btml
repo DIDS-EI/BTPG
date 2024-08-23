@@ -1,30 +1,140 @@
 selector
-    sequence
-        cond Active(AC)
-        cond On(Coffee,Table3)
-    sequence
-        cond Active(AC)
-        selector
+    selector
+        cond IsSwitchedOn(toaster)
+        cond IsIn(condimentshaker,kitchencabinet)
+        sequence
+            cond IsSwitchedOn(toaster)
+            selector
+                selector
+                    sequence
+                        cond IsRightHolding(self,condimentshaker)
+                        selector
+                            sequence
+                                cond IsNear(self,kitchencabinet)
+                                selector
+                                    sequence
+                                        cond IsOpen(kitchencabinet)
+                                        act RightPutIn(condimentshaker,kitchencabinet)
+                                    sequence
+                                        cond IsClose(kitchencabinet)
+                                        cond IsLeftHandEmpty(self)
+                                        act Open(kitchencabinet)
+                            sequence
+                                cond IsStanding(self)
+                                cond IsClose(kitchencabinet)
+                                cond IsLeftHandEmpty(self)
+                                act Walk(kitchencabinet)
+                    sequence
+                        cond IsNear(self,condimentshaker)
+                        cond IsRightHandEmpty(self)
+                        cond IsLeftHandEmpty(self)
+                        cond IsStanding(self)
+                        cond IsClose(kitchencabinet)
+                        act RightGrab(condimentshaker)
+                sequence
+                    cond IsStanding(self)
+                    cond IsLeftHandEmpty(self)
+                    cond IsClose(kitchencabinet)
+                    cond IsRightHandEmpty(self)
+                    act Walk(condimentshaker)
+        sequence
+            cond IsSwitchedOff(toaster)
+            cond IsRightHandEmpty(self)
+            cond IsLeftHandEmpty(self)
+            cond IsStanding(self)
+            cond IsClose(kitchencabinet)
             selector
                 sequence
-                    cond Holding(Coffee)
-                    selector
-                        sequence
-                            cond RobotNear(Table3)
-                            act PutDown(Coffee,Table3)
-                        act MoveTo(Table3)
+                    cond IsNear(self,toaster)
+                    act SwitchOn(toaster)
+                act Walk(toaster)
+    selector
+        cond IsOn(clothespile,bed)
+        cond IsClose(kitchencabinet)
+        cond IsIn(condimentshaker,kitchencabinet)
+        cond IsOn(book,desk)
+        sequence
+            cond IsLeftHandEmpty(self)
+            cond IsOn(book,desk)
+            selector
+                selector
+                    sequence
+                        cond IsOn(clothespile,bed)
+                        selector
+                            selector
+                                selector
+                                    sequence
+                                        cond IsNear(self,kitchencabinet)
+                                        selector
+                                            sequence
+                                                cond IsOpen(kitchencabinet)
+                                                selector
+                                                    sequence
+                                                        cond IsIn(condimentshaker,kitchencabinet)
+                                                        act Close(kitchencabinet)
+                                                    sequence
+                                                        cond IsRightHolding(self,condimentshaker)
+                                                        act RightPutIn(condimentshaker,kitchencabinet)
+                                            sequence
+                                                cond IsRightHolding(self,condimentshaker)
+                                                cond IsClose(kitchencabinet)
+                                                act Open(kitchencabinet)
+                                    sequence
+                                        cond IsStanding(self)
+                                        cond IsRightHolding(self,condimentshaker)
+                                        cond IsClose(kitchencabinet)
+                                        act Walk(kitchencabinet)
+                                sequence
+                                    cond IsStanding(self)
+                                    cond IsClose(kitchencabinet)
+                                    cond IsRightHandEmpty(self)
+                                    cond IsNear(self,condimentshaker)
+                                    act RightGrab(condimentshaker)
+                            sequence
+                                cond IsStanding(self)
+                                cond IsClose(kitchencabinet)
+                                cond IsRightHandEmpty(self)
+                                act Walk(condimentshaker)
+                    sequence
+                        cond IsRightHolding(self,clothespile)
+                        cond IsStanding(self)
+                        cond IsNear(self,bed)
+                        cond IsClose(kitchencabinet)
+                        act RightPut(clothespile,bed)
                 sequence
-                    cond Holding(Nothing)
-                    cond RobotNear(Coffee)
-                    act PickUp(Coffee)
-            sequence
-                cond Holding(Nothing)
-                cond Exists(Coffee)
-                act MoveTo(Coffee)
-    sequence
-        cond Holding(Nothing)
-        selector
-            sequence
-                cond Exists(Coffee)
-                act Turn(AC,On)
-            act Make(Coffee)
+                    cond IsStanding(self)
+                    cond IsRightHolding(self,clothespile)
+                    cond IsClose(kitchencabinet)
+                    act Walk(bed)
+        sequence
+            cond IsStanding(self)
+            cond IsClose(kitchencabinet)
+            selector
+                selector
+                    sequence
+                        cond IsRightHolding(self,clothespile)
+                        selector
+                            selector
+                                sequence
+                                    cond IsLeftHolding(self,book)
+                                    selector
+                                        sequence
+                                            cond IsNear(self,desk)
+                                            act LeftPut(book,desk)
+                                        act Walk(desk)
+                                sequence
+                                    cond IsLeftHandEmpty(self)
+                                    cond IsNear(self,book)
+                                    act LeftGrab(book)
+                            sequence
+                                cond IsLeftHandEmpty(self)
+                                act Walk(book)
+                    sequence
+                        cond IsNear(self,clothespile)
+                        cond IsRightHandEmpty(self)
+                        cond IsLeftHandEmpty(self)
+                        act RightGrab(clothespile)
+                sequence
+                    cond IsLeftHandEmpty(self)
+                    cond IsRightHandEmpty(self)
+                    act Walk(clothespile)
