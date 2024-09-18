@@ -82,12 +82,14 @@ key_objects = ["milk","garbagecan"]
 
 # goal_str="(IsOn_clothespile_bed & IsOn_book_desk & IsSwitchedOn_toaster ) |  (IsOn_breadslice_kitchentable & IsIn_condimentshaker_kitchencabinet & IsClose_kitchencabinet)"
 # key_objects = ["kitchentable","clothespile","bed","condimentshaker","kitchencabinet","book","desk","breadslice","toaster","kitchentable"]
-goal_str="(IsOn_clothespile_bed & IsOn_book_desk & IsIn_condimentshaker_kitchencabinet & IsClose_kitchencabinet)   |  (IsIn_condimentshaker_kitchencabinet & IsSwitchedOn_toaster)"
-# goal_str="(IsOn_clothespile_bed & IsOn_book_desk & IsIn_condimentshaker_kitchencabinet & IsClose_kitchencabinet ) "
+
+
+# goal_str="(IsOn_clothespile_bed & IsOn_book_desk & IsIn_condimentshaker_kitchencabinet & IsClose_kitchencabinet)   |  (IsIn_condimentshaker_kitchencabinet & IsSwitchedOn_toaster)"
+goal_str="(IsOn_clothespile_bed & IsOn_book_desk & IsIn_condimentshaker_kitchencabinet & IsClose_kitchencabinet ) "
 
 key_objects = ["clothespile","bed","bed","book","desk","toaster","condimentshaker","kitchencabinet"]
 
-(IsOn(clothespile,bed) & IsOn(book,desk) & IsClose(kitchencabinet)) | IsIn(condimentshaker,kitchencabinet) & IsIn(condimentshaker,kitchencabinet)
+# (IsOn(clothespile,bed) & IsOn(book,desk) & IsClose(kitchencabinet)) | IsIn(condimentshaker,kitchencabinet) & IsIn(condimentshaker,kitchencabinet)
 
 # | (IsOn_breadslice_kitchentable & IsSwitchedOn_toaster)  | (IsOn_breadslice_kitchentable & IsSwitchedOn_toaster)
 
@@ -129,7 +131,7 @@ print("goal_str:", goal_str)
 algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
                       priority_act_ls=[], key_predicates=[],
                       key_objects=key_objects,
-                      selected_algorithm="obtea", mode="small-objs",
+                      selected_algorithm="hobtea", mode="small-objs",
                       act_tree_verbose=False, time_limit=60,
                       heuristic_choice=0,output_just_best=True,use_priority_act=priority_act_ls) #
 
@@ -168,7 +170,8 @@ bt.draw()
 goal = goal_transfer_str(goal_str)[0]
 print(f"goal: {goal}") # {'IsIn(milk,fridge)', 'IsClose(fridge)'}
 
-if scene in ["RW"]:
+# if scene in ["RW"]:
+if scene in ["VH","RW"]:
     env.agents[0].bind_bt(bt)
     env.reset()
     is_finished = False

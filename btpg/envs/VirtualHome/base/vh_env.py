@@ -26,12 +26,20 @@ class VHEnv(Env):
         raise NotImplementedError
 
 
+    # def launch_simulator(self):
+    #     self.comm = UnityCommunication()
+    #     self.simulator_process = subprocess.Popen(self.simulator_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE,start_new_session=True)
+    #
+    #     atexit.register(self.close)
+
     def launch_simulator(self):
+        # 设置全屏分辨率为 2560x160
+        simulator_command = [self.simulator_path, '-screen-fullscreen', '1', '-screen-width', '2560', '-screen-height', '1600']
+
         self.comm = UnityCommunication()
-        self.simulator_process = subprocess.Popen(self.simulator_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE,start_new_session=True)
+        self.simulator_process = subprocess.Popen(simulator_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
 
         atexit.register(self.close)
-
 
     def load_scenario(self,scenario_id):
         simulator_launched = False
