@@ -10,8 +10,9 @@ class VHEnvTest(VHEnv):
 
     def reset(self):
         self.load_scenario(15) # 18 6  15场景很亮  hard=18
+        self.comm.add_character('Chars/male1')
         # self.comm.add_character('Chars/male1')
-        self.comm.add_character('Chars/Female1')
+        # self.comm.add_character('Chars/Female1')
         # self.comm.add_character('Chars/male6') # micai
 
     def task_finished(self):

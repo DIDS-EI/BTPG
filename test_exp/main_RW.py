@@ -19,8 +19,10 @@ for goal in goal_ls:
 
 env, cur_cond_set = setup_environment(scene)
 
-goal_str ='On_Coffee_Table3 & Active_AC'
+# goal_str ='On_Coffee_Table3 & Active_AC'
 # goal_str ='RobotNear_WaterStation'
+# goal_str ='IsClean_Floor & On_Water_WaterStation'
+goal_str ='Low_ACTemperature & On_Water_WaterStation'
 print("goal_str:", goal_str)
 
 algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,

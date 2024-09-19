@@ -1,72 +1,83 @@
 selector
     sequence
-        cond IsIn(chicken,stove)
-        cond IsClose(stove)
-        cond IsSwitchedOn(stove)
-        cond IsIn(poundcake,stove)
+        cond IsSwitchedOn(computer)
+        cond IsClose(microwave)
+        cond IsSwitchedOn(tv)
+        cond IsIn(cutlets,microwave)
     sequence
-        cond IsIn(chicken,stove)
-        selector
-            sequence
-                cond IsIn(poundcake,stove)
-                selector
-                    sequence
-                        cond IsClose(stove)
-                        act SwitchOn(stove)
-                    sequence
-                        cond IsLeftHandEmpty(self)
-                        cond IsOpen(stove)
-                        cond IsNear(self,stove)
-                        act Close(stove)
-            sequence
-                cond IsLeftHolding(self,poundcake)
-                cond IsOpen(stove)
-                cond IsNear(self,stove)
-                act LeftPutIn(poundcake,stove)
-    sequence
-        cond IsOpen(stove)
+        cond IsLeftHandEmpty(self)
         selector
             selector
-                sequence
-                    cond IsRightHolding(self,chicken)
+                selector
                     selector
-                        selector
-                            sequence
-                                cond IsLeftHolding(self,poundcake)
+                        sequence
+                            cond IsSwitchedOn(tv)
+                            selector
                                 selector
                                     sequence
-                                        cond IsNear(self,stove)
-                                        act RightPutIn(chicken,stove)
+                                        cond IsSwitchedOn(computer)
+                                        selector
+                                            sequence
+                                                cond IsNear(self,microwave)
+                                                selector
+                                                    sequence
+                                                        cond IsOpen(microwave)
+                                                        selector
+                                                            sequence
+                                                                cond IsIn(cutlets,microwave)
+                                                                act Close(microwave)
+                                                            sequence
+                                                                cond IsRightHolding(self,cutlets)
+                                                                act RightPutIn(cutlets,microwave)
+                                                    sequence
+                                                        cond IsClose(microwave)
+                                                        cond IsRightHolding(self,cutlets)
+                                                        act Open(microwave)
+                                            sequence
+                                                cond IsClose(microwave)
+                                                cond IsStanding(self)
+                                                cond IsRightHolding(self,cutlets)
+                                                act Walk(microwave)
                                     sequence
+                                        cond IsClose(microwave)
+                                        cond IsSwitchedOff(computer)
+                                        cond IsNear(self,computer)
+                                        cond IsRightHolding(self,cutlets)
                                         cond IsStanding(self)
-                                        act Walk(stove)
-                            sequence
-                                cond IsNear(self,poundcake)
-                                cond IsLeftHandEmpty(self)
-                                cond IsStanding(self)
-                                act LeftGrab(poundcake)
+                                        act SwitchOn(computer)
+                                sequence
+                                    cond IsClose(microwave)
+                                    cond IsStanding(self)
+                                    cond IsRightHolding(self,cutlets)
+                                    cond IsSwitchedOff(computer)
+                                    act Walk(computer)
                         sequence
-                            cond IsLeftHandEmpty(self)
+                            cond IsClose(microwave)
+                            cond IsSwitchedOff(computer)
+                            cond IsNear(self,tv)
+                            cond IsRightHolding(self,cutlets)
                             cond IsStanding(self)
-                            act Walk(poundcake)
+                            cond IsSwitchedOff(tv)
+                            act SwitchOn(tv)
+                    sequence
+                        cond IsClose(microwave)
+                        cond IsSwitchedOff(computer)
+                        cond IsRightHolding(self,cutlets)
+                        cond IsStanding(self)
+                        cond IsSwitchedOff(tv)
+                        act Walk(tv)
                 sequence
-                    cond IsLeftHandEmpty(self)
-                    cond IsStanding(self)
-                    cond IsNear(self,chicken)
+                    cond IsClose(microwave)
+                    cond IsSwitchedOff(computer)
+                    cond IsNear(self,cutlets)
                     cond IsRightHandEmpty(self)
-                    act RightGrab(chicken)
+                    cond IsSwitchedOff(tv)
+                    cond IsStanding(self)
+                    act RightGrab(cutlets)
             sequence
-                cond IsLeftHandEmpty(self)
-                cond IsStanding(self)
+                cond IsClose(microwave)
+                cond IsSwitchedOff(computer)
                 cond IsRightHandEmpty(self)
-                act Walk(chicken)
-    sequence
-        cond IsClose(stove)
-        cond IsLeftHandEmpty(self)
-        cond IsRightHandEmpty(self)
-        cond IsStanding(self)
-        selector
-            sequence
-                cond IsNear(self,stove)
-                act Open(stove)
-            act Walk(stove)
+                cond IsSwitchedOff(tv)
+                cond IsStanding(self)
+                act Walk(cutlets)
