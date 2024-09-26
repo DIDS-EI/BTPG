@@ -4,6 +4,7 @@ A Platform and Benchmark for Behavior Tree Planning in Everyday Service Robots. 
 <div align="center">
 
 [[Website]](https://dids-ei.github.io/Project/BTPG/)
+
 ![Python Version](images/python310.svg)
 ![GitHub license](images/license.svg)
 
