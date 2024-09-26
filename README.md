@@ -1,13 +1,15 @@
 # BTPG
 
 A Platform and Benchmark for Behavior Tree Planning in Everyday Service Robots. Based on RoboWaiter and [VirtualHome](http://virtual-home.org/) v2.3.0
+<div align="center">
 
+[[Website]](https://dids-ei.github.io/Project/BTPG/)
 ![Python Version](images/python310.svg)
 ![GitHub license](images/license.svg)
 
-
+______________________________________________________________________
 ![](images/framework.png)
-
+</div>
 ## 🛠️ Installation
 
 ### Create a conda environment
