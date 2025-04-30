@@ -1,7 +1,0 @@
-CafeSimulator/Binaries/Win64/RobotProject.pdb	2024-02-22T09:04:25.002Z
-CafeSimulator/Binaries/Win64/tbb.pdb	2023-10-15T06:14:23.376Z
-Engine/Content/SlateDebug/Fonts/LastResort.tps	2023-10-15T06:19:07.403Z
-Engine/Content/SlateDebug/Fonts/LastResort.ttf	2023-10-15T06:19:08.379Z
-Engine/Extras/GPUDumpViewer/GPUDumpViewer.html	2023-10-15T06:23:01.065Z
-Engine/Extras/GPUDumpViewer/OpenGPUDumpViewer.bat	2023-10-15T06:23:01.066Z
-Engine/Extras/GPUDumpViewer/OpenGPUDumpViewer.sh	2023-10-15T06:23:01.067Z

@@ -1,9 +1,0 @@
-LICENSE
-README.md
-setup.py
-BTPG.egg-info/PKG-INFO
-BTPG.egg-info/SOURCES.txt
-BTPG.egg-info/dependency_links.txt
-BTPG.egg-info/requires.txt
-BTPG.egg-info/top_level.txt
-btpg/__init__.py
