@@ -1,0 +1,800 @@
+1
+Environment: 
+Instruction: 
+Goals: Low_ACTemperature
+Optimal Actions: Turn_AC_On, Turn_ACTemperature_Down
+Vital Action Predicates: Turn
+Vital Objects: AC, On, ACTemperature, Down
+
+2
+Environment: 
+Instruction: 
+Goals: RobotNear_BrightTable2
+Optimal Actions: MoveTo_BrightTable2
+Vital Action Predicates: MoveTo
+Vital Objects: BrightTable2
+
+3
+Environment: 
+Instruction: 
+Goals: Low_ACTemperature
+Optimal Actions: Turn_AC_On, Turn_ACTemperature_Down
+Vital Action Predicates: Turn
+Vital Objects: AC, On, ACTemperature, Down
+
+4
+Environment: 
+Instruction: 
+Goals: Exists_Water
+Optimal Actions: Make_Water
+Vital Action Predicates: Make
+Vital Objects: Water
+
+5
+Environment: 
+Instruction: 
+Goals: Holding_Yogurt
+Optimal Actions: MoveTo_Yogurt, PickUp_Yogurt
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: Yogurt
+
+6
+Environment: 
+Instruction: 
+Goals: Active_HallLight
+Optimal Actions: Turn_HallLight_On
+Vital Action Predicates: Turn
+Vital Objects: HallLight, On
+
+7
+Environment: 
+Instruction: 
+Goals: Holding_Yogurt
+Optimal Actions: MoveTo_Yogurt, PickUp_Yogurt
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: Yogurt
+
+8
+Environment: 
+Instruction: 
+Goals: Active_HallLight
+Optimal Actions: Turn_HallLight_On
+Vital Action Predicates: Turn
+Vital Objects: HallLight, On
+
+9
+Environment: 
+Instruction: 
+Goals: Exists_Dessert
+Optimal Actions: Make_Dessert
+Vital Action Predicates: Make
+Vital Objects: Dessert
+
+10
+Environment: 
+Instruction: 
+Goals: IsClean_Floor
+Optimal Actions: Clean_Floor
+Vital Action Predicates: Clean
+Vital Objects: Floor
+
+11
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+12
+Environment: 
+Instruction: 
+Goals: Exists_Dessert
+Optimal Actions: Make_Dessert
+Vital Action Predicates: Make
+Vital Objects: Dessert
+
+13
+Environment: 
+Instruction: 
+Goals: On_MilkDrink_CoffeeStation
+Optimal Actions: MoveTo_MilkDrink, PickUp_MilkDrink, MoveTo_CoffeeStation, PutDown_MilkDrink_CoffeeStation
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: MilkDrink, CoffeeStation
+
+14
+Environment: 
+Instruction: 
+Goals: Low_ACTemperature
+Optimal Actions: Turn_AC_On, Turn_ACTemperature_Down
+Vital Action Predicates: Turn
+Vital Objects: AC, On, ACTemperature, Down
+
+15
+Environment: 
+Instruction: 
+Goals: Exists_Water
+Optimal Actions: Make_Water
+Vital Action Predicates: Make
+Vital Objects: Water
+
+16
+Environment: 
+Instruction: 
+Goals: IsClean_Chairs
+Optimal Actions: Clean_Chairs
+Vital Action Predicates: Clean
+Vital Objects: Chairs
+
+17
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+18
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+19
+Environment: 
+Instruction: 
+Goals: Exists_Coffee
+Optimal Actions: Make_Coffee
+Vital Action Predicates: Make
+Vital Objects: Coffee
+
+20
+Environment: 
+Instruction: 
+Goals: IsClean_Chairs
+Optimal Actions: Clean_Chairs
+Vital Action Predicates: Clean
+Vital Objects: Chairs
+
+21
+Environment: 
+Instruction: 
+Goals: Active_TubeLight
+Optimal Actions: Turn_TubeLight_On
+Vital Action Predicates: Turn
+Vital Objects: TubeLight, On
+
+22
+Environment: 
+Instruction: 
+Goals: Active_HallLight
+Optimal Actions: Turn_HallLight_On
+Vital Action Predicates: Turn
+Vital Objects: HallLight, On
+
+23
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+24
+Environment: 
+Instruction: 
+Goals: Exists_Coffee
+Optimal Actions: Make_Coffee
+Vital Action Predicates: Make
+Vital Objects: Coffee
+
+25
+Environment: 
+Instruction: 
+Goals: IsClean_Chairs
+Optimal Actions: Clean_Chairs
+Vital Action Predicates: Clean
+Vital Objects: Chairs
+
+26
+Environment: 
+Instruction: 
+Goals: RobotNear_Table2
+Optimal Actions: MoveTo_Table2
+Vital Action Predicates: MoveTo
+Vital Objects: Table2
+
+27
+Environment: 
+Instruction: 
+Goals: Holding_Softdrink
+Optimal Actions: MoveTo_Softdrink, PickUp_Softdrink
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: Softdrink
+
+28
+Environment: 
+Instruction: 
+Goals: Exists_Coffee
+Optimal Actions: Make_Coffee
+Vital Action Predicates: Make
+Vital Objects: Coffee
+
+29
+Environment: 
+Instruction: 
+Goals: Holding_Chips
+Optimal Actions: MoveTo_Chips, PickUp_Chips
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: Chips
+
+30
+Environment: 
+Instruction: 
+Goals: Active_HallLight
+Optimal Actions: Turn_HallLight_On
+Vital Action Predicates: Turn
+Vital Objects: HallLight, On
+
+31
+Environment: 
+Instruction: 
+Goals: RobotNear_BrightTable2
+Optimal Actions: MoveTo_BrightTable2
+Vital Action Predicates: MoveTo
+Vital Objects: BrightTable2
+
+32
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+33
+Environment: 
+Instruction: 
+Goals: RobotNear_BrightTable5
+Optimal Actions: MoveTo_BrightTable5
+Vital Action Predicates: MoveTo
+Vital Objects: BrightTable5
+
+34
+Environment: 
+Instruction: 
+Goals: IsClean_Table1
+Optimal Actions: Clean_Table1
+Vital Action Predicates: Clean
+Vital Objects: Table1
+
+35
+Environment: 
+Instruction: 
+Goals: Active_TubeLight
+Optimal Actions: Turn_TubeLight_On
+Vital Action Predicates: Turn
+Vital Objects: TubeLight, On
+
+36
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+37
+Environment: 
+Instruction: 
+Goals: On_ADMilk_Bar2
+Optimal Actions: MoveTo_ADMilk, PickUp_ADMilk, MoveTo_Bar2, PutDown_ADMilk_Bar2
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: ADMilk, Bar2
+
+38
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+39
+Environment: 
+Instruction: 
+Goals: Holding_NFCJuice
+Optimal Actions: MoveTo_NFCJuice, PickUp_NFCJuice
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: NFCJuice
+
+40
+Environment: 
+Instruction: 
+Goals: On_Water_BrightTable6
+Optimal Actions: Make_Water, MoveTo_Water, PickUp_Water, MoveTo_BrightTable6, PutDown_Water_BrightTable6
+Vital Action Predicates: Make, MoveTo, PickUp, PutDown
+Vital Objects: Water, BrightTable6
+
+41
+Environment: 
+Instruction: 
+Goals: On_VacuumCup_Table3
+Optimal Actions: MoveTo_VacuumCup, PickUp_VacuumCup, MoveTo_Table3, PutDown_VacuumCup_Table3
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: VacuumCup, Table3
+
+42
+Environment: 
+Instruction: 
+Goals: Active_HallLight
+Optimal Actions: Turn_HallLight_On
+Vital Action Predicates: Turn
+Vital Objects: HallLight, On
+
+43
+Environment: 
+Instruction: 
+Goals: Active_TubeLight
+Optimal Actions: Turn_TubeLight_On
+Vital Action Predicates: Turn
+Vital Objects: TubeLight, On
+
+44
+Environment: 
+Instruction: 
+Goals: IsClean_Table1
+Optimal Actions: Clean_Table1
+Vital Action Predicates: Clean
+Vital Objects: Table1
+
+45
+Environment: 
+Instruction: 
+Goals: On_Milk_BrightTable6
+Optimal Actions: MoveTo_Milk, PickUp_Milk, MoveTo_BrightTable6, PutDown_Milk_BrightTable6
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: Milk, BrightTable6
+
+46
+Environment: 
+Instruction: 
+Goals: Exists_Coffee
+Optimal Actions: Make_Coffee
+Vital Action Predicates: Make
+Vital Objects: Coffee
+
+47
+Environment: 
+Instruction: 
+Goals: On_Coffee_Table2
+Optimal Actions: Make_Coffee, MoveTo_Coffee, PickUp_Coffee, MoveTo_Table2, PutDown_Coffee_Table2
+Vital Action Predicates: Make, MoveTo, PickUp, PutDown
+Vital Objects: Coffee, Table2
+
+48
+Environment: 
+Instruction: 
+Goals: RobotNear_BrightTable6
+Optimal Actions: MoveTo_BrightTable6
+Vital Action Predicates: MoveTo
+Vital Objects: BrightTable6
+
+49
+Environment: 
+Instruction: 
+Goals: Active_HallLight
+Optimal Actions: Turn_HallLight_On
+Vital Action Predicates: Turn
+Vital Objects: HallLight, On
+
+50
+Environment: 
+Instruction: 
+Goals: IsClean_Floor
+Optimal Actions: Clean_Floor
+Vital Action Predicates: Clean
+Vital Objects: Floor
+
+51
+Environment: 
+Instruction: 
+Goals: On_Coffee_WaterStation
+Optimal Actions: Make_Coffee, MoveTo_Coffee, PickUp_Coffee, MoveTo_WaterStation, PutDown_Coffee_WaterStation
+Vital Action Predicates: Make, MoveTo, PickUp, PutDown
+Vital Objects: Coffee, WaterStation
+
+52
+Environment: 
+Instruction: 
+Goals: Active_HallLight
+Optimal Actions: Turn_HallLight_On
+Vital Action Predicates: Turn
+Vital Objects: HallLight, On
+
+53
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+54
+Environment: 
+Instruction: 
+Goals: IsClean_Chairs
+Optimal Actions: Clean_Chairs
+Vital Action Predicates: Clean
+Vital Objects: Chairs
+
+55
+Environment: 
+Instruction: 
+Goals: Holding_ADMilk
+Optimal Actions: MoveTo_ADMilk, PickUp_ADMilk
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: ADMilk
+
+56
+Environment: 
+Instruction: 
+Goals: On_MilkDrink_BrightTable6
+Optimal Actions: MoveTo_MilkDrink, PickUp_MilkDrink, MoveTo_BrightTable6, PutDown_MilkDrink_BrightTable6
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: MilkDrink, BrightTable6
+
+57
+Environment: 
+Instruction: 
+Goals: IsClean_Chairs
+Optimal Actions: Clean_Chairs
+Vital Action Predicates: Clean
+Vital Objects: Chairs
+
+58
+Environment: 
+Instruction: 
+Goals: Active_HallLight
+Optimal Actions: Turn_HallLight_On
+Vital Action Predicates: Turn
+Vital Objects: HallLight, On
+
+59
+Environment: 
+Instruction: 
+Goals: Holding_Softdrink
+Optimal Actions: MoveTo_Softdrink, PickUp_Softdrink
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: Softdrink
+
+60
+Environment: 
+Instruction: 
+Goals: Low_ACTemperature
+Optimal Actions: Turn_AC_On, Turn_ACTemperature_Down
+Vital Action Predicates: Turn
+Vital Objects: AC, On, ACTemperature, Down
+
+61
+Environment: 
+Instruction: 
+Goals: IsClean_Floor
+Optimal Actions: Clean_Floor
+Vital Action Predicates: Clean
+Vital Objects: Floor
+
+62
+Environment: 
+Instruction: 
+Goals: Holding_Coffee
+Optimal Actions: Make_Coffee, MoveTo_Coffee, PickUp_Coffee
+Vital Action Predicates: Make, MoveTo, PickUp
+Vital Objects: Coffee
+
+63
+Environment: 
+Instruction: 
+Goals: Exists_Dessert
+Optimal Actions: Make_Dessert
+Vital Action Predicates: Make
+Vital Objects: Dessert
+
+64
+Environment: 
+Instruction: 
+Goals: IsClean_Chairs
+Optimal Actions: Clean_Chairs
+Vital Action Predicates: Clean
+Vital Objects: Chairs
+
+65
+Environment: 
+Instruction: 
+Goals: RobotNear_BrightTable6
+Optimal Actions: MoveTo_BrightTable6
+Vital Action Predicates: MoveTo
+Vital Objects: BrightTable6
+
+66
+Environment: 
+Instruction: 
+Goals: Exists_Water
+Optimal Actions: Make_Water
+Vital Action Predicates: Make
+Vital Objects: Water
+
+67
+Environment: 
+Instruction: 
+Goals: IsClean_Chairs
+Optimal Actions: Clean_Chairs
+Vital Action Predicates: Clean
+Vital Objects: Chairs
+
+68
+Environment: 
+Instruction: 
+Goals: RobotNear_Table1
+Optimal Actions: MoveTo_Table1
+Vital Action Predicates: MoveTo
+Vital Objects: Table1
+
+69
+Environment: 
+Instruction: 
+Goals: Active_AC
+Optimal Actions: Turn_AC_On
+Vital Action Predicates: Turn
+Vital Objects: AC, On
+
+70
+Environment: 
+Instruction: 
+Goals: IsClean_Table1
+Optimal Actions: Clean_Table1
+Vital Action Predicates: Clean
+Vital Objects: Table1
+
+71
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+72
+Environment: 
+Instruction: 
+Goals: Low_ACTemperature
+Optimal Actions: Turn_AC_On, Turn_ACTemperature_Down
+Vital Action Predicates: Turn
+Vital Objects: AC, On, ACTemperature, Down
+
+73
+Environment: 
+Instruction: 
+Goals: On_SpringWater_Table2
+Optimal Actions: MoveTo_SpringWater, PickUp_SpringWater, MoveTo_Table2, PutDown_SpringWater_Table2
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: SpringWater, Table2
+
+74
+Environment: 
+Instruction: 
+Goals: Holding_Bernachon
+Optimal Actions: MoveTo_Bernachon, PickUp_Bernachon
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: Bernachon
+
+75
+Environment: 
+Instruction: 
+Goals: RobotNear_Table2
+Optimal Actions: MoveTo_Table2
+Vital Action Predicates: MoveTo
+Vital Objects: Table2
+
+76
+Environment: 
+Instruction: 
+Goals: Exists_Dessert
+Optimal Actions: Make_Dessert
+Vital Action Predicates: Make
+Vital Objects: Dessert
+
+77
+Environment: 
+Instruction: 
+Goals: On_Bernachon_Bar
+Optimal Actions: MoveTo_Bernachon, PickUp_Bernachon, MoveTo_Bar, PutDown_Bernachon_Bar
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: Bernachon, Bar
+
+78
+Environment: 
+Instruction: 
+Goals: Exists_Coffee
+Optimal Actions: Make_Coffee
+Vital Action Predicates: Make
+Vital Objects: Coffee
+
+79
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+80
+Environment: 
+Instruction: 
+Goals: Holding_Softdrink
+Optimal Actions: MoveTo_Softdrink, PickUp_Softdrink
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: Softdrink
+
+81
+Environment: 
+Instruction: 
+Goals: Low_ACTemperature
+Optimal Actions: Turn_AC_On, Turn_ACTemperature_Down
+Vital Action Predicates: Turn
+Vital Objects: AC, On, ACTemperature, Down
+
+82
+Environment: 
+Instruction: 
+Goals: On_Milk_CoffeeStation
+Optimal Actions: MoveTo_Milk, PickUp_Milk, MoveTo_CoffeeStation, PutDown_Milk_CoffeeStation
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: Milk, CoffeeStation
+
+83
+Environment: 
+Instruction: 
+Goals: Active_AC
+Optimal Actions: Turn_AC_On
+Vital Action Predicates: Turn
+Vital Objects: AC, On
+
+84
+Environment: 
+Instruction: 
+Goals: Closed_Curtain
+Optimal Actions: Turn_Curtain_Off
+Vital Action Predicates: Turn
+Vital Objects: Curtain, Off
+
+85
+Environment: 
+Instruction: 
+Goals: RobotNear_Table2
+Optimal Actions: MoveTo_Table2
+Vital Action Predicates: MoveTo
+Vital Objects: Table2
+
+86
+Environment: 
+Instruction: 
+Goals: Exists_Water
+Optimal Actions: Make_Water
+Vital Action Predicates: Make
+Vital Objects: Water
+
+87
+Environment: 
+Instruction: 
+Goals: On_Yogurt_WaterStation
+Optimal Actions: MoveTo_Yogurt, PickUp_Yogurt, MoveTo_WaterStation, PutDown_Yogurt_WaterStation
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: Yogurt, WaterStation
+
+88
+Environment: 
+Instruction: 
+Goals: RobotNear_Table2
+Optimal Actions: MoveTo_Table2
+Vital Action Predicates: MoveTo
+Vital Objects: Table2
+
+89
+Environment: 
+Instruction: 
+Goals: Active_AC
+Optimal Actions: Turn_AC_On
+Vital Action Predicates: Turn
+Vital Objects: AC, On
+
+90
+Environment: 
+Instruction: 
+Goals: On_Softdrink_CoffeeStation
+Optimal Actions: MoveTo_Softdrink, PickUp_Softdrink, MoveTo_CoffeeStation, PutDown_Softdrink_CoffeeStation
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: Softdrink, CoffeeStation
+
+91
+Environment: 
+Instruction: 
+Goals: RobotNear_QuietTable1
+Optimal Actions: MoveTo_QuietTable1
+Vital Action Predicates: MoveTo
+Vital Objects: QuietTable1
+
+92
+Environment: 
+Instruction: 
+Goals: On_VacuumCup_WaterStation
+Optimal Actions: MoveTo_VacuumCup, PickUp_VacuumCup, MoveTo_WaterStation, PutDown_VacuumCup_WaterStation
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: VacuumCup, WaterStation
+
+93
+Environment: 
+Instruction: 
+Goals: Low_ACTemperature
+Optimal Actions: Turn_AC_On, Turn_ACTemperature_Down
+Vital Action Predicates: Turn
+Vital Objects: AC, On, ACTemperature, Down
+
+94
+Environment: 
+Instruction: 
+Goals: Holding_Milk
+Optimal Actions: MoveTo_Milk, PickUp_Milk
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: Milk
+
+95
+Environment: 
+Instruction: 
+Goals: RobotNear_CoffeeStation
+Optimal Actions: MoveTo_CoffeeStation
+Vital Action Predicates: MoveTo
+Vital Objects: CoffeeStation
+
+96
+Environment: 
+Instruction: 
+Goals: Holding_Yogurt
+Optimal Actions: MoveTo_Yogurt, PickUp_Yogurt
+Vital Action Predicates: MoveTo, PickUp
+Vital Objects: Yogurt
+
+97
+Environment: 
+Instruction: 
+Goals: IsClean_Floor
+Optimal Actions: Clean_Floor
+Vital Action Predicates: Clean
+Vital Objects: Floor
+
+98
+Environment: 
+Instruction: 
+Goals: IsClean_Chairs
+Optimal Actions: Clean_Chairs
+Vital Action Predicates: Clean
+Vital Objects: Chairs
+
+99
+Environment: 
+Instruction: 
+Goals: On_Yogurt_BrightTable6
+Optimal Actions: MoveTo_Yogurt, PickUp_Yogurt, MoveTo_BrightTable6, PutDown_Yogurt_BrightTable6
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: Yogurt, BrightTable6
+
+100
+Environment: 
+Instruction: 
+Goals: RobotNear_QuietTable2
+Optimal Actions: MoveTo_QuietTable2
+Vital Action Predicates: MoveTo
+Vital Objects: QuietTable2
+

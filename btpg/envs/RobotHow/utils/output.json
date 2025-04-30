@@ -1,0 +1,80 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "category": "Characters",
+            "class_name": "character",
+            "prefab_name": "Male1",
+            "obj_transform": {
+                "position": [
+                    -5.9214325,
+                    1.247,
+                    1.78895521
+                ],
+                "rotation": [
+                    0.0,
+                    -0.6852732,
+                    0.0,
+                    0.728286147
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "bounding_box": {
+                "center": [
+                    -5.898017,
+                    2.118052,
+                    1.78752911
+                ],
+                "size": [
+                    0.5964303,
+                    1.86971855,
+                    1.37743878
+                ]
+            },
+            "properties": [],
+            "states": []
+        },
+        {
+            "id": 11,
+            "category": "Rooms",
+            "class_name": "bathroom",
+            "prefab_name": "PRE_ROO_Bathroom_01",
+            "obj_transform": {
+                "position": [
+                    -6.385,
+                    -0.003,
+                    -0.527
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "bounding_box": {
+                "center": [
+                    -5.135,
+                    1.247,
+                    0.723
+                ],
+                "size": [
+                    8.0,
+                    3.0,
+                    5.5
+                ]
+            },
+            "properties": [],
+            "states": []
+        }
+    ]
+}

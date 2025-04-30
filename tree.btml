@@ -1,0 +1,83 @@
+selector
+    sequence
+        cond IsSwitchedOn(computer)
+        cond IsClose(microwave)
+        cond IsSwitchedOn(tv)
+        cond IsIn(cutlets,microwave)
+    sequence
+        cond IsLeftHandEmpty(self)
+        selector
+            selector
+                selector
+                    selector
+                        sequence
+                            cond IsSwitchedOn(tv)
+                            selector
+                                selector
+                                    sequence
+                                        cond IsSwitchedOn(computer)
+                                        selector
+                                            sequence
+                                                cond IsNear(self,microwave)
+                                                selector
+                                                    sequence
+                                                        cond IsOpen(microwave)
+                                                        selector
+                                                            sequence
+                                                                cond IsIn(cutlets,microwave)
+                                                                act Close(microwave)
+                                                            sequence
+                                                                cond IsRightHolding(self,cutlets)
+                                                                act RightPutIn(cutlets,microwave)
+                                                    sequence
+                                                        cond IsClose(microwave)
+                                                        cond IsRightHolding(self,cutlets)
+                                                        act Open(microwave)
+                                            sequence
+                                                cond IsClose(microwave)
+                                                cond IsStanding(self)
+                                                cond IsRightHolding(self,cutlets)
+                                                act Walk(microwave)
+                                    sequence
+                                        cond IsClose(microwave)
+                                        cond IsSwitchedOff(computer)
+                                        cond IsNear(self,computer)
+                                        cond IsRightHolding(self,cutlets)
+                                        cond IsStanding(self)
+                                        act SwitchOn(computer)
+                                sequence
+                                    cond IsClose(microwave)
+                                    cond IsStanding(self)
+                                    cond IsRightHolding(self,cutlets)
+                                    cond IsSwitchedOff(computer)
+                                    act Walk(computer)
+                        sequence
+                            cond IsClose(microwave)
+                            cond IsSwitchedOff(computer)
+                            cond IsNear(self,tv)
+                            cond IsRightHolding(self,cutlets)
+                            cond IsStanding(self)
+                            cond IsSwitchedOff(tv)
+                            act SwitchOn(tv)
+                    sequence
+                        cond IsClose(microwave)
+                        cond IsSwitchedOff(computer)
+                        cond IsRightHolding(self,cutlets)
+                        cond IsStanding(self)
+                        cond IsSwitchedOff(tv)
+                        act Walk(tv)
+                sequence
+                    cond IsClose(microwave)
+                    cond IsSwitchedOff(computer)
+                    cond IsNear(self,cutlets)
+                    cond IsRightHandEmpty(self)
+                    cond IsSwitchedOff(tv)
+                    cond IsStanding(self)
+                    act RightGrab(cutlets)
+            sequence
+                cond IsClose(microwave)
+                cond IsSwitchedOff(computer)
+                cond IsRightHandEmpty(self)
+                cond IsSwitchedOff(tv)
+                cond IsStanding(self)
+                act Walk(cutlets)

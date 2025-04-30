@@ -1,0 +1,800 @@
+1
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_candle & IsOn_wine_kitchentable
+Optimal Actions: Walk_candle, SwitchOn_candle, Walk_wine, RightGrab_wine, Walk_kitchentable, RightPut_wine_kitchentable
+Vital Action Predicates: Walk, SwitchOn, RightGrab, RightPut
+Vital Objects: candle, wine, kitchentable
+
+2
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_tv & IsPlugged_tv
+Optimal Actions: Walk_tv, PlugIn_tv, SwitchOn_tv
+Vital Action Predicates: Walk, PlugIn, SwitchOn
+Vital Objects: tv
+
+3
+Environment: 
+Instruction: 
+Goals: IsClean_rag & IsOn_rag_kitchencabinet
+Optimal Actions: Walk_rag, RightGrab_rag, Walk_faucet, SwitchOn_faucet, Wash_rag, Walk_kitchencabinet, RightPut_rag_kitchencabinet
+Vital Action Predicates: Walk, RightGrab, SwitchOn, Wash, RightPut
+Vital Objects: rag, faucet, kitchencabinet
+
+4
+Environment: 
+Instruction: 
+Goals: IsPlugged_tv
+Optimal Actions: Walk_tv, PlugIn_tv
+Vital Action Predicates: Walk, PlugIn
+Vital Objects: tv
+
+5
+Environment: 
+Instruction: 
+Goals: IsClean_faucet
+Optimal Actions: Walk_rag, LeftGrab_rag, Walk_faucet, Wipe_faucet
+Vital Action Predicates: Walk, LeftGrab, Wipe
+Vital Objects: rag, faucet
+
+6
+Environment: 
+Instruction: 
+Goals: IsIn_wine_kitchencabinet & IsClose_kitchencabinet & IsPlugged_tv
+Optimal Actions: Walk_tv, PlugIn_tv, Walk_wine, RightGrab_wine, Walk_kitchencabinet, Open_kitchencabinet, RightPutIn_wine_kitchencabinet, Close_kitchencabinet
+Vital Action Predicates: Walk, PlugIn, RightGrab, Open, RightPutIn, Close
+Vital Objects: tv, wine, kitchencabinet
+
+7
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_candle & IsPlugged_mouse & IsOpen_fridge
+Optimal Actions: Walk_mouse, PlugIn_mouse, Walk_candle, SwitchOn_candle, Walk_fridge, Open_fridge
+Vital Action Predicates: Walk, PlugIn, SwitchOn, Open
+Vital Objects: mouse, candle, fridge
+
+8
+Environment: 
+Instruction: 
+Goals: IsOn_wine_kitchencabinet
+Optimal Actions: Walk_wine, LeftGrab_wine, Walk_kitchencabinet, LeftPut_wine_kitchencabinet
+Vital Action Predicates: Walk, LeftGrab, LeftPut
+Vital Objects: wine, kitchencabinet
+
+9
+Environment: 
+Instruction: 
+Goals: IsOn_rag_kitchencabinet
+Optimal Actions: Walk_rag, LeftGrab_rag, Walk_kitchencabinet, LeftPut_rag_kitchencabinet
+Vital Action Predicates: Walk, LeftGrab, LeftPut
+Vital Objects: rag, kitchencabinet
+
+10
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_tv & IsClean_kitchencabinet & IsOpen_kitchencabinet
+Optimal Actions: Walk_rag, RightGrab_rag, Walk_kitchencabinet, Wipe_kitchencabinet, Open_kitchencabinet, Walk_tv, PlugIn_tv, SwitchOn_tv
+Vital Action Predicates: Walk, RightGrab, Wipe, Open, PlugIn, SwitchOn
+Vital Objects: rag, kitchencabinet, tv
+
+11
+Environment: 
+Instruction: 
+Goals: IsCut_apple & IsPlugged_fridge
+Optimal Actions: Walk_fridge, PlugIn_fridge, Walk_kitchenknife, RightGrab_kitchenknife, Walk_apple, LeftGrab_apple, Cut_apple
+Vital Action Predicates: Walk, PlugIn, RightGrab, LeftGrab, Cut
+Vital Objects: fridge, kitchenknife, apple
+
+12
+Environment: 
+Instruction: 
+Goals: IsOpen_kitchencabinet
+Optimal Actions: Walk_kitchencabinet, Open_kitchencabinet
+Vital Action Predicates: Walk, Open
+Vital Objects: kitchencabinet
+
+13
+Environment: 
+Instruction: 
+Goals: IsPlugged_tv
+Optimal Actions: Walk_tv, PlugIn_tv
+Vital Action Predicates: Walk, PlugIn
+Vital Objects: tv
+
+14
+Environment: 
+Instruction: 
+Goals: IsIn_kitchenknife_fridge & IsClose_fridge
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_fridge, Open_fridge, PlugIn_fridge, RightPutIn_kitchenknife_fridge, Close_fridge
+Vital Action Predicates: Walk, RightGrab, Open, PlugIn, RightPutIn, Close
+Vital Objects: kitchenknife, fridge
+
+15
+Environment: 
+Instruction: 
+Goals: IsIn_rag_garbagecan
+Optimal Actions: Walk_rag, LeftGrab_rag, Walk_garbagecan, LeftPutIn_rag_garbagecan
+Vital Action Predicates: Walk, LeftGrab, LeftPutIn
+Vital Objects: rag, garbagecan
+
+16
+Environment: 
+Instruction: 
+Goals: IsOn_plate_bed & IsOpen_window & IsNear_self_candle
+Optimal Actions: Walk_plate, RightGrab_plate, Walk_bed, RightPut_plate_bed, Walk_window, Open_window, Walk_candle
+Vital Action Predicates: Walk, RightGrab, RightPut, Open
+Vital Objects: plate, bed, window, candle
+
+17
+Environment: 
+Instruction: 
+Goals: IsClean_kitchentable
+Optimal Actions: Walk_rag, LeftGrab_rag, Walk_kitchentable, Wipe_kitchentable
+Vital Action Predicates: Walk, LeftGrab, Wipe
+Vital Objects: rag, kitchentable
+
+18
+Environment: 
+Instruction: 
+Goals: IsNear_self_plate & IsOn_cutlets_bed
+Optimal Actions: Walk_cutlets, LeftGrab_cutlets, Walk_bed, LeftPut_cutlets_bed, Walk_plate
+Vital Action Predicates: Walk, LeftGrab, LeftPut
+Vital Objects: cutlets, bed, plate
+
+19
+Environment: 
+Instruction: 
+Goals: IsIn_apple_kitchencabinet & IsClose_kitchencabinet & IsSwitchedOn_faucet
+Optimal Actions: Walk_faucet, SwitchOn_faucet, Walk_apple, RightGrab_apple, Walk_kitchencabinet, Open_kitchencabinet, RightPutIn_apple_kitchencabinet, Close_kitchencabinet
+Vital Action Predicates: Walk, SwitchOn, RightGrab, Open, RightPutIn, Close
+Vital Objects: faucet, apple, kitchencabinet
+
+20
+Environment: 
+Instruction: 
+Goals: IsOpen_fridge & IsOn_apple_kitchencabinet & IsNear_self_bed
+Optimal Actions: Walk_fridge, Open_fridge, Walk_apple, LeftGrab_apple, Walk_kitchencabinet, LeftPut_apple_kitchencabinet, Walk_bed
+Vital Action Predicates: Walk, Open, LeftGrab, LeftPut
+Vital Objects: fridge, apple, kitchencabinet, bed
+
+21
+Environment: 
+Instruction: 
+Goals: IsCut_apple
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_apple, LeftGrab_apple, Cut_apple
+Vital Action Predicates: Walk, RightGrab, LeftGrab, Cut
+Vital Objects: kitchenknife, apple
+
+22
+Environment: 
+Instruction: 
+Goals: IsCut_cutlets
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_cutlets, LeftGrab_cutlets, Cut_cutlets
+Vital Action Predicates: Walk, RightGrab, LeftGrab, Cut
+Vital Objects: kitchenknife, cutlets
+
+23
+Environment: 
+Instruction: 
+Goals: IsIn_plate_garbagecan & IsPlugged_fridge
+Optimal Actions: Walk_fridge, PlugIn_fridge, Walk_plate, LeftGrab_plate, Walk_garbagecan, LeftPutIn_plate_garbagecan
+Vital Action Predicates: Walk, PlugIn, LeftGrab, LeftPutIn
+Vital Objects: fridge, plate, garbagecan
+
+24
+Environment: 
+Instruction: 
+Goals: IsOpen_window
+Optimal Actions: Walk_window, Open_window
+Vital Action Predicates: Walk, Open
+Vital Objects: window
+
+25
+Environment: 
+Instruction: 
+Goals: IsClean_window & IsPlugged_fridge
+Optimal Actions: Walk_rag, RightGrab_rag, Walk_fridge, PlugIn_fridge, Walk_window, Wipe_window
+Vital Action Predicates: Walk, RightGrab, PlugIn, Wipe
+Vital Objects: rag, fridge, window
+
+26
+Environment: 
+Instruction: 
+Goals: IsPlugged_mouse & IsNear_self_garbagecan & IsOpen_window
+Optimal Actions: Walk_window, Open_window, Walk_mouse, PlugIn_mouse, Walk_garbagecan
+Vital Action Predicates: Walk, Open, PlugIn
+Vital Objects: window, mouse, garbagecan
+
+27
+Environment: 
+Instruction: 
+Goals: IsCut_apple
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_apple, LeftGrab_apple, Cut_apple
+Vital Action Predicates: Walk, RightGrab, LeftGrab, Cut
+Vital Objects: kitchenknife, apple
+
+28
+Environment: 
+Instruction: 
+Goals: IsNear_self_plate & IsCut_cutlets
+Optimal Actions: Walk_cutlets, LeftGrab_cutlets, Walk_kitchenknife, RightGrab_kitchenknife, Walk_plate, Cut_cutlets
+Vital Action Predicates: Walk, LeftGrab, RightGrab, Cut
+Vital Objects: cutlets, kitchenknife, plate
+
+29
+Environment: 
+Instruction: 
+Goals: IsIn_plate_fridge & IsClose_fridge
+Optimal Actions: Walk_plate, RightGrab_plate, Walk_fridge, PlugIn_fridge, Open_fridge, RightPutIn_plate_fridge, Close_fridge
+Vital Action Predicates: Walk, RightGrab, PlugIn, Open, RightPutIn, Close
+Vital Objects: plate, fridge
+
+30
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_faucet
+Optimal Actions: Walk_faucet, SwitchOn_faucet
+Vital Action Predicates: Walk, SwitchOn
+Vital Objects: faucet
+
+31
+Environment: 
+Instruction: 
+Goals: IsOn_rag_kitchencabinet & IsOpen_microwave
+Optimal Actions: Walk_microwave, Open_microwave, Walk_rag, LeftGrab_rag, Walk_kitchencabinet, LeftPut_rag_kitchencabinet
+Vital Action Predicates: Walk, Open, LeftGrab, LeftPut
+Vital Objects: microwave, rag, kitchencabinet
+
+32
+Environment: 
+Instruction: 
+Goals: IsCut_cutlets
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_cutlets, LeftGrab_cutlets, Cut_cutlets
+Vital Action Predicates: Walk, RightGrab, LeftGrab, Cut
+Vital Objects: kitchenknife, cutlets
+
+33
+Environment: 
+Instruction: 
+Goals: IsPlugged_fridge & IsIn_rag_garbagecan & IsNear_self_tv
+Optimal Actions: Walk_fridge, PlugIn_fridge, Walk_rag, LeftGrab_rag, Walk_garbagecan, LeftPutIn_rag_garbagecan, Walk_tv
+Vital Action Predicates: Walk, PlugIn, LeftGrab, LeftPutIn
+Vital Objects: fridge, rag, garbagecan, tv
+
+34
+Environment: 
+Instruction: 
+Goals: IsClean_microwave
+Optimal Actions: Walk_rag, LeftGrab_rag, Walk_microwave, Wipe_microwave
+Vital Action Predicates: Walk, LeftGrab, Wipe
+Vital Objects: rag, microwave
+
+35
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_tv & IsPlugged_tv & IsNear_self_faucet
+Optimal Actions: Walk_tv, PlugIn_tv, SwitchOn_tv, Walk_faucet
+Vital Action Predicates: Walk, PlugIn, SwitchOn
+Vital Objects: tv, faucet
+
+36
+Environment: 
+Instruction: 
+Goals: IsNear_self_window
+Optimal Actions: Walk_window
+Vital Action Predicates: Walk
+Vital Objects: window
+
+37
+Environment: 
+Instruction: 
+Goals: IsPlugged_fridge & IsPlugged_microwave
+Optimal Actions: Walk_fridge, PlugIn_fridge, Walk_microwave, PlugIn_microwave
+Vital Action Predicates: Walk, PlugIn
+Vital Objects: fridge, microwave
+
+38
+Environment: 
+Instruction: 
+Goals: IsOn_apple_bed & IsOn_kitchenknife_kitchencabinet
+Optimal Actions: Walk_kitchenknife, LeftGrab_kitchenknife, Walk_apple, RightGrab_apple, Walk_bed, RightPut_apple_bed, Walk_kitchencabinet, LeftPut_kitchenknife_kitchencabinet
+Vital Action Predicates: Walk, LeftGrab, RightGrab, RightPut, LeftPut
+Vital Objects: kitchenknife, apple, bed, kitchencabinet
+
+39
+Environment: 
+Instruction: 
+Goals: IsPlugged_mouse & IsSwitchedOn_candle
+Optimal Actions: Walk_candle, SwitchOn_candle, Walk_mouse, PlugIn_mouse
+Vital Action Predicates: Walk, SwitchOn, PlugIn
+Vital Objects: candle, mouse
+
+40
+Environment: 
+Instruction: 
+Goals: IsCut_apple
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_apple, LeftGrab_apple, Cut_apple
+Vital Action Predicates: Walk, RightGrab, LeftGrab, Cut
+Vital Objects: kitchenknife, apple
+
+41
+Environment: 
+Instruction: 
+Goals: IsClean_kitchenknife
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_faucet, SwitchOn_faucet, Wash_kitchenknife
+Vital Action Predicates: Walk, RightGrab, SwitchOn, Wash
+Vital Objects: kitchenknife, faucet
+
+42
+Environment: 
+Instruction: 
+Goals: IsCut_cutlets
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_cutlets, LeftGrab_cutlets, Cut_cutlets
+Vital Action Predicates: Walk, RightGrab, LeftGrab, Cut
+Vital Objects: kitchenknife, cutlets
+
+43
+Environment: 
+Instruction: 
+Goals: IsOn_apple_kitchencabinet & IsClean_window
+Optimal Actions: Walk_rag, RightGrab_rag, Walk_window, Wipe_window, Walk_apple, LeftGrab_apple, Walk_kitchencabinet, LeftPut_apple_kitchencabinet
+Vital Action Predicates: Walk, RightGrab, Wipe, LeftGrab, LeftPut
+Vital Objects: rag, window, apple, kitchencabinet
+
+44
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_microwave
+Optimal Actions: Walk_microwave, PlugIn_microwave, SwitchOn_microwave
+Vital Action Predicates: Walk, PlugIn, SwitchOn
+Vital Objects: microwave
+
+45
+Environment: 
+Instruction: 
+Goals: IsIn_kitchenknife_fridge & IsClose_fridge
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_fridge, Open_fridge, PlugIn_fridge, RightPutIn_kitchenknife_fridge, Close_fridge
+Vital Action Predicates: Walk, RightGrab, Open, PlugIn, RightPutIn, Close
+Vital Objects: kitchenknife, fridge
+
+46
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_microwave
+Optimal Actions: Walk_microwave, PlugIn_microwave, SwitchOn_microwave
+Vital Action Predicates: Walk, PlugIn, SwitchOn
+Vital Objects: microwave
+
+47
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_candle
+Optimal Actions: Walk_candle, SwitchOn_candle
+Vital Action Predicates: Walk, SwitchOn
+Vital Objects: candle
+
+48
+Environment: 
+Instruction: 
+Goals: IsCut_cutlets & IsOpen_microwave
+Optimal Actions: Walk_microwave, Open_microwave, Walk_kitchenknife, RightGrab_kitchenknife, Walk_cutlets, LeftGrab_cutlets, Cut_cutlets
+Vital Action Predicates: Walk, Open, RightGrab, LeftGrab, Cut
+Vital Objects: microwave, kitchenknife, cutlets
+
+49
+Environment: 
+Instruction: 
+Goals: IsOpen_fridge & IsClean_kitchencabinet
+Optimal Actions: Walk_rag, RightGrab_rag, Walk_kitchencabinet, Wipe_kitchencabinet, Walk_fridge, Open_fridge
+Vital Action Predicates: Walk, RightGrab, Wipe, Open
+Vital Objects: rag, kitchencabinet, fridge
+
+50
+Environment: 
+Instruction: 
+Goals: IsPlugged_microwave
+Optimal Actions: Walk_microwave, PlugIn_microwave
+Vital Action Predicates: Walk, PlugIn
+Vital Objects: microwave
+
+51
+Environment: 
+Instruction: 
+Goals: IsOn_wine_kitchentable
+Optimal Actions: Walk_wine, LeftGrab_wine, Walk_kitchentable, LeftPut_wine_kitchentable
+Vital Action Predicates: Walk, LeftGrab, LeftPut
+Vital Objects: wine, kitchentable
+
+52
+Environment: 
+Instruction: 
+Goals: IsNear_self_cutlets
+Optimal Actions: Walk_cutlets
+Vital Action Predicates: Walk
+Vital Objects: cutlets
+
+53
+Environment: 
+Instruction: 
+Goals: IsCut_cutlets
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_cutlets, LeftGrab_cutlets, Cut_cutlets
+Vital Action Predicates: Walk, RightGrab, LeftGrab, Cut
+Vital Objects: kitchenknife, cutlets
+
+54
+Environment: 
+Instruction: 
+Goals: IsNear_self_wine & IsIn_kitchenknife_microwave & IsClose_microwave
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_microwave, Open_microwave, PlugIn_microwave, RightPutIn_kitchenknife_microwave, Close_microwave, Walk_wine
+Vital Action Predicates: Walk, RightGrab, Open, PlugIn, RightPutIn, Close
+Vital Objects: kitchenknife, microwave, wine
+
+55
+Environment: 
+Instruction: 
+Goals: IsOpen_kitchencabinet & IsOn_apple_bed & IsPlugged_mouse
+Optimal Actions: Walk_kitchencabinet, Open_kitchencabinet, Walk_apple, RightGrab_apple, Walk_mouse, PlugIn_mouse, Walk_bed, RightPut_apple_bed
+Vital Action Predicates: Walk, Open, RightGrab, PlugIn, RightPut
+Vital Objects: kitchencabinet, apple, mouse, bed
+
+56
+Environment: 
+Instruction: 
+Goals: IsNear_self_faucet & IsSwitchedOn_faucet
+Optimal Actions: Walk_faucet, SwitchOn_faucet
+Vital Action Predicates: Walk, SwitchOn
+Vital Objects: faucet
+
+57
+Environment: 
+Instruction: 
+Goals: IsIn_wine_garbagecan
+Optimal Actions: Walk_wine, LeftGrab_wine, Walk_garbagecan, LeftPutIn_wine_garbagecan
+Vital Action Predicates: Walk, LeftGrab, LeftPutIn
+Vital Objects: wine, garbagecan
+
+58
+Environment: 
+Instruction: 
+Goals: IsOpen_fridge
+Optimal Actions: Walk_fridge, Open_fridge
+Vital Action Predicates: Walk, Open
+Vital Objects: fridge
+
+59
+Environment: 
+Instruction: 
+Goals: IsClean_rag
+Optimal Actions: Walk_rag, RightGrab_rag, Walk_faucet, SwitchOn_faucet, Wash_rag
+Vital Action Predicates: Walk, RightGrab, SwitchOn, Wash
+Vital Objects: rag, faucet
+
+60
+Environment: 
+Instruction: 
+Goals: IsPlugged_mouse & IsNear_self_garbagecan
+Optimal Actions: Walk_mouse, PlugIn_mouse, Walk_garbagecan
+Vital Action Predicates: Walk, PlugIn
+Vital Objects: mouse, garbagecan
+
+61
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_microwave & IsOn_plate_kitchencabinet
+Optimal Actions: Walk_microwave, PlugIn_microwave, SwitchOn_microwave, Walk_plate, LeftGrab_plate, Walk_kitchencabinet, LeftPut_plate_kitchencabinet
+Vital Action Predicates: Walk, PlugIn, SwitchOn, LeftGrab, LeftPut
+Vital Objects: microwave, plate, kitchencabinet
+
+62
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_tv & IsOn_plate_bed
+Optimal Actions: Walk_tv, PlugIn_tv, SwitchOn_tv, Walk_plate, LeftGrab_plate, Walk_bed, LeftPut_plate_bed
+Vital Action Predicates: Walk, PlugIn, SwitchOn, LeftGrab, LeftPut
+Vital Objects: tv, plate, bed
+
+63
+Environment: 
+Instruction: 
+Goals: IsClean_microwave
+Optimal Actions: Walk_rag, LeftGrab_rag, Walk_microwave, Wipe_microwave
+Vital Action Predicates: Walk, LeftGrab, Wipe
+Vital Objects: rag, microwave
+
+64
+Environment: 
+Instruction: 
+Goals: IsOn_cutlets_kitchentable
+Optimal Actions: Walk_cutlets, LeftGrab_cutlets, Walk_kitchentable, LeftPut_cutlets_kitchentable
+Vital Action Predicates: Walk, LeftGrab, LeftPut
+Vital Objects: cutlets, kitchentable
+
+65
+Environment: 
+Instruction: 
+Goals: IsCut_apple
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_apple, LeftGrab_apple, Cut_apple
+Vital Action Predicates: Walk, RightGrab, LeftGrab, Cut
+Vital Objects: kitchenknife, apple
+
+66
+Environment: 
+Instruction: 
+Goals: IsNear_self_tv & IsPlugged_tv & IsSwitchedOn_faucet
+Optimal Actions: Walk_faucet, SwitchOn_faucet, Walk_tv, PlugIn_tv
+Vital Action Predicates: Walk, SwitchOn, PlugIn
+Vital Objects: faucet, tv
+
+67
+Environment: 
+Instruction: 
+Goals: IsOn_cutlets_bed & IsIn_rag_garbagecan
+Optimal Actions: Walk_cutlets, RightGrab_cutlets, Walk_bed, RightPut_cutlets_bed, Walk_rag, LeftGrab_rag, Walk_garbagecan, LeftPutIn_rag_garbagecan
+Vital Action Predicates: Walk, RightGrab, RightPut, LeftGrab, LeftPutIn
+Vital Objects: cutlets, bed, rag, garbagecan
+
+68
+Environment: 
+Instruction: 
+Goals: IsOn_wine_kitchencabinet
+Optimal Actions: Walk_wine, LeftGrab_wine, Walk_kitchencabinet, LeftPut_wine_kitchencabinet
+Vital Action Predicates: Walk, LeftGrab, LeftPut
+Vital Objects: wine, kitchencabinet
+
+69
+Environment: 
+Instruction: 
+Goals: IsOpen_kitchencabinet & IsCut_apple
+Optimal Actions: Walk_kitchencabinet, Open_kitchencabinet, Walk_apple, LeftGrab_apple, Walk_kitchenknife, RightGrab_kitchenknife, Cut_apple
+Vital Action Predicates: Walk, Open, LeftGrab, RightGrab, Cut
+Vital Objects: kitchencabinet, apple, kitchenknife
+
+70
+Environment: 
+Instruction: 
+Goals: IsOn_cutlets_kitchentable
+Optimal Actions: Walk_cutlets, LeftGrab_cutlets, Walk_kitchentable, LeftPut_cutlets_kitchentable
+Vital Action Predicates: Walk, LeftGrab, LeftPut
+Vital Objects: cutlets, kitchentable
+
+71
+Environment: 
+Instruction: 
+Goals: IsOpen_fridge
+Optimal Actions: Walk_fridge, Open_fridge
+Vital Action Predicates: Walk, Open
+Vital Objects: fridge
+
+72
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_candle
+Optimal Actions: Walk_candle, SwitchOn_candle
+Vital Action Predicates: Walk, SwitchOn
+Vital Objects: candle
+
+73
+Environment: 
+Instruction: 
+Goals: IsNear_self_kitchencabinet
+Optimal Actions: Walk_kitchencabinet
+Vital Action Predicates: Walk
+Vital Objects: kitchencabinet
+
+74
+Environment: 
+Instruction: 
+Goals: IsClean_kitchentable & IsIn_rag_garbagecan
+Optimal Actions: Walk_rag, LeftGrab_rag, Walk_kitchentable, Wipe_kitchentable, Walk_garbagecan, LeftPutIn_rag_garbagecan
+Vital Action Predicates: Walk, LeftGrab, Wipe, LeftPutIn
+Vital Objects: rag, kitchentable, garbagecan
+
+75
+Environment: 
+Instruction: 
+Goals: IsOn_apple_bed & IsPlugged_microwave
+Optimal Actions: Walk_apple, RightGrab_apple, Walk_bed, RightPut_apple_bed, Walk_microwave, PlugIn_microwave
+Vital Action Predicates: Walk, RightGrab, RightPut, PlugIn
+Vital Objects: apple, bed, microwave
+
+76
+Environment: 
+Instruction: 
+Goals: IsPlugged_microwave
+Optimal Actions: Walk_microwave, PlugIn_microwave
+Vital Action Predicates: Walk, PlugIn
+Vital Objects: microwave
+
+77
+Environment: 
+Instruction: 
+Goals: IsNear_self_candle & IsOpen_microwave & IsOn_plate_bed
+Optimal Actions: Walk_microwave, Open_microwave, Walk_plate, RightGrab_plate, Walk_bed, RightPut_plate_bed, Walk_candle
+Vital Action Predicates: Walk, Open, RightGrab, RightPut
+Vital Objects: microwave, plate, bed, candle
+
+78
+Environment: 
+Instruction: 
+Goals: IsPlugged_mouse & IsOn_kitchenknife_bed
+Optimal Actions: Walk_kitchenknife, RightGrab_kitchenknife, Walk_mouse, PlugIn_mouse, Walk_bed, RightPut_kitchenknife_bed
+Vital Action Predicates: Walk, RightGrab, PlugIn, RightPut
+Vital Objects: kitchenknife, mouse, bed
+
+79
+Environment: 
+Instruction: 
+Goals: IsOpen_kitchencabinet
+Optimal Actions: Walk_kitchencabinet, Open_kitchencabinet
+Vital Action Predicates: Walk, Open
+Vital Objects: kitchencabinet
+
+80
+Environment: 
+Instruction: 
+Goals: IsIn_rag_kitchencabinet & IsClose_kitchencabinet
+Optimal Actions: Walk_rag, RightGrab_rag, Walk_kitchencabinet, Open_kitchencabinet, RightPutIn_rag_kitchencabinet, Close_kitchencabinet
+Vital Action Predicates: Walk, RightGrab, Open, RightPutIn, Close
+Vital Objects: rag, kitchencabinet
+
+81
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_tv
+Optimal Actions: Walk_tv, PlugIn_tv, SwitchOn_tv
+Vital Action Predicates: Walk, PlugIn, SwitchOn
+Vital Objects: tv
+
+82
+Environment: 
+Instruction: 
+Goals: IsOpen_kitchencabinet
+Optimal Actions: Walk_kitchencabinet, Open_kitchencabinet
+Vital Action Predicates: Walk, Open
+Vital Objects: kitchencabinet
+
+83
+Environment: 
+Instruction: 
+Goals: IsOpen_kitchencabinet & IsOpen_kitchencabinet & IsNear_self_kitchencabinet
+Optimal Actions: Walk_kitchencabinet, Open_kitchencabinet
+Vital Action Predicates: Walk, Open
+Vital Objects: kitchencabinet
+
+84
+Environment: 
+Instruction: 
+Goals: IsOn_cutlets_bed & IsNear_self_apple & IsOn_kitchenknife_kitchentable
+Optimal Actions: Walk_kitchenknife, LeftGrab_kitchenknife, Walk_kitchentable, LeftPut_kitchenknife_kitchentable, Walk_cutlets, RightGrab_cutlets, Walk_bed, RightPut_cutlets_bed, Walk_apple
+Vital Action Predicates: Walk, LeftGrab, LeftPut, RightGrab, RightPut
+Vital Objects: kitchenknife, kitchentable, cutlets, bed, apple
+
+85
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_faucet & IsNear_self_faucet
+Optimal Actions: Walk_faucet, SwitchOn_faucet
+Vital Action Predicates: Walk, SwitchOn
+Vital Objects: faucet
+
+86
+Environment: 
+Instruction: 
+Goals: IsPlugged_tv & IsIn_plate_kitchencabinet & IsClose_kitchencabinet
+Optimal Actions: Walk_tv, PlugIn_tv, Walk_plate, RightGrab_plate, Walk_kitchencabinet, Open_kitchencabinet, RightPutIn_plate_kitchencabinet, Close_kitchencabinet
+Vital Action Predicates: Walk, PlugIn, RightGrab, Open, RightPutIn, Close
+Vital Objects: tv, plate, kitchencabinet
+
+87
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_faucet & IsOn_plate_kitchentable
+Optimal Actions: Walk_faucet, SwitchOn_faucet, Walk_plate, RightGrab_plate, Walk_kitchentable, RightPut_plate_kitchentable
+Vital Action Predicates: Walk, SwitchOn, RightGrab, RightPut
+Vital Objects: faucet, plate, kitchentable
+
+88
+Environment: 
+Instruction: 
+Goals: IsOpen_kitchencabinet & IsPlugged_tv
+Optimal Actions: Walk_kitchencabinet, Open_kitchencabinet, Walk_tv, PlugIn_tv
+Vital Action Predicates: Walk, Open, PlugIn
+Vital Objects: kitchencabinet, tv
+
+89
+Environment: 
+Instruction: 
+Goals: IsNear_self_cutlets
+Optimal Actions: Walk_cutlets
+Vital Action Predicates: Walk
+Vital Objects: cutlets
+
+90
+Environment: 
+Instruction: 
+Goals: IsIn_plate_microwave & IsClose_microwave & IsNear_self_fridge
+Optimal Actions: Walk_plate, RightGrab_plate, Walk_microwave, Open_microwave, PlugIn_microwave, RightPutIn_plate_microwave, Close_microwave, Walk_fridge
+Vital Action Predicates: Walk, RightGrab, Open, PlugIn, RightPutIn, Close
+Vital Objects: plate, microwave, fridge
+
+91
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_faucet
+Optimal Actions: Walk_faucet, SwitchOn_faucet
+Vital Action Predicates: Walk, SwitchOn
+Vital Objects: faucet
+
+92
+Environment: 
+Instruction: 
+Goals: IsOpen_window
+Optimal Actions: Walk_window, Open_window
+Vital Action Predicates: Walk, Open
+Vital Objects: window
+
+93
+Environment: 
+Instruction: 
+Goals: IsNear_self_garbagecan & IsPlugged_microwave
+Optimal Actions: Walk_microwave, PlugIn_microwave, Walk_garbagecan
+Vital Action Predicates: Walk, PlugIn
+Vital Objects: microwave, garbagecan
+
+94
+Environment: 
+Instruction: 
+Goals: IsOpen_microwave & IsClean_garbagecan
+Optimal Actions: Walk_microwave, Open_microwave, Walk_rag, RightGrab_rag, Walk_garbagecan, Wipe_garbagecan
+Vital Action Predicates: Walk, Open, RightGrab, Wipe
+Vital Objects: microwave, rag, garbagecan
+
+95
+Environment: 
+Instruction: 
+Goals: IsNear_self_apple & IsSwitchedOn_faucet & IsCut_apple
+Optimal Actions: Walk_faucet, SwitchOn_faucet, Walk_kitchenknife, RightGrab_kitchenknife, Walk_apple, LeftGrab_apple, Cut_apple
+Vital Action Predicates: Walk, SwitchOn, RightGrab, LeftGrab, Cut
+Vital Objects: faucet, kitchenknife, apple
+
+96
+Environment: 
+Instruction: 
+Goals: IsClean_fridge
+Optimal Actions: Walk_rag, LeftGrab_rag, Walk_fridge, Wipe_fridge
+Vital Action Predicates: Walk, LeftGrab, Wipe
+Vital Objects: rag, fridge
+
+97
+Environment: 
+Instruction: 
+Goals: IsIn_cutlets_kitchencabinet & IsClose_kitchencabinet
+Optimal Actions: Walk_cutlets, RightGrab_cutlets, Walk_kitchencabinet, Open_kitchencabinet, RightPutIn_cutlets_kitchencabinet, Close_kitchencabinet
+Vital Action Predicates: Walk, RightGrab, Open, RightPutIn, Close
+Vital Objects: cutlets, kitchencabinet
+
+98
+Environment: 
+Instruction: 
+Goals: IsNear_self_cutlets & IsOpen_window
+Optimal Actions: Walk_window, Open_window, Walk_cutlets
+Vital Action Predicates: Walk, Open
+Vital Objects: window, cutlets
+
+99
+Environment: 
+Instruction: 
+Goals: IsSwitchedOn_faucet & IsClean_kitchentable & IsClean_window
+Optimal Actions: Walk_rag, RightGrab_rag, Walk_faucet, SwitchOn_faucet, Walk_window, Wipe_window, Walk_kitchentable, Wipe_kitchentable
+Vital Action Predicates: Walk, RightGrab, SwitchOn, Wipe
+Vital Objects: rag, faucet, window, kitchentable
+
+100
+Environment: 
+Instruction: 
+Goals: IsIn_plate_garbagecan
+Optimal Actions: Walk_plate, LeftGrab_plate, Walk_garbagecan, LeftPutIn_plate_garbagecan
+Vital Action Predicates: Walk, LeftGrab, LeftPutIn
+Vital Objects: plate, garbagecan
+

@@ -1,0 +1,80 @@
+1
+Environment: 
+Instruction: 
+Goals: IsClean_Floor & Closed_Curtain
+Optimal Actions: Clean_Floor, Turn_Curtain_Off
+Vital Action Predicates: Clean, Turn
+Vital Objects: Floor, Curtain, Off
+
+2
+Environment: 
+Instruction: 
+Goals: Exists_Water & IsClean_Floor & Active_HallLight
+Optimal Actions: Turn_HallLight_On, Clean_Floor, Make_Water
+Vital Action Predicates: Turn, Clean, Make
+Vital Objects: HallLight, On, Floor, Water
+
+3
+Environment: 
+Instruction: 
+Goals: Low_ACTemperature
+Optimal Actions: Turn_AC_On, Turn_ACTemperature_Down
+Vital Action Predicates: Turn
+Vital Objects: AC, On, ACTemperature, Down
+
+4
+Environment: 
+Instruction: 
+Goals: Low_ACTemperature & RobotNear_WaterTable
+Optimal Actions: MoveTo_WaterTable, Turn_AC_On, Turn_ACTemperature_Down
+Vital Action Predicates: MoveTo, Turn
+Vital Objects: WaterTable, AC, On, ACTemperature, Down
+
+5
+Environment: 
+Instruction: 
+Goals: Low_ACTemperature & Active_HallLight & RobotNear_CoffeeStation
+Optimal Actions: MoveTo_CoffeeStation, Turn_AC_On, Turn_HallLight_On, Turn_ACTemperature_Down
+Vital Action Predicates: MoveTo, Turn
+Vital Objects: CoffeeStation, AC, On, HallLight, ACTemperature, Down
+
+6
+Environment: 
+Instruction: 
+Goals: Holding_VacuumCup & Exists_Water & RobotNear_WaterStation
+Optimal Actions: MoveTo_VacuumCup, Make_Water, PickUp_VacuumCup, MoveTo_WaterStation
+Vital Action Predicates: MoveTo, Make, PickUp
+Vital Objects: VacuumCup, Water, WaterStation
+
+7
+Environment: 
+Instruction: 
+Goals: On_Chips_Bar & Exists_Coffee & Exists_Dessert
+Optimal Actions: Make_Dessert, MoveTo_Chips, Make_Coffee, PickUp_Chips, MoveTo_Bar, PutDown_Chips_Bar
+Vital Action Predicates: Make, MoveTo, PickUp, PutDown
+Vital Objects: Dessert, Chips, Coffee, Bar
+
+8
+Environment: 
+Instruction: 
+Goals: RobotNear_BrightTable1
+Optimal Actions: MoveTo_BrightTable1
+Vital Action Predicates: MoveTo
+Vital Objects: BrightTable1
+
+9
+Environment: 
+Instruction: 
+Goals: Closed_Curtain & Exists_Coffee & Holding_Dessert
+Optimal Actions: Make_Dessert, MoveTo_Dessert, Make_Coffee, PickUp_Dessert, Turn_Curtain_Off
+Vital Action Predicates: Make, MoveTo, PickUp, Turn
+Vital Objects: Dessert, Coffee, Curtain, Off
+
+10
+Environment: 
+Instruction: 
+Goals: RobotNear_BrightTable5 & On_ADMilk_BrightTable6
+Optimal Actions: MoveTo_ADMilk, PickUp_ADMilk, MoveTo_BrightTable6, PutDown_ADMilk_BrightTable6, MoveTo_BrightTable5
+Vital Action Predicates: MoveTo, PickUp, PutDown
+Vital Objects: ADMilk, BrightTable6, BrightTable5
+
