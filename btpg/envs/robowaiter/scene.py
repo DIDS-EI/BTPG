@@ -23,6 +23,9 @@ from btpg.envs.robowaiter.algos.navigator.dstar_lite import euclidean_distance
 from PIL import Image
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
+from btpg.envs.robowaiter.proto import GrabSim_pb2
+from btpg.envs.robowaiter.proto import GrabSim_pb2_grpc
+
 plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
@@ -30,7 +33,7 @@ root_path = get_root_path()
 
 # 将 channel 的创建移到函数内部
 def get_channel():
-    from btpg.envs.robowaiter.proto import GrabSim_pb2_grpc
+    # from btpg.envs.robowaiter.proto import GrabSim_pb2_grpc
     return grpc.insecure_channel(
         "localhost:30001",
         options=[
@@ -286,7 +289,7 @@ class Scene:
     """
 
     def __init__(self, robot=None, sceneID=0):
-        from btpg.envs.robowaiter.proto import GrabSim_pb2_grpc
+        # from btpg.envs.robowaiter.proto import GrabSim_pb2_grpc
         self.stub = GrabSim_pb2_grpc.GrabSimStub(get_channel())
 
         self.robot = robot
@@ -432,18 +435,17 @@ class Scene:
         time.sleep(3)  # wait for the map to load
 
     def get_camera(self,part, scene_id=0):
-        from btpg.envs.robowaiter.proto import GrabSim_pb2
+        # from btpg.envs.robowaiter.proto import GrabSim_pb2
         # print('------------------get_camera----------------------')
         request = GrabSim_pb2.CameraRequest(part=part, scene=scene_id)
         response = self.stub.Camera(request)
         return response
 
     def init_robot(self):
-        from btpg.envs.robowaiter.proto import GrabSim_pb2
-        # init robot
-        request = GrabSim_pb2.InitRequest()
-        response = self.stub.Init(request)
-        return response
+        if self.robot:
+            self.robot.set_scene(self)
+            self.robot.load_BT()
+        # return response
 
     def init_algos(self):
         '''
@@ -460,7 +462,7 @@ class Scene:
 
 
     def reset(self):
-        from btpg.envs.robowaiter.proto import GrabSim_pb2
+        # from btpg.envs.robowaiter.proto import GrabSim_pb2
         # 基类reset，默认执行仿真器初始化操作
         self.reset_sim()
         self.init_robot()
@@ -475,7 +477,7 @@ class Scene:
         self.running = True
 
     def run(self):
-        from btpg.envs.robowaiter.proto import GrabSim_pb2
+        # from btpg.envs.robowaiter.proto import GrabSim_pb2
         # 基类run
         self._run()
         # 运行并由robot打印每步信息
@@ -483,7 +485,7 @@ class Scene:
             self.step()
 
     def step(self):
-        from btpg.envs.robowaiter.proto import GrabSim_pb2
+        # from btpg.envs.robowaiter.proto import GrabSim_pb2
         # 基类step，默认执行行为树tick操作
         self.time = time.time() - self.start_time
 

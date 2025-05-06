@@ -10,7 +10,6 @@ import atexit
 class VHEnv(Env):
     agent_num = 1
 
-    headless = True
 
     # launch simulator
     simulator_path = f'{ROOT_PATH}/../simulators/virtualhome/windows/VirtualHome.exe'
@@ -19,8 +18,7 @@ class VHEnv(Env):
 
 
     def __init__(self):
-        if not self.headless:
-            self.launch_simulator()
+        self.launch_simulator()
         super().__init__()
 
     def reset(self):
@@ -38,11 +36,12 @@ class VHEnv(Env):
 
     def launch_simulator(self):
         # 设置全屏分辨率为 2560x160
+        print('Launching simulator...')
         simulator_command = [self.simulator_path, '-screen-fullscreen', '1', '-screen-width', '2560', '-screen-height', '1600']
 
         self.comm = UnityCommunication()
         self.simulator_process = subprocess.Popen(simulator_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
-
+        print("Simulator is ready.")
         atexit.register(self.close)
 
     def load_scenario(self,scenario_id):

@@ -10,8 +10,6 @@ from btpg.envs.robowaiter.scene import Scene
 class RWEnv(Env):
     agent_num = 1
 
-    headless = True
-
     # launch simulator
     simulator_path = f'{ROOT_PATH}/../simulators/robowaiter/CafeSimulator/CafeSimulator.exe'
 
@@ -19,8 +17,7 @@ class RWEnv(Env):
 
 
     def __init__(self):
-        if not self.headless:
-            self.launch_simulator()
+        self.launch_simulator()
         self.scene = Scene()
         super().__init__()
 
@@ -32,6 +29,7 @@ class RWEnv(Env):
 
 
     def launch_simulator(self):
+        print('Launching simulator...')
         self.simulator_process = subprocess.Popen(self.simulator_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE,start_new_session=True)
         atexit.register(self.close)
         # Check for startup flag

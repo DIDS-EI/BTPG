@@ -181,6 +181,7 @@ print(f"goal: {goal}") # {'IsIn(milk,fridge)', 'IsClose(fridge)'}
 # if scene in ["RW"]:
 # if scene in ["VH","RW"]:
 if scene in ["VH","RW"]:
+
     env.agents[0].bind_bt(bt)
     env.reset()
     is_finished = False

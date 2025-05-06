@@ -15,6 +15,7 @@ from matplotlib.patches import Polygon
 import matplotlib.colors as mcolors
 
 from btpg.envs.robowaiter.utils.basic import get_root_path
+root_path = get_root_path()
 
 def diagonal_distance(start, end):  #
     return max(abs(start[0] - end[0]), abs(start[1] - end[1]))

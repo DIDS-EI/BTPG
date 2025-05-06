@@ -7,8 +7,6 @@ import copy
 import random
 import re
 
-from btpg.envs.robowaiter.exec_lib._base.rw_action import RWAction as RW
-
 
 
 # modify_condition_set: change_location
@@ -207,7 +205,7 @@ def modify_condition_set_Random_Perturbations(sence,SimAct, cur_cond_set,objects
     if random.random() < p:
         new_cur_state = change_canopen(sence, SimAct, new_cur_state,objects)
 
-    if sence in ["RHS","RH"]:
+    if sence in ["OG","RH"]:
         if random.random() < p:
             new_cur_state = change_hasplug(sence, SimAct, new_cur_state,objects)
         # Change IsClean or IsCut

@@ -21,8 +21,9 @@ env, cur_cond_set = setup_environment(scene)
 
 # goal_str ='On_Coffee_Table3 & Active_AC'
 # goal_str ='RobotNear_WaterStation'
-# goal_str ='IsClean_Floor & On_Water_WaterStation'
-goal_str ='Low_ACTemperature & On_Water_WaterStation'
+# goal_str ='IsClean_Floor'
+# 'On_Water_WaterStation'
+goal_str = 'Low_ACTemperature'
 print("goal_str:", goal_str)
 
 algo = BTPlannerInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
@@ -30,7 +31,7 @@ algo = BTPlannerInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
                       key_objects=[],
                       selected_algorithm="hbtp", mode="big",
                       time_limit=15,
-                      heuristic_choice=0,output_just_best=True)
+                      heuristic_choice=0,output_just_best=False)
 
 goal_set = goal_transfer_str(goal_str)
 
@@ -68,16 +69,19 @@ goal = goal_transfer_str(goal_str)[0]
 print(f"goal: {goal}") # {'IsIn(milk,fridge)', 'IsClose(fridge)'}
 
 
+headless = False
+
 
 if scene in ["VH","RW"]:
-    env.agents[0].bind_bt(bt)
-    env.reset()
-    time.sleep(5)
-    is_finished = False
-    while not is_finished:
-        is_finished = env.step()
-        if goal <= env.agents[0].condition_set:
-            is_finished=True
-    env.close()
+    if not headless:
+        env.agents[0].bind_bt(bt)
+        env.reset()
+        time.sleep(5)
+        is_finished = False
+        while not is_finished:
+            is_finished = env.step()
+            if goal <= env.agents[0].condition_set:
+                is_finished=True
+        env.close()
 else:
     error, state, act_num, current_cost, record_act_ls,ticks = algo.execute_bt(goal_set[0], cur_cond_set, verbose=True)
