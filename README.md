@@ -89,7 +89,7 @@ import btpg
 import time
 from btpg import BehaviorTree
 from btpg.utils.tools import *
-from btpg.algos.bt_planning.main_interface import BTExpInterface
+from btpg.algos.bt_planning.main_interface import BTPlannerInterface
 from btpg.algos.llm_client.tools import goal_transfer_str
 
 # Initialize environment and conditions
@@ -101,7 +101,7 @@ goal_str = 'IsIn_milk_fridge & IsClose_fridge'
 goal_set = goal_transfer_str(goal_str)  # [{'IsIn(milk, fridge)', 'IsClose(fridge)'}]
 
 # Initialize Behavior Tree Planning Interface
-algo = BTExpInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
+algo = BTPlannerInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
                       priority_act_ls=[], key_predicates=[],
                       key_objects=[],
                       selected_algorithm="hobtea", mode="big",

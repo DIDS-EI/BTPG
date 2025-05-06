@@ -1,5 +1,5 @@
 
-from btpg.algos.bt_planning.Action import Action
+from btpg.algos.base.planning_action import PlanningAction
 from btpg.utils.read_dataset import read_dataset
 from btpg.utils import ROOT_PATH
 # from btpg.envs.RobotHow.exec_lib._base.RHAction import RHAction
@@ -44,13 +44,13 @@ def collect_action_nodes(behavior_lib):
         if cls.can_be_expanded:
             # print(f"可扩展动作：{cls.__name__}, 存在{len(cls.valid_args)}个有效论域组合")
             if cls.num_args == 0:
-                action_list.append(Action(name=cls.get_ins_name(), **cls.get_info()))
+                action_list.append(PlanningAction(name=cls.get_ins_name(), **cls.get_info()))
             if cls.num_args == 1:
                 for arg in cls.valid_args:
-                    action_list.append(Action(name=cls.get_ins_name(arg), **cls.get_info(arg)))
+                    action_list.append(PlanningAction(name=cls.get_ins_name(arg), **cls.get_info(arg)))
             if cls.num_args > 1:
                 for args in cls.valid_args:
-                    action_list.append(Action(name=cls.get_ins_name(*args), **cls.get_info(*args)))
+                    action_list.append(PlanningAction(name=cls.get_ins_name(*args), **cls.get_info(*args)))
 
     print(f"共收集到{len(action_list)}个实例化动作:")
     # for a in self.action_list:
@@ -125,7 +125,7 @@ def setup_environment(scene):
     from btpg.utils.tools import collect_action_nodes
     if scene == "RW":
         # ===================== RoboWaiter ========================
-        from btpg.envs.RoboWaiter.exec_lib._base.RWAction import RWAction
+        from btpg.envs.robowaiter.exec_lib._base.rw_action import RWAction
         env = btpg.make("RW")
         cur_cond_set = env.agents[0].condition_set = {'RobotNear(Bar)', 'Holding(Nothing)'}
         cur_cond_set |= {f'Exists({arg})' for arg in RWAction.all_object - {'Coffee', 'Water', 'Dessert'}}
@@ -135,7 +135,7 @@ def setup_environment(scene):
 
     elif scene == "VH":
         # ===================== VirtualHome ========================
-        from btpg.envs.VirtualHome.exec_lib._base.VHAction import VHAction
+        from btpg.envs.virtualhome.exec_lib._base.vh_action import VHAction
         env = btpg.make("VH")
         cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)",
                                                       "IsStanding(self)"}
@@ -144,21 +144,21 @@ def setup_environment(scene):
         big_actions = collect_action_nodes(env.behavior_lib)
         return env,cur_cond_set
 
-    elif scene == "RHS":
-        # ===================== RobotHow-Small ========================
-        from btpg.envs.RobotHow_Small.exec_lib._base.RHSAction import RHSAction
-        env = btpg.make("RHS")
+    elif scene == "OG":
+        # ===================== OmniGibson ========================
+        from btpg.envs.omnigibson.exec_lib._base.og_action import OGAction
+        env = btpg.make("OG")
         cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)",
                                                       "IsStanding(self)"}
-        cur_cond_set |= {f'IsClose({arg})' for arg in RHSAction.CAN_OPEN}
-        cur_cond_set |= {f'IsUnplugged({arg})' for arg in RHSAction.HAS_PLUG}
-        cur_cond_set |= {f'IsSwitchedOff({arg})' for arg in RHSAction.HAS_SWITCH}
+        cur_cond_set |= {f'IsClose({arg})' for arg in OGAction.CAN_OPEN}
+        cur_cond_set |= {f'IsUnplugged({arg})' for arg in OGAction.HAS_PLUG}
+        cur_cond_set |= {f'IsSwitchedOff({arg})' for arg in OGAction.HAS_SWITCH}
         big_actions = collect_action_nodes(env.behavior_lib)
         return env,cur_cond_set
 
     elif scene == "RH":
         # ===================== RobotHow ========================
-        from btpg.envs.RobotHow.exec_lib._base.RHAction import RHAction as RHB
+        from btpg.envs.robothow.exec_lib._base.rh_action import RHAction as RHB
         env = btpg.make("RH")
         cur_cond_set = env.agents[0].condition_set = {"IsRightHandEmpty(self)", "IsLeftHandEmpty(self)",
                                                       "IsStanding(self)"}

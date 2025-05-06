@@ -1,5 +1,5 @@
 import random
-from btpg.utils.goal_generator.GoalGen import GoalGenerator
+from btpg.utils.goal_generator.goal_gen_base import GoalGenerator
 
 
 class RoboWaiterGoalGen(GoalGenerator):

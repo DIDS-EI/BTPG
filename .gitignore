@@ -68,3 +68,6 @@ _build
 
 simulators/virtualhome/*
 simulators/robowaiter/*
+
+z_example
+z_example/*
