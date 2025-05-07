@@ -43,6 +43,26 @@ pip install -e .
 Download the simulator, unzip it, and run `CafeSimulator.exe` to open the simulator. The simulator will display an empty scene, awaiting the code to generate the scene and complete robot interactions.
 ## 📂 Directory Structure
 
+
+### 3. Download the OmniGibson executable (Only Windows is tested now):
+
+We use the [isaacsim 4.2](https://docs.omniverse.nvidia.com/isaacsim/latest/index.html) simulator and [omnigibson](https://behavior.stanford.edu/omnigibson/getting_started/installation.html) dataset (omnigibson platform is not needed).
+
+First download the isaacsim simulator: 
+| Operating System | Download Link                                                                      |
+|:-----------------|:-----------------------------------------------------------------------------------|
+| Linux            | [Download](https://download.isaacsim.omniverse.nvidia.com/isaac-sim-standalone%404.2.0-rc.18%2Brelease.16044.3b2ed111.gl.linux-x86_64.release.zip)   |
+| Windows          | [Download](https://download.isaacsim.omniverse.nvidia.com/isaac-sim-standalone%404.2.0-rc.18%2Brelease.16044.3b2ed111.gl.windows-x86_64.release.zip) |
+
+| Assets | Download Link                                                                      |
+|:-----------------|:-----------------------------------------------------------------------------------|
+| assets            | [Download](https://storage.googleapis.com/gibson_scenes/og_assets_1_1_0.tar.gz)   |
+| og_dataset          | [Download](https://storage.googleapis.com/gibson_scenes/og_dataset_1_0_0.tar.gz) |
+
+
+
+
+
 ```
 btpg
 │
@@ -64,9 +84,23 @@ btpg
 │   ├── RobotHow - Testing environment for household robots.
 │   └── RobotHow_Small - Smaller version of the household robot testing environment.
 └── utils - Supporting functions and utilities.
+```
 
+
+```
 simulators - Platforms for realistic training environments.
+│
+├── robothow - RobotHow simulator.
+├── virtualhome - VirtualHome simulator.
+└── omnigibson - IsaacSim4.2 and omnigibson dataset.
+│   ├── IsaacSim4.2 - IsaacSim4.2 simulator.
+│   ├── Assets - OmniGibson assets.
+│   │   ├── assets - Unzip the [assets](https://storage.googleapis.com/gibson_scenes/og_assets_1_1_0.tar.gz) in here.
+│   │   ├── og_dataset - Unzip the [og_dataset](https://storage.googleapis.com/gibson_scenes/og_dataset_1_0_0.tar.gz) in here.
+│   │   └── omnigibson.key - This will be created automatically when you first use the omnigibson datasets.
+```
 
+```
 test_exp - Testing modules for behavior trees planning, LLMs, and scene environments.
 ```
 
