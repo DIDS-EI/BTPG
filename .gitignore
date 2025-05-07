@@ -72,8 +72,6 @@ simulators/robowaiter/*
 simulators/omnigibson/*
 !simulators/omnigibson/.gitkeep
 
-
 z_example
 z_example/*
-
 
