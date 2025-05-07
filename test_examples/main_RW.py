@@ -69,7 +69,7 @@ goal = goal_transfer_str(goal_str)[0]
 print(f"goal: {goal}") # {'IsIn(milk,fridge)', 'IsClose(fridge)'}
 
 
-headless = False
+headless = True
 
 
 if scene in ["VH","RW"]:

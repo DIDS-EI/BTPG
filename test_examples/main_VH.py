@@ -178,18 +178,18 @@ bt.draw()
 goal = goal_transfer_str(goal_str)[0]
 print(f"goal: {goal}") # {'IsIn(milk,fridge)', 'IsClose(fridge)'}
 
-# if scene in ["RW"]:
-# if scene in ["VH","RW"]:
-if scene in ["VH","RW"]:
+headless = True
 
-    env.agents[0].bind_bt(bt)
-    env.reset()
-    is_finished = False
-    while not is_finished:
-        is_finished = env.step()
-        if goal <= env.agents[0].condition_set:
-            is_finished=True
-    env.close()
+if scene in ["VH","RW"]:
+    if not headless:
+        env.agents[0].bind_bt(bt)
+        env.reset()
+        is_finished = False
+        while not is_finished:
+            is_finished = env.step()
+            if goal <= env.agents[0].condition_set:
+                is_finished=True
+        env.close()
 else:
     error, state, act_num, current_cost, record_act_ls,ticks = algo.execute_bt(goal_set[0], cur_cond_set, verbose=True)
 
