@@ -808,26 +808,74 @@ class BTPlannerBase:
         return count
 
 
+    # def dfs_ptml(self,parnode,is_root=False):
+    #     for child in parnode.children:
+    #         if isinstance(child, Leaf):
+    #             if child.type == 'cond':
+    #
+    #                 if is_root and len(child.content) > 1:
+    #                     # 把多个 cond 串起来
+    #                     self.btml_string += "sequence{\n"
+    #                     self.btml_string += "cond "
+    #                     c_set_str = '\n cond '.join(map(str, child.content)) + "\n"
+    #                     self.btml_string += c_set_str
+    #                     self.btml_string += '}\n'
+    #                 else:
+    #                     self.btml_string += "cond "
+    #                     c_set_str = '\n cond '.join(map(str, child.content)) + "\n"
+    #                     self.btml_string += c_set_str
+    #
+    #             elif child.type == 'act':
+    #                 if '(' not in child.content.name:
+    #                     self.btml_string += 'act ' + child.content.name + "()\n"
+    #                 else:
+    #                     self.btml_string += 'act ' + child.content.name + "\n"
+    #         elif isinstance(child, ControlBT):
+    #             if child.type == '?':
+    #                 self.btml_string += "selector{\n"
+    #                 self.dfs_ptml(parnode=child)
+    #             elif child.type == '>':
+    #                 self.btml_string += "sequence{\n"
+    #                 self.dfs_ptml( parnode=child)
+    #             self.btml_string += '}\n'
+    #
+    # def get_btml(self,file_name=None):
+    #     self.btml_string = "selector{\n"
+    #     self.dfs_ptml(self.bt.children[0])
+    #     self.btml_string += '}\n'
+    #     return self.btml_string
+    #     # with open(f'{file_name}.ptml', 'w') as file:
+    #     #     file.write(self.btml_string)
+    #     # return self.btml_string
+
+
+
+
+    # ---------------------Other tools-------------------------------------
+    # 树的dfs
     # ---------------------Other tools-------------------------------------
     def dfs_btml_indent(self, parnode, level=0, is_root=False, act_bt_tree=False):
         indent = " " * (level * 4)  # 4 spaces per indent level
         for child in parnode.children:
             if isinstance(child, Leaf):
-
                 if is_root and len(child.content) > 1:
                     # 把多个 cond 串起来
                     self.btml_string += " " * (level * 4) + "sequence\n"
                     if act_bt_tree == False:
                         for c in child.content:
                             self.btml_string += " " * ((level + 1) * 4) + "cond " + str(c) + "\n"
-
                 elif child.type == 'cond':
-                    # Directly add cond and its content without special handling for multiple conds under the root node
-                    # self.btml_string += indent + "cond " + ', '.join(map(str, child.content)) + "\n"
-                    # Add each condition independently, ensuring each occupies a separate line
-                    if act_bt_tree == False:
-                        for c in child.content:
-                            self.btml_string += indent + "cond " + str(c) + "\n"
+                    # 如果有多个条件，用sequence连接
+                    if len(child.content) > 1:
+                        self.btml_string += indent + "sequence\n"
+                        if act_bt_tree == False:
+                            for c in child.content:
+                                self.btml_string += " " * ((level + 1) * 4) + "cond " + str(c) + "\n"
+                    else:
+                        # 单个条件直接添加
+                        if act_bt_tree == False:
+                            for c in child.content:
+                                self.btml_string += indent + "cond " + str(c) + "\n"
                 elif child.type == 'act':
                     # 直接添加act及其内容
                     self.btml_string += indent + 'act ' + child.content.name + "\n"

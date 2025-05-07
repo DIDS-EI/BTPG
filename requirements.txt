@@ -2,13 +2,13 @@ certifi~=2019.3.9
 chardet==3.0.4
 idna==2.8
 matplotlib>=3.4.2
-networkx==2.3
+networkx #==2.3
 numpy
 opencv-python
 pillow>=8.3.1
 plotly==3.10.0
 requests>=1.21.0
-ipdb==0.13.9
+ipdb #==0.13.9
 termcolor==1.1.0
 tqdm==4.31.1
 urllib3>=1.24.3
@@ -33,7 +33,7 @@ numpy~=1.26.0
 setuptools~=68.0.0
 pydot~=1.4.2
 colorama~=0.4.6
-pyqt5==5.15.2
+pyqt5 #==5.15.2
 scikit-learn~=1.5.0
 translate~=3.6.1
 psutil

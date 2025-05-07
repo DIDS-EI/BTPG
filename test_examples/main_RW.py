@@ -5,6 +5,8 @@ from btpg.algos.llm_client.tools import goal_transfer_str
 from btpg.algos.bt_planning.bt_planner_interface import BTPlannerInterface
 from btpg.utils.tools import *
 from btpg.utils.goal_generator.rw_gen import RoboWaiterGoalGen
+import os
+DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 max_goal_num=5
@@ -42,7 +44,7 @@ planning_time_total = end_time - start_time
 
 time_limit_exceeded = algo.algo.time_limit_exceeded
 
-ptml_string, cost, expanded_num = algo.post_process()
+btml_string, cost, expanded_num = algo.post_process()
 error, state, act_num, current_cost, record_act_ls,ticks = algo.execute_bt(goal_set[0], cur_cond_set, verbose=False)
 
 print(f"\x1b[32m Goal:{goal_str} \n Executed {act_num} action steps\x1b[0m",
@@ -53,12 +55,14 @@ print("current_cost:", current_cost, "expanded_num:", expanded_num, "planning_ti
 
 # visualization
 file_name = "tree"
-file_path = f'./{file_name}.btml'
+file_path = f'{DIR}/{file_name}.btml'
+print(f"保存文件到路径: {file_path}")
 with open(file_path, 'w') as file:
-    file.write(ptml_string)
+    file.write(btml_string)
 # read and execute
 from btpg import BehaviorTree
-bt = BehaviorTree(file_name + ".btml", env.behavior_lib)
+print(f"尝试加载文件: {file_path}")
+bt = BehaviorTree(file_path, env.behavior_lib)
 bt.print()
 bt.draw()
 

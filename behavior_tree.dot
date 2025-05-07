@@ -1,0 +1,27 @@
+digraph pastafarianism {
+ordering=out;
+graph [fontname="times-roman"];
+node [fontname="times-roman"];
+edge [fontname="times-roman"];
+"6cab502e-f6d9-46cc-bb94-706e7c14ad1f" [fillcolor="#B0FFFF", fontcolor=black, fontsize=20, height=0.01, label=" ? ", shape=box, style=filled, width=0.01];
+"90246cb8-cae8-40f7-88ac-4314ea7dc80d" [fillcolor="#FFFF80", fontcolor=black, fontsize=20, label="Low(ACTemperature)", shape=ellipse, style=filled];
+"6cab502e-f6d9-46cc-bb94-706e7c14ad1f" -> "90246cb8-cae8-40f7-88ac-4314ea7dc80d";
+"e3427bab-f98b-44f3-87f6-b53034e41529" [fillcolor="#FF8080", fontcolor=black, fontsize=20, height=0.01, label="&rarr;", shape=box, style=filled, width=0.01];
+"6cab502e-f6d9-46cc-bb94-706e7c14ad1f" -> "e3427bab-f98b-44f3-87f6-b53034e41529";
+"04d8ae05-9949-4928-86a8-d2d1fb1d54ea" [fillcolor="#B0FFFF", fontcolor=black, fontsize=20, height=0.01, label=" ? ", shape=box, style=filled, width=0.01];
+"e3427bab-f98b-44f3-87f6-b53034e41529" -> "04d8ae05-9949-4928-86a8-d2d1fb1d54ea";
+"3fef1c01-2485-422a-9bca-5c3f634cc174" [fillcolor="#FF8080", fontcolor=black, fontsize=20, height=0.01, label="&rarr;", shape=box, style=filled, width=0.01];
+"04d8ae05-9949-4928-86a8-d2d1fb1d54ea" -> "3fef1c01-2485-422a-9bca-5c3f634cc174";
+"4ae1bc3c-f2d2-4dc4-87fa-3d84482fb297" [fillcolor="#FFFF80", fontcolor=black, fontsize=20, label="Holding(Nothing)", shape=ellipse, style=filled];
+"3fef1c01-2485-422a-9bca-5c3f634cc174" -> "4ae1bc3c-f2d2-4dc4-87fa-3d84482fb297";
+"3c5730d1-6fc5-4dbe-b5a1-1a2661a7cd57" [fillcolor="#FFFF80", fontcolor=black, fontsize=20, label="Active(AC)", shape=ellipse, style=filled];
+"3fef1c01-2485-422a-9bca-5c3f634cc174" -> "3c5730d1-6fc5-4dbe-b5a1-1a2661a7cd57";
+"6e62e4c2-067a-4440-9272-b8af3a513f1e" [fillcolor="#FF8080", fontcolor=black, fontsize=20, height=0.01, label="&rarr;", shape=box, style=filled, width=0.01];
+"04d8ae05-9949-4928-86a8-d2d1fb1d54ea" -> "6e62e4c2-067a-4440-9272-b8af3a513f1e";
+"9a7cf296-aee4-4820-a40a-031bdcc0a80c" [fillcolor="#FFFF80", fontcolor=black, fontsize=20, label="Holding(Nothing)", shape=ellipse, style=filled];
+"6e62e4c2-067a-4440-9272-b8af3a513f1e" -> "9a7cf296-aee4-4820-a40a-031bdcc0a80c";
+"651886c4-3ba8-40df-a4f3-f3ab24ad5ea9" [fillcolor=lightgreen, fontcolor=black, fontsize=20, label="Turn(AC,On)", shape=box, style=filled];
+"6e62e4c2-067a-4440-9272-b8af3a513f1e" -> "651886c4-3ba8-40df-a4f3-f3ab24ad5ea9";
+"cf073b09-ba36-4492-9a7c-50c641e54d87" [fillcolor=lightgreen, fontcolor=black, fontsize=20, label="Turn(ACTemperature,Down)", shape=box, style=filled];
+"e3427bab-f98b-44f3-87f6-b53034e41529" -> "cf073b09-ba36-4492-9a7c-50c641e54d87";
+}
