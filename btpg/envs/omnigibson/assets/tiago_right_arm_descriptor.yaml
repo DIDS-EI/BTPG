@@ -1,0 +1,98 @@
+# Copyright (c) 2019-2021, NVIDIA CORPORATION.  All rights reserved.
+#
+# NVIDIA CORPORATION and its licensors retain all intellectual property
+# and proprietary rights in and to this software, related documentation
+# and any modifications thereto.  Any use, reproduction, disclosure or
+# distribution of this software and related documentation without an express
+# license agreement from NVIDIA CORPORATION is strictly prohibited.
+
+# The robot descriptor defines the generalized coordinates and how to map those
+# to the underlying URDF dofs.
+
+api_version: 1.0
+
+# Defines the generalized coordinates. Each generalized coordinate is assumed
+# to have an entry in the URDF, except when otherwise specified below under
+# cspace_urdf_bridge
+cspace:
+  - torso_lift_joint
+  - arm_right_1_joint
+  - arm_right_2_joint
+  - arm_right_3_joint
+  - arm_right_4_joint
+  - arm_right_5_joint
+  - arm_right_6_joint
+  # - arm_left_7_joint
+
+
+root_link: base_link
+subtree_root_link: base_link
+
+default_q: [
+    0.0,-0.0,-0.0,0.0019,-0.0002,0.0165,0.0005 #,0.0147
+]
+
+# Most dimensions of the cspace have a direct corresponding element
+# in the URDF. This list of rules defines how unspecified coordinates
+# should be extracted.
+cspace_to_urdf_rules:
+    - {name: head_1_joint, rule: fixed, value: -0.0}
+    - {name: head_2_joint, rule: fixed, value: -0.0}
+    - {name: arm_left_1_joint, rule: fixed, value: 0.0}
+    - {name: arm_left_2_joint, rule: fixed, value: -1e-04}
+    - {name: arm_left_3_joint, rule: fixed, value: 0.0007}
+    - {name: arm_left_4_joint, rule: fixed, value: -0.0002}
+    - {name: arm_left_5_joint, rule: fixed, value: 1.0703}
+    - {name: arm_left_6_joint, rule: fixed, value: -0.0008}
+    - {name: arm_left_7_joint, rule: fixed, value: 0.0197}
+    - {name: arm_right_7_joint, rule: fixed, value: 0.0197}
+    - {name: gripper_left_left_finger_joint, rule: fixed, value: 0.0}
+    - {name: gripper_left_right_finger_joint, rule: fixed, value: 0.0}
+    - {name: gripper_right_left_finger_joint, rule: fixed, value: 0.0}
+    - {name: gripper_right_right_finger_joint, rule: fixed, value: 0.0}
+composite_task_spaces: []
+
+# Just using dummy spheres for now for debugging
+collision_spheres:
+  - arm_right_3_link:
+    - "center": [0.014, 0.003, 0.035]
+      "radius": 0.065
+    - "center": [0.002, 0.002, 0.088]
+      "radius": 0.05665
+    - "center": [-0.011, -0.006, 0.155]
+      "radius": 0.056
+    - "center": [-0.018, 0.015, 0.215]
+      "radius": 0.05
+  - arm_right_2_link:
+    - "center": [0.009, 0.005, -0.015]
+      "radius": 0.05
+    - "center": [0.044, 0.036, 0.022]
+      "radius": 0.04
+  - arm_right_1_link:
+    - "center": [0.143, -0.049, 0.023]
+      "radius": 0.0406
+    - "center": [0.11, -0.049, 0.047]
+      "radius": 0.04003
+    - "center": [-0.004, 0.009, -0.002]
+      "radius": 0.03491
+    - "center": [0.05, -0.033, -0.0]
+      "radius": 0.03491
+  - arm_right_4_link:
+    - "center": [0.139, -0.02, -0.026]
+      "radius": 0.05933
+    - "center": [0.082, -0.023, -0.027]
+      "radius": 0.05705
+    - "center": [0.0, -0.01, -0.008]
+      "radius": 0.06
+  - arm_right_5_link:
+    - "center": [0.008, 0.008, -0.043]
+      "radius": 0.065
+    - "center": [0.007, 0.003, -0.099]
+      "radius": 0.06
+    - "center": [0.004, -0.013, -0.144]
+      "radius": 0.05122
+  - arm_right_6_link:
+    - "center": [-0.04, 0.001, -0.0]
+      "radius": 0.03033
+    - "center": [0.004, 0.003, 0.0]
+      "radius": 0.04

@@ -46,14 +46,13 @@ sudo apt-get update && sudo apt-get install -y libxcb-xinerama0 libxcb-icccm4 li
 👉 [Download RoboWaiter](https://drive.google.com/file/d/1ayAQZbPOyQV2W-V_ZdYv6AoqLOg0zvm1/view?usp=sharing)
 
 Download the simulator, unzip it, and run `CafeSimulator.exe` to open the simulator. The simulator will display an empty scene, awaiting the code to generate the scene and complete robot interactions.
-## 📂 Directory Structure
 
 
 ### 3. Download the OmniGibson executable (Only Windows is tested now):
 
 We use the [isaacsim 4.2](https://docs.omniverse.nvidia.com/isaacsim/latest/index.html) simulator and [omnigibson](https://behavior.stanford.edu/omnigibson/getting_started/installation.html) dataset (omnigibson platform is not needed).
 
-First download the isaacsim simulator: 
+First download the isaacsim simulator and assets: 
 | Operating System | Download Link                                                                      |
 |:-----------------|:-----------------------------------------------------------------------------------|
 | Linux            | [Download](https://download.isaacsim.omniverse.nvidia.com/isaac-sim-standalone%404.2.0-rc.18%2Brelease.16044.3b2ed111.gl.linux-x86_64.release.zip)   |
@@ -66,6 +65,21 @@ First download the isaacsim simulator:
 
 
 
+Put or link the isaacsim-4.2 and omnigibson_assets to the following path:
+
+```shell
+ln -s /path/to/isaacsim-4.2 /path/to/BTPG/simulators/omnigibson/IsaacSim4.2
+ln -s /path/to/omnigibson_assets /path/to/BTPG/simulators/omnigibson/Assets
+```
+
+Install python packages in isaacsim 4.2:
+
+```shell
+cd BTPG
+./simulators/omnigibson/IsaacSim4.2/kit/python/python3 -m pip install pyzmq lz4
+```
+
+## 📂 Directory Structure
 
 
 ```
