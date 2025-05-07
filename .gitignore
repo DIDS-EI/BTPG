@@ -66,8 +66,11 @@ _build
 
 
 simulators/virtualhome/*
+!simulators/virtualhome/.gitkeep
 simulators/robowaiter/*
+!simulators/robowaiter/.gitkeep
 simulators/omnigibson/*
+!simulators/omnigibson/.gitkeep
 
 z_example
 z_example/*
