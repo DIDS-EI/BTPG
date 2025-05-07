@@ -9,7 +9,6 @@
 **/.thumbs
 
 # No USD files allowed in the repo
-**/*.usd
 **/*.usda
 **/*.usdc
 **/*.usdz
@@ -68,6 +67,8 @@ _build
 
 simulators/virtualhome/*
 simulators/robowaiter/*
+simulators/omnigibson/*
+
 
 z_example
 z_example/*
