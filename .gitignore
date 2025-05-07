@@ -72,3 +72,6 @@ simulators/omnigibson/*
 z_example
 z_example/*
 
+simulators/omnigibson/Assets
+simulators/omnigibson/IsaacSim4.2
+*.2
