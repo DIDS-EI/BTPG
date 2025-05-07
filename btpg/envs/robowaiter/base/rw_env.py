@@ -6,6 +6,11 @@ from btpg.utils import ROOT_PATH
 
 import atexit
 from btpg.envs.robowaiter.scene import Scene
+import dataclasses
+
+@dataclasses.dataclass
+class HeadlessScene:
+    headless = True
 
 class RWEnv(Env):
     agent_num = 1
@@ -13,12 +18,15 @@ class RWEnv(Env):
     # launch simulator
     simulator_path = f'{ROOT_PATH}/../simulators/robowaiter/CafeSimulator/CafeSimulator.exe'
 
-    behavior_lib_path = f"{ROOT_PATH}/envs/RoboWaiter/exec_lib"
+    behavior_lib_path = f"{ROOT_PATH}/envs/robowaiter/exec_lib"
 
 
     def __init__(self):
-        self.launch_simulator()
-        self.scene = Scene()
+        if not self.headless:
+            self.launch_simulator()
+            self.scene = Scene()
+        else:
+            self.scene = HeadlessScene()
         super().__init__()
 
     def reset(self):

@@ -17,8 +17,8 @@ ______________________________________________________________________
 ### Create a conda environment
 
 ```shell
-conda create --name BTPG python=3.10
-conda activate BTPG
+conda create --name btpg python=3.10
+conda activate btpg
 ```
 
 ### Install BTPGym
@@ -26,6 +26,11 @@ conda activate BTPG
 ```shell
 cd BTPG
 pip install -e .
+```
+
+ubuntu用户安装依赖
+```
+sudo apt-get update && sudo apt-get install -y libxcb-xinerama0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xkb1 libxkbcommon-x11-0 graphviz
 ```
 
 ### 1. Download the VirtualHome executable for your platform (Only Windows is tested now):

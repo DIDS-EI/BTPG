@@ -33,7 +33,8 @@ numpy~=1.26.0
 setuptools~=68.0.0
 pydot~=1.4.2
 colorama~=0.4.6
-pyqt5
+pyqt5==5.15.2
 scikit-learn~=1.5.0
 translate~=3.6.1
 psutil
+sympy

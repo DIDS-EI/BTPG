@@ -23,8 +23,10 @@ from btpg.envs.robowaiter.algos.navigator.dstar_lite import euclidean_distance
 from PIL import Image
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
-from btpg.envs.robowaiter.proto import GrabSim_pb2
-from btpg.envs.robowaiter.proto import GrabSim_pb2_grpc
+
+if "Windows" in sys.platform:
+    from btpg.envs.robowaiter.proto import GrabSim_pb2
+    from btpg.envs.robowaiter.proto import GrabSim_pb2_grpc
 
 plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号

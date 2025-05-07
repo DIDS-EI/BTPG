@@ -18,7 +18,8 @@ class VHEnv(Env):
 
 
     def __init__(self):
-        self.launch_simulator()
+        if not self.headless:
+            self.launch_simulator()
         super().__init__()
 
     def reset(self):

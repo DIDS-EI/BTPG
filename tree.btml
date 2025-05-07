@@ -1,87 +1,10 @@
 selector
-    sequence
-        cond On(Water,WaterStation)
-        cond Low(ACTemperature)
-    sequence
-        cond Holding(Nothing)
-        cond On(Water,WaterStation)
-        cond Active(AC)
-        act Turn(ACTemperature,Down)
+    cond Low(ACTemperature)
     sequence
         selector
+            cond Active(AC)
             cond Holding(Nothing)
-            cond Low(ACTemperature)
             sequence
                 cond Holding(Nothing)
-                cond Active(AC)
-                cond Low(ACTemperature)
-                act Turn(AC,Off)
-            sequence
-                cond Holding(Nothing)
-                cond Low(ACTemperature)
                 act Turn(AC,On)
-            sequence
-                cond Holding(Nothing)
-                cond Active(AC)
-                act Turn(ACTemperature,Down)
-            sequence
-                cond Active(HallLight)
-                cond Holding(Nothing)
-                cond Low(ACTemperature)
-                act Turn(HallLight,Off)
-            sequence
-                cond Holding(Nothing)
-                cond Low(ACTemperature)
-                act Turn(HallLight,On)
-            sequence
-                cond Holding(Nothing)
-                cond Active(TubeLight)
-                cond Low(ACTemperature)
-                act Turn(TubeLight,Off)
-            sequence
-                cond Holding(Nothing)
-                cond Low(ACTemperature)
-                act Turn(TubeLight,On)
-            sequence
-                cond Holding(Nothing)
-                cond Low(ACTemperature)
-                act Make(Coffee)
-            sequence
-                cond Holding(Nothing)
-                cond Low(ACTemperature)
-                act Make(Dessert)
-            sequence
-                cond Holding(Nothing)
-                cond Low(ACTemperature)
-                act Make(Water)
-            sequence
-                selector
-                    cond Low(ACTemperature)
-                    sequence
-                        selector
-                            cond Holding(Nothing)
-                            cond Active(AC)
-                            sequence
-                                cond Holding(Nothing)
-                                act Turn(AC,On)
-                        act Turn(ACTemperature,Down)
-                act PutDown(Anything,Anywhere)
-            sequence
-                cond Holding(Nothing)
-                cond Low(ACTemperature)
-                act Clean(Chairs)
-            sequence
-                cond Holding(Nothing)
-                cond Low(ACTemperature)
-                act Clean(Floor)
-            sequence
-                cond Holding(Nothing)
-                cond Low(ACTemperature)
-                act Clean(Table1)
-        act Make(Water)
-    sequence
-        selector
-            cond Holding(Water)
-            cond RobotNear(WaterStation)
-            cond Low(ACTemperature)
-        act PutDown(Water,WaterStation)
+        act Turn(ACTemperature,Down)
