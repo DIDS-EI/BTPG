@@ -160,7 +160,7 @@ class OmnigibsonTiago(OmnigibsonBase):
         )
 
     def set_viewer_camera(self):
-        set_camera_view(eye=[0.68,3.33,1.10], target=[0.30,2.42,0.96], camera_prim_path="/OmniverseKit_Persp")
+        set_camera_view(eye=[-1.66,-1.93,2.06], target=[-1.34,-1.03,1.76], camera_prim_path="/OmniverseKit_Persp")
         print("dof_names",self.robot.articulation.dof_names)
 
     def load_example_assets(self):
