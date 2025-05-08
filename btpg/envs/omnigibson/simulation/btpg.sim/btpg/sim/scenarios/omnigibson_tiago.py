@@ -66,6 +66,81 @@ class Tiago(Robot):
 class OmnigibsonTiago(OmnigibsonBase):
     ROBOT_CLS = Tiago
 
+
+    def create_rs_int_scene(self):
+        scene_json_path = os.path.join(Global.Cfg.omnigibson_asset_path, "og_dataset/scenes/Rs_int/json/Rs_int_best.json")
+        scene_json = json.load(open(scene_json_path))
+
+        avg_category_specs_path = os.path.join(Global.Cfg.omnigibson_asset_path, "og_dataset/metadata/avg_category_specs.json")
+        avg_category_specs = json.load(open(avg_category_specs_path))
+
+        object_list = []
+        for obj_name,obj_info in scene_json['state']['object_registry'].items():
+            # print(obj_name,obj_info)
+            if obj_name == "robot0":
+                continue
+            category = scene_json['objects_info']['init_info'][obj_name]["args"]['category']
+            object_name = scene_json['objects_info']['init_info'][obj_name]["args"]['model']
+            path_to_object_usd = get_omnigibson_asset(category=category, object_name=object_name)
+            add_reference_to_stage(path_to_object_usd, f"/Env/{obj_name}")
+
+            position = obj_info['root_link']['pos']
+            rotation = obj_info['root_link']['ori']
+            rotation = [rotation[3],rotation[0],rotation[1],rotation[2]]
+
+            scale = scene_json['objects_info']['init_info'][obj_name]["args"]['scale']
+
+            obj_prim = XFormPrim(
+                f"/Env/{obj_name}",
+                name=obj_name,
+                scale=np.array(scale),
+                position=np.array(position),
+                orientation=rotation,
+            )
+            # obj_base_prim = XFormPrim(
+            #     f"/World/{obj_name}/base_link",
+            #     name=obj_name+"_base_link",
+            #     scale=np.array(scale),
+            #     position=np.array(position),
+            #     orientation=rotation,
+            # )
+            # if scene_json['objects_info']['init_info'][obj_name]["args"].get('fixed_base',False):
+            #     omnigibson_object_fix_base(obj_prim.prim_path + "/base_link")
+            #     print(str(obj_prim.prim_path)+"/base_link")
+            # omnigibson_object_fix_base(obj_prim.prim_path + "/base_link")
+
+            density = avg_category_specs[category]["density"]
+            prim = prims_utils.get_prim_at_path(obj_prim.prim_path)
+
+            children_prim = get_prim_children(prim)
+            for child_prim in children_prim:
+                if child_prim.GetPrimTypeInfo().GetTypeName() == "Xform":
+                    if child_prim.HasAPI(pxr.UsdPhysics.RigidBodyAPI):
+                        child_prim.GetAttribute("physics:density").Set(density)
+                        child_prim.GetAttribute("physics:mass").Set(0.0)
+
+                    # change_prim_property(child_prim.GetPrimPath(), "physics:density", density)
+                    # change_prim_property(child_prim.GetPrimPath(), "physics:density", density)
+                if "light" in child_prim.GetName():
+                    get_prim_children(child_prim)[0].GetAttribute("inputs:intensity").Set(150000)
+
+
+            if scene_json['objects_info']['init_info'][obj_name]["args"].get('fixed_base',False) or "cabinet" in category or "switch" in category:
+                prim = prims_utils.get_prim_at_path(obj_prim.prim_path)
+                
+                if len(get_prim_children(prim)) <= 2 or "ceilings" in category:
+                    omnigibson_object_fix_base(obj_prim.prim_path + "/base_link")
+                else:
+                    base_link_prim_path = obj_prim.prim_path
+                    joint_prim_path = obj_prim.prim_path + "/rootJoint"
+                    joint = pxr.UsdPhysics.FixedJoint.Define(self.stage, joint_prim_path)
+                    joint.GetBody1Rel().SetTargets([pxr.Sdf.Path(base_link_prim_path+"/base_link")])
+                    joint_prim = get_prim_at_path(joint_prim_path)
+                    pxr.PhysxSchema.PhysxJointAPI.Apply(joint_prim)
+
+            object_list.append(obj_prim)
+        return object_list
+
     def create_objects(self):
         self._red_cube = VisualCuboid(
             name="RedCube",
@@ -85,6 +160,34 @@ class OmnigibsonTiago(OmnigibsonBase):
     def set_viewer_camera(self):
         set_camera_view(eye=[1.73,2.53,1.53], target=[1.18,1.80,1.12], camera_prim_path="/OmniverseKit_Persp")
         print("dof_names",self.robot.articulation.dof_names)
+
+
+    def load_example_assets(self):
+        """Load assets onto the stage and return them so they can be registered with the
+        core.World.
+
+        This function is called from ui_builder._setup_scene()
+
+        The position in which things are loaded is also the position to which
+        they will be returned on reset.
+        """
+
+        self.stage = get_current_stage()
+
+        # path_to_robot_usd = os.path.join(Global.Cfg.omnigibson_asset_path, "assets/models/tiago/tiago_dual_omnidirectional_stanford/tiago_dual_omnidirectional_stanford_33.usd")
+        self.robot = self.ROBOT_CLS()
+
+        self.create_objects()
+        rs_int_obj_list = self.create_rs_int_scene()
+        self._ground_plane = GroundPlane("/World/GroundPlane", z_position=-0.5)
+
+        self.post_load_assets()
+        # Return assets that were added to the stage so that they can be registered with the core.World
+        return self.robot.articulation, \
+                self._ground_plane, \
+                *rs_int_obj_list
+                # *self.object_list, \
+            # self._red_block, 
 
 
 
