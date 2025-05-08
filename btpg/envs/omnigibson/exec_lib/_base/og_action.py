@@ -50,21 +50,50 @@ class OGAction(Action):
     # EATABLE = {"apple", 'breadslice'}
     # DRINKABLE = {'wine'}
 
-    SURFACES = {"kitchencabinet", "bed", "kitchentable"}
-    SITTABLE = {"bed"}
-    CAN_OPEN = {"fridge", "window", "microwave", "kitchencabinet"}
-    CONTAINERS = {"fridge", "garbagecan", "microwave", "kitchencabinet"}
+
+
+
+    # SURFACES = {"kitchencabinet", "bed", "kitchentable"}  
+    #             # bottom_cabinet_slgzfc_0， bed_zrumze_0， breakfast_table_skczfi_1   #coffee_table_fqluyq_0
+    # SITTABLE = {"bed"}          
+    # CAN_OPEN = {"fridge", "window", "microwave", "kitchencabinet"} #fridge_xyejdx_0, window_ithrgo_2, microwave_182, 
+    # CONTAINERS = {"fridge", "garbagecan", "microwave", "kitchencabinet"} # 
+    # GRABBABLE = {"apple", 'wine', 'plate', "rag", "kitchenknife", "cutlets"}
+    #             # apple_omzprq_0
+    # cleaning_tools = {"rag"}
+    # cutting_tools = {"kitchenknife"}
+    # HAS_SWITCH = {"tv", "faucet", "candle", "microwave"} # electric_switch_wseglt_2
+    # HAS_PLUG = {"tv", "mouse", "fridge", "microwave"}
+    # CUTABLE = {"apple", "cutlets"} # apple,
+    # WASHABLE = {"apple", "rag", "kitchenknife", "cutlets"}
+    # EATABLE = {"apple", 'cutlets'}
+    # DRINKABLE = {'wine'}
+
+
+    SURFACES = {"kitchencabinet", "bed", "kitchentable"}  
+                # bottom_cabinet_slgzfc_0， bed_zrumze_0， breakfast_table_skczfi_1   #coffee_table_fqluyq_0
+    SITTABLE = {"bed"}          
+    CAN_OPEN = {"fridge", "window", "microwave", "kitchencabinet"} #fridge_xyejdx_0, window_ithrgo_2, microwave_182, 
+    CONTAINERS = {"fridge", "garbagecan", "microwave", "kitchencabinet"} # 
     GRABBABLE = {"apple", 'wine', 'plate', "rag", "kitchenknife", "cutlets"}
+                # apple_omzprq_0
     cleaning_tools = {"rag"}
     cutting_tools = {"kitchenknife"}
-    HAS_SWITCH = {"tv", "faucet", "candle", "microwave"}
+    HAS_SWITCH = {"tv", "faucet", "candle", "microwave"} # electric_switch_wseglt_2
     HAS_PLUG = {"tv", "mouse", "fridge", "microwave"}
-    # 墙电话, 咖啡机, 开关, 手机, 冰箱, 烤面包机, 台灯, 微波炉, 电视, \
-    # 鼠标, 时钟, 键盘, 收音机, 洗衣机, 打印机
-    CUTABLE = {"apple", "cutlets"}
+    CUTABLE = {"apple", "cutlets"} # apple,
     WASHABLE = {"apple", "rag", "kitchenknife", "cutlets"}
     EATABLE = {"apple", 'cutlets'}
     DRINKABLE = {'wine'}
+
+    obj2og = {}
+    obj2og["apple"] = "apple_omzprq_0"
+    obj2og["kitchencabinet"] = "bottom_cabinet_slgzfc_0"
+    obj2og["window"] = "window_ithrgo_2"
+
+
+
+
 
     AllObject = SURFACES | SITTABLE | CAN_OPEN | CONTAINERS | GRABBABLE |\
                  HAS_SWITCH | HAS_PLUG| CUTABLE | WASHABLE|cleaning_tools|cutting_tools

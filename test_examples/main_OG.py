@@ -23,13 +23,19 @@ env, cur_cond_set = setup_environment(scene)
 # goal_str ='RobotNear_WaterStation'
 # goal_str ='IsClean_Floor & On_Water_WaterStation'
 # goal_str ='Low_ACTemperature & On_Water_WaterStation'
-goal_str ='IsIn_apple_fridge'
+# goal_str ='IsIn_apple_fridge'
+# goal_str ='IsIn_apple_kitchencabinet & IsOpen_window'
+goal_str ='IsIn_apple_kitchencabinet'
+# goal_str ='IsOpen_window'
 print("goal_str:", goal_str)
 
+key_predicates = ["Walk","RightGrab","RightPutIn","Open","Close"]
+key_objects = ["apple", "kitchencabinet"]
+
 algo = BTPlannerInterface(env.behavior_lib, cur_cond_set=cur_cond_set,
-                      priority_act_ls=[], key_predicates=[],
-                      key_objects=[],
-                      selected_algorithm="hbtp", mode="big",
+                      priority_act_ls=[], key_predicates=key_predicates,
+                      key_objects=key_objects,
+                      selected_algorithm="hbtp", mode="small-predicate-objs",
                       time_limit=15,
                       heuristic_choice=0,output_just_best=True)
 

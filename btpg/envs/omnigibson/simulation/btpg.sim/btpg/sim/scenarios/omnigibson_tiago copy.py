@@ -68,9 +68,7 @@ class OmnigibsonTiago(OmnigibsonBase):
 
 
     def create_rs_int_scene(self):
-        # scene_json_path = os.path.join(Global.Cfg.omnigibson_asset_path, "og_dataset/scenes/Rs_int/json/Rs_int_best.json")
-        # scene_json_path = os.path.join(Global.Cfg.omnigibson_asset_path, "og_dataset/scenes/Rs_garden/json/Rs_garden_best.json")
-        scene_json_path = os.path.join(Global.Cfg.root_path, config_folder+"Rs_garden_btpg.json")
+        scene_json_path = os.path.join(Global.Cfg.omnigibson_asset_path, "og_dataset/scenes/Rs_int/json/Rs_int_best.json")
         scene_json = json.load(open(scene_json_path))
 
         avg_category_specs_path = os.path.join(Global.Cfg.omnigibson_asset_path, "og_dataset/metadata/avg_category_specs.json")
@@ -160,8 +158,9 @@ class OmnigibsonTiago(OmnigibsonBase):
         )
 
     def set_viewer_camera(self):
-        set_camera_view(eye=[0.68,3.33,1.10], target=[0.30,2.42,0.96], camera_prim_path="/OmniverseKit_Persp")
+        set_camera_view(eye=[1.73,2.53,1.53], target=[1.18,1.80,1.12], camera_prim_path="/OmniverseKit_Persp")
         print("dof_names",self.robot.articulation.dof_names)
+
 
     def load_example_assets(self):
         """Load assets onto the stage and return them so they can be registered with the
@@ -182,16 +181,6 @@ class OmnigibsonTiago(OmnigibsonBase):
         rs_int_obj_list = self.create_rs_int_scene()
         self._ground_plane = GroundPlane("/World/GroundPlane", z_position=-0.5)
 
-        # 添加日光
-        from pxr import Sdf, UsdLux
-        sphereLight = UsdLux.SphereLight.Define(get_current_stage(), Sdf.Path("/World/SphereLight"))
-        sphereLight.CreateRadiusAttr(2)
-        sphereLight.CreateIntensityAttr(500000)
-        XFormPrim(str(sphereLight.GetPath())).set_world_pose([6.5, 0, 12])
-
-        # 添加一些物体
-        
-
         self.post_load_assets()
         # Return assets that were added to the stage so that they can be registered with the core.World
         return self.robot.articulation, \
@@ -199,6 +188,8 @@ class OmnigibsonTiago(OmnigibsonBase):
                 *rs_int_obj_list
                 # *self.object_list, \
             # self._red_block, 
+
+
 
     def follow_cube(self):
         euler_gripper_standard = np.array([0, 0, 0])
@@ -265,6 +256,8 @@ class OmnigibsonTiago(OmnigibsonBase):
                 # the next frame.
             yield ()
 
+
+
     def post_load_assets(self):
         joint_prim_path = self.robot.prim_path + "/rootJoint"
         joint = pxr.UsdPhysics.FixedJoint.Define(self.stage, joint_prim_path)
@@ -309,20 +302,6 @@ class OmnigibsonTiago(OmnigibsonBase):
                     'robot_description_path': os.path.join(Global.Cfg.root_path, config_folder + "tiago_right_arm_descriptor.yaml"),
                     'rmpflow_config_path': os.path.join(Global.Cfg.root_path, config_folder + "tiago_rmpflow.yaml")}
         return [left_rmp_config, right_rmp_config]
-
-
-    # 获取物体坐标
-    def get_object_pose(self,object_name):
-        
-         
-
-
-        object_prim = get_prim_at_path(f"/Env/{object_name}")
-        pos,quat = object_prim.get_world_pose()
-        return pos,quat
-
-
-
 
     # def step(self,action):
     #     pass
