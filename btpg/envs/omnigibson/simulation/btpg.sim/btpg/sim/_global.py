@@ -21,12 +21,13 @@ class Global:
         data_path = os.path.join(ROOT_PATH, "simulators/omnigibson")
         omnigibson_asset_path = os.path.join(data_path, "Assets")
         omnigibson_key_path = os.path.join(data_path, "Assets/omnigibson.key")
-
+        output_path = os.path.join(ROOT_PATH, "outputs")
         is_standalone = os.environ.get("BTPG_SERVER_MODE", "Standalone") == "Standalone"
 
 print(f"Dataset path: {Global.Cfg.data_path}")
 assert os.path.exists(Global.Cfg.data_path), f"Dataset path {Global.Cfg.data_path} does not exist."
 
+os.makedirs(Global.Cfg.output_path, exist_ok=True)
 
 def download_key():
     os.makedirs(os.path.dirname(Global.Cfg.omnigibson_key_path), exist_ok=True)

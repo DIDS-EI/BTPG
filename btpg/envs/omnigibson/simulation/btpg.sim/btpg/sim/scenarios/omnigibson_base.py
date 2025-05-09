@@ -52,6 +52,7 @@ from omni.isaac.core.utils.numpy.rotations import euler_angles_to_quats, quats_t
 
 class Robot:
     def __init__(self, prim_path,usd_path):
+        self.dt = 1/60
         add_reference_to_stage(usd_path, prim_path)
         self.prim_path = prim_path
         self.articulation = Articulation(prim_path)
@@ -387,11 +388,14 @@ class OmnigibsonBase(BaseScenario):
         self.action_scale = (self.high_limit - self.low_limit) / 2
         self.action_bias = (self.high_limit + self.low_limit) / 2
 
+        for i in range(len(self.robot.articulation.dof_names)):
+            print(i, self.robot.articulation.dof_names[i], low_limit[i], high_limit[i])
+        # print("dof_names",self.robot.articulation.dof_names)
 
-        print("low_limit",low_limit)
-        print("high_limit",high_limit)
-        print("action_scale",self.action_scale)
-        print("action_bias",self.action_bias)
+        # print("low_limit",low_limit)
+        # print("high_limit",high_limit)
+        # print("action_scale",self.action_scale)
+        # print("action_bias",self.action_bias)
 
 
         return low_limit, high_limit

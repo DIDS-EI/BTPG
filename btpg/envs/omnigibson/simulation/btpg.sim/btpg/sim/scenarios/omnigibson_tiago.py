@@ -20,6 +20,7 @@ from omni.isaac.motion_generation import ArticulationMotionPolicy, RmpFlow
 from omni.isaac.motion_generation.interface_config_loader import load_supported_motion_policy_config
 from omni.isaac.nucleus import get_assets_root_path
 import omni.isaac.core.utils.physics as physics_utils
+import pxr.GeomUtil
 
 from ..utils import SharedStatus, get_btpg_asset, get_omnigibson_asset
 from ..utils import change_prim_property, disable_physics, enable_physics, omnigibson_object_fix_base
@@ -42,7 +43,7 @@ import torch
 from .._global import Global
 import os
 import json
-from pxr import Usd, Sdf
+from pxr import Usd, Sdf,Gf
 import pxr
 from omni.isaac.core.utils.prims import get_prim_at_path, get_prim_children
 from omni.isaac.wheeled_robots.robots import WheeledRobot
@@ -50,7 +51,9 @@ from omni.isaac.wheeled_robots.controllers import WheelBasePoseController, Diffe
 from omni.isaac.core.utils.numpy.rotations import euler_angles_to_quats, quats_to_rot_matrices,rot_matrices_to_quats,quats_to_euler_angles
 
 from .omnigibson_base import OmnigibsonBase, Robot
-
+from omni.isaac.occupancy_map.bindings import _occupancy_map
+from omni.isaac.occupancy_map.utils.utils import update_location as update_occupancy_map_location
+from omni.isaac.occupancy_map.utils.utils import generate_image as generate_occupancy_map_image
 config_folder = "btpg/envs/omnigibson/assets/"
 
 
@@ -59,14 +62,128 @@ class Tiago(Robot):
         prim_path = "/Tiago"
         path_to_robot_usd = os.path.join(Global.Cfg.root_path, config_folder + "tiago.usd")
         super().__init__(prim_path,path_to_robot_usd)
+        
+        self.base_link_prim_path = prim_path + "/base_link"
+        self.base_link_prim = get_prim_at_path(Sdf.Path(self.base_link_prim_path))
+
+        self.default_arm_poses = {
+            "vertical": torch.tensor([0.85846, -0.14852, 1.81008, 1.63368, 0.13764, -1.32488, -0.68415]),
+            "diagonal15": torch.tensor([0.90522, -0.42811, 2.23505, 1.64627, 0.76867, -0.79464, -1.08908]),
+            "diagonal30": torch.tensor([0.71883, -0.02787, 1.86002, 1.52897, 0.52204, -0.99741, -1.11046]),
+            "diagonal45": torch.tensor([0.66058, -0.14251, 1.77547, 1.43345, 0.65988, -1.02741, -1.32857]),
+            "horizontal": torch.tensor([0.61511, 0.49229, 1.46306, 1.24919, 1.08282, -1.28865, 1.50910]),
+        }
+        self.default_arm_pose = self.default_arm_poses["vertical"]
+        self.default_joint_positions = torch.tensor([0.15,
+        1.45,1.45, # arm1
+        0, # head_1_joint
+        -1,-1, # arm2
+        0, # head_2_joint
+        3.0,3.0, # arm3
+        2.3,2.3, # arm4
+        2,2, # arm5
+        -0.2,-0.2, # arm6
+        0,0, # arm7
+        0.0,0.0, 
+        0.0,0.0])
+
+        self.init_position = np.array([-0.5,0,0])
+        self.position_offset = np.array([0.,0,0.06])
+        self.linear_velocity = np.array([0.,0.,0])
+
+        self.collision_prim_path_list = ['/Tiago/base_link/collisions',
+        '/Tiago/base_antenna_left_link/collisions',
+        '/Tiago/base_antenna_right_link/collisions',
+        '/Tiago/base_dock_link/collisions',
+        '/Tiago/suspension_front_left_link/collisions',
+        '/Tiago/wheel_front_left_link/collisions',
+        '/Tiago/suspension_front_right_link/collisions',
+        '/Tiago/wheel_front_right_link/collisions',
+        '/Tiago/wheel_rear_left_link/collisions',
+        '/Tiago/wheel_rear_right_link/collisions',
+        '/Tiago/torso_fixed_column_link/collisions',
+        '/Tiago/arm_left_1_link/collisions',
+        '/Tiago/arm_left_2_link/collisions',
+        '/Tiago/arm_left_3_link/collisions',
+        '/Tiago/arm_left_4_link/collisions',
+        '/Tiago/arm_left_5_link/collisions',
+        '/Tiago/arm_left_6_link/collisions',
+        '/Tiago/arm_left_tool_link/collisions',
+        '/Tiago/wrist_left_ft_link/collisions',
+        '/Tiago/wrist_left_ft_tool_link/collisions',
+        '/Tiago/gripper_left_link/collisions',
+        '/Tiago/gripper_left_left_finger_link/collisions',
+        '/Tiago/gripper_left_right_finger_link/collisions',
+        '/Tiago/arm_right_1_link/collisions',
+        '/Tiago/arm_right_2_link/collisions',
+        '/Tiago/arm_right_3_link/collisions',
+        '/Tiago/arm_right_4_link/collisions',
+        '/Tiago/arm_right_5_link/collisions',
+        '/Tiago/arm_right_6_link/collisions',
+        '/Tiago/arm_right_tool_link/collisions',
+        '/Tiago/wrist_right_ft_link/collisions',
+        '/Tiago/wrist_right_ft_tool_link/collisions',
+        '/Tiago/gripper_right_link/collisions',
+        '/Tiago/gripper_right_left_finger_link/collisions',
+        '/Tiago/gripper_right_right_finger_link/collisions',
+        '/Tiago/head_1_link/collisions',
+        '/Tiago/head_2_link/collisions',
+        '/Tiago/torso_fixed_link/collisions/mesh_0',
+        '/Tiago/torso_fixed_link/collisions/mesh_1',
+        '/Tiago/torso_lift_link/collisions/mesh_0',
+        '/Tiago/torso_lift_link/collisions/mesh_1',
+        '/Tiago/torso_lift_link/collisions/mesh_2',
+        '/Tiago/torso_lift_link/collisions/mesh_3']
+
+        # for prim_path in self.collision_prim_path_list:
+        #     prim = get_prim_at_path(Sdf.Path(prim_path))
+        #     prim.GetAttribute("physics:collisionEnabled").Set(False)
 
 
+    def get_collisions_prim_path_list(self):
+        predicate = lambda path: "collisions" in path
+        self.prims = prims_utils.get_all_matching_child_prims("/Tiago",predicate)
+        with open(os.path.join(Global.Cfg.output_path, "tiago_prims.txt"), "w") as f:
+            for prim in self.prims:
+                f.write(f"'{prim.GetPath()}'," + "\n")
 
+    def reset(self):
+        self.articulation.set_joint_positions(self.default_joint_positions)
+        self.set_position(self.init_position)
+        
+    @property
+    def position(self):
+        return np.array(self.base_link_prim.GetAttribute("xformOp:translate").Get()) - self.position_offset
+
+    @property
+    def orient_quat(self):
+        gf_quatd: Gf.Quatd = self.base_link_prim.GetAttribute("xformOp:orient").Get()
+        return np.array([gf_quatd.GetReal(),*gf_quatd.GetImaginary()])
+
+    @property
+    def orient_euler(self):
+        return quats_to_euler_angles(self.orient_quat)
+
+    def set_position(self,position: np.ndarray):
+        position += self.position_offset
+        self.base_link_prim.GetAttribute("xformOp:translate").Set(Gf.Vec3d(*position.tolist()))
+
+
+    def set_orient_quat(self,quat: np.ndarray):
+        self.base_link_prim.GetAttribute("xformOp:orient").Set(Gf.Quatd(*quat.tolist()))
+
+    def set_orient_euler(self,euler: np.ndarray):
+        self.set_orient_quat(euler_angles_to_quats(euler))
+
+    def step_locomotion(self):
+        next_position = self.position + self.linear_velocity * self.dt 
+        # self.set_position(next_position)
+        # self.set_orient_euler(np.array([0,0,np.pi/2]))
 
 class OmnigibsonTiago(OmnigibsonBase):
     ROBOT_CLS = Tiago
 
-
+    occupancy_map = None
     def create_rs_int_scene(self):
         # scene_json_path = os.path.join(Global.Cfg.omnigibson_asset_path, "og_dataset/scenes/Rs_int/json/Rs_int_best.json")
         # scene_json_path = os.path.join(Global.Cfg.omnigibson_asset_path, "og_dataset/scenes/Rs_garden/json/Rs_garden_best.json")
@@ -161,7 +278,6 @@ class OmnigibsonTiago(OmnigibsonBase):
 
     def set_viewer_camera(self):
         set_camera_view(eye=[0.68,3.33,1.10], target=[0.30,2.42,0.96], camera_prim_path="/OmniverseKit_Persp")
-        print("dof_names",self.robot.articulation.dof_names)
 
     def load_example_assets(self):
         """Load assets onto the stage and return them so they can be registered with the
@@ -203,6 +319,25 @@ class OmnigibsonTiago(OmnigibsonBase):
     def follow_cube(self):
         euler_gripper_standard = np.array([0, 0, 0])
         while True:
+
+            if self.occupancy_map is None:
+                import omni.kit.usd
+                context = omni.usd.get_context()
+                self._physx = omni.physx.acquire_physx_interface()
+                self.occupancy_map = _occupancy_map.acquire_occupancy_map_interface()
+                self.occupancy_map.set_cell_size(0.1)
+                update_occupancy_map_location(self.occupancy_map, (0,0,0.6), (-7, -11, -0.5), (6, 15, 0.63))
+                # update_occupancy_map_location(self.occupancy_map, (0,0,0.6), (-2.5, -2.5, -0.5), (1.5, 1.5, 0.63))
+                self.occupancy_map.generate()
+                point_list = self.occupancy_map.get_occupied_positions()
+                dims = self.occupancy_map.get_dimensions()
+                image_buffer = generate_occupancy_map_image(self.occupancy_map, [0, 0, 0, 255], [127, 127, 127, 255], [255, 255, 255, 255])
+                print(image_buffer)
+                print(dims)
+                image_buffer = np.array(image_buffer).reshape(dims[1],dims[0],4)
+                import matplotlib.pyplot as plt
+                plt.imshow(image_buffer)
+                plt.savefig("/home/cxl/code/BTPG/outputs/occupancy_map.png")
             # 获取机器人的 坐标和旋转
             # pos_robot, quat_robot = self.robot.articulation.get_world_pose()
             # robot_rot_matrix = quats_to_rot_matrices(quat_robot)
@@ -240,21 +375,24 @@ class OmnigibsonTiago(OmnigibsonBase):
             orientation_target = euler_angles_to_quats(euler_target)
 
             # 开始控制
-            self._left_rmpflow.set_end_effector_target(left_translation_target, orientation_target)
-            self._right_rmpflow.set_end_effector_target(right_translation_target, orientation_target)
+            # self._left_rmpflow.set_end_effector_target(left_translation_target, orientation_target)
+            # self._right_rmpflow.set_end_effector_target(right_translation_target, orientation_target)
 
-            self._left_rmpflow.update_world()
-            self._right_rmpflow.update_world()
-            left_action = self._left_articulation_motion_policy.get_next_articulation_action(1 / 60)
-            right_action = self._right_articulation_motion_policy.get_next_articulation_action(1 / 60)
+            # self._left_rmpflow.update_world()
+            # self._right_rmpflow.update_world()
+            # left_action = self._left_articulation_motion_policy.get_next_articulation_action(1 / 60)
+            # right_action = self._right_articulation_motion_policy.get_next_articulation_action(1 / 60)
 
-            # action.joint_positions[4] = euler_lookat[0]
-            # print(f"action: {action.joint_positions[0]:.2f}, {action.joint_positions[1]:.2f}, {action.joint_positions[2]:.2f}, {action.joint_positions[3]:.2f}, {action.joint_positions[4]:.2f}, {action.joint_positions[5]:.2f}, {action.joint_positions[6]:.2f}")
-            self._articulation.apply_action(left_action)
-            self._articulation.apply_action(right_action)
+            # # action.joint_positions[4] = euler_lookat[0]
+            # # print(f"action: {action.joint_positions[0]:.2f}, {action.joint_positions[1]:.2f}, {action.joint_positions[2]:.2f}, {action.joint_positions[3]:.2f}, {action.joint_positions[4]:.2f}, {action.joint_positions[5]:.2f}, {action.joint_positions[6]:.2f}")
+            # self._articulation.apply_action(left_action)
+            # self._articulation.apply_action(right_action)
 
-            print(left_action.joint_positions)
-            print(right_action.joint_positions)
+
+            self.robot.step_locomotion()
+
+            # print(left_action.joint_positions)
+            # print(right_action.joint_positions)
             # print(action.joint_positions)
             # rad = euler_lookat[0]
             # deg = np.rad2deg(rad)
@@ -289,6 +427,30 @@ class OmnigibsonTiago(OmnigibsonBase):
         self._left_articulation_motion_policy = ArticulationMotionPolicy(self._articulation, self._left_rmpflow, 1 / 60)
         self._right_articulation_motion_policy = ArticulationMotionPolicy(self._articulation, self._right_rmpflow, 1 / 60)
 
+        self.robot.reset()
+
+        # for i, point in enumerate(point_list):
+        #     VisualCuboid(
+        #         name=f"occupancy_map_point_{i}",
+        #         position=np.array(point),
+        #         prim_path=f"/OccupancyMap/occupancy_map_point_{i}",
+        #         size=0.05,
+        #         color=np.array([1, 0, 0]),
+        #     )
+        # generator = _occupancy_map.Generator(self._physx, context.get_stage_id())
+        # generator.update_settings(0.05, 4, 5, 6)
+        # generator.set_transform((0, 0, 0), (-2.00, -2.00, 0), (2.00, 2.00, 0))
+        # generator.generate2d()
+        # buffer = generator.get_buffer()
+        # print(buffer)
+
+
+
+            # geometry = pxr.UsdGeom.Sphere.Define(self.stage, pxr.Sdf.Path(f"/World/Sphere_{i}"))
+            # geometry.GetRadiusAttr().Set(0.05)
+            # geometry.GetTranslateAttr().Set(point)
+            # generator.add_point(point)
+        # generator.update()
 
     def get_rmp_config_list(self):
 
