@@ -70,26 +70,42 @@ class OGAction(Action):
     # DRINKABLE = {'wine'}
 
 
-    SURFACES = {"kitchencabinet", "bed", "kitchentable"}  
+    SURFACES = {"bottomcabinet", "bed", "breakfasttable"}  
                 # bottom_cabinet_slgzfc_0， bed_zrumze_0， breakfast_table_skczfi_1   #coffee_table_fqluyq_0
     SITTABLE = {"bed"}          
-    CAN_OPEN = {"fridge", "window", "microwave", "kitchencabinet"} #fridge_xyejdx_0, window_ithrgo_2, microwave_182, 
-    CONTAINERS = {"fridge", "garbagecan", "microwave", "kitchencabinet"} # 
-    GRABBABLE = {"apple", 'wine', 'plate', "rag", "kitchenknife", "cutlets"}
-                # apple_omzprq_0
-    cleaning_tools = {"rag"}
-    cutting_tools = {"kitchenknife"}
-    HAS_SWITCH = {"tv", "faucet", "candle", "microwave"} # electric_switch_wseglt_2
-    HAS_PLUG = {"tv", "mouse", "fridge", "microwave"}
-    CUTABLE = {"apple", "cutlets"} # apple,
-    WASHABLE = {"apple", "rag", "kitchenknife", "cutlets"}
-    EATABLE = {"apple", 'cutlets'}
-    DRINKABLE = {'wine'}
+    CAN_OPEN = {"fridge", "window", "microwave", "bottomcabinet"} #fridge_xyejdx_0, window_ithrgo_2, microwave_hjjxmi_0, 
+    CONTAINERS = {"fridge", "garbagecan", "microwave", "bottomcabinet"} # trash_can_zotrbg_0
+    GRABBABLE = {"apple", 'milk', 'plate', "rag", "kitchenknife", "chips"} 
+                # apple_omzprq_0, box_of_almond_milk_oiiqwq_0, plate_amhlqh_0,carving_knife_alekva_0, bag_of_chips_bryahw_0
+    cleaning_tools = {"rag"} # rag_oocmed_0
+    cutting_tools = {"kitchenknife"} # carving_knife_alekva_0
+    HAS_SWITCH = {"tv", "faucet", "electricswitch", "microwave"} # standing_tv_udotid_0, sink_zexzrc_0, electric_switch_wseglt_2
+    HAS_PLUG = {"tv", "loudspeaker", "fridge", "microwave"} #loudspeaker_bmpdyv_0
+    CUTABLE = {"apple", "chips"} # bag_of_chips_bryahw_0
+    WASHABLE = {"apple", "rag", "kitchenknife", "chips"}
+    EATABLE = {"apple", 'chips'}
+    DRINKABLE = {'milk'} #box_of_almond_milk_oiiqwq_0
 
     obj2og = {}
     obj2og["apple"] = "apple_omzprq_0"
-    obj2og["kitchencabinet"] = "bottom_cabinet_slgzfc_0"
+    obj2og["milk"] = "box_of_almond_milk_oiiqwq_0"
+    obj2og["chips"] = "bag_of_chips_bryahw_0"
+
+    obj2og["microwave"] = "microwave_hjjxmi_0"
+    obj2og["fridge"] = "fridge_xyejdx_0"
     obj2og["window"] = "window_ithrgo_2"
+    obj2og["bottomcabinet"] = "bottom_cabinet_slgzfc_0"
+    obj2og["bed"] = "bed_zrumze_0"
+    obj2og["breakfasttable"] = "breakfast_table_skczfi_1"
+    obj2og["rag"] = "rag_oocmed_0"
+    obj2og["kitchenknife"] = "carving_knife_alekva_0"
+    obj2og["plate"] = "plate_amhlqh_0"
+    obj2og["tv"] = "standing_tv_udotid_0"
+    obj2og["faucet"] = "sink_zexzrc_0"
+    obj2og["electricswitch"] = "electric_switch_wseglt_2"
+    obj2og["loudspeaker"] = "loudspeaker_bmpdyv_0"
+    obj2og["garbagecan"] = "trash_can_zotrbg_0"
+    
 
 
 

@@ -403,7 +403,7 @@
                 "root_link": {
                     "pos": [
                         0.09590596705675125,
-                        0.7292457818984985,
+                        1.1392457818984985,
                         0.2838297486305237
                     ],
                     "ori": [
@@ -504,7 +504,7 @@
                 "root_link": {
                     "pos": [
                         0.039613768458366394,
-                        0.350189208984375,
+                        0.868189208984375,
                         0.4828847646713257
                     ],
                     "ori": [
@@ -624,80 +624,18 @@
                     }
                 }
             },
-            "shelf_njwsoa_1": {
+            "sofa_bskyog_0": {
                 "root_link": {
                     "pos": [
-                        1.4809290170669556,
-                        2.8649778366088867,
-                        0.8199405074119568
+                        1.38523,
+                        1.23144,
+                        0.39642
                     ],
                     "ori": [
-                        0.0,
-                        2.066371962428093e-09,
-                        -0.7036992311477661,
-                        0.7104978561401367
-                    ],
-                    "lin_vel": [
-                        0.0,
-                        0.0,
-                        -0.08175000548362732
-                    ],
-                    "ang_vel": [
-                        0.0,
-                        0.0,
-                        0.0
-                    ]
-                },
-                "joints": {},
-                "non_kin": {
-                    "Temperature": {
-                        "temperature": 23.0
-                    }
-                }
-            },
-            "shelf_owvfik_0": {
-                "root_link": {
-                    "pos": [
-                        0.6396535634994507,
-                        3.309452533721924,
-                        0.369286447763443
-                    ],
-                    "ori": [
-                        -1.9970446373918094e-05,
-                        -2.1258933884382714e-06,
-                        -2.1152663975954056e-07,
-                        1.000000238418579
-                    ],
-                    "lin_vel": [
-                        -0.000512397033162415,
-                        -0.0009925595950335264,
-                        -7.252820068970323e-05
-                    ],
-                    "ang_vel": [
-                        0.001651911181397736,
-                        -0.0006773169152438641,
-                        -0.000566016708035022
-                    ]
-                },
-                "joints": {},
-                "non_kin": {
-                    "Temperature": {
-                        "temperature": 23.0
-                    }
-                }
-            },
-            "sofa_mnfbbh_0": {
-                "root_link": {
-                    "pos": [
-                        1.155757188796997,
-                        1.2314355373382568,
-                        0.3964160084724426
-                    ],
-                    "ori": [
-                        -1.6239937394857407e-08,
-                        -1.0128132998943329e-08,
-                        -0.7063470482826233,
-                        0.7078657746315002
+                        0,
+                        0,
+                        0.9963470482826233,
+                        0.01953
                     ],
                     "lin_vel": [
                         0.0,
@@ -891,59 +829,6 @@
                 "non_kin": {
                     "Temperature": {
                         "temperature": 23.0
-                    }
-                }
-            },
-            "table_lamp_xbfgjc_0": {
-                "root_link": {
-                    "pos": [
-                        0.027154669165611267,
-                        3.424875497817993,
-                        0.9100505709648132
-                    ],
-                    "ori": [
-                        0.0004670448834076524,
-                        -0.009647523984313011,
-                        -0.055750772356987,
-                        0.9983980059623718
-                    ],
-                    "lin_vel": [
-                        -0.011549293994903564,
-                        0.0026145244482904673,
-                        -0.0033445190638303757
-                    ],
-                    "ang_vel": [
-                        0.02170959673821926,
-                        -0.08429214358329773,
-                        -0.06008416786789894
-                    ]
-                },
-                "joints": {
-                    "j_link_1": {
-                        "pos": [
-                            0.001442536013200879
-                        ],
-                        "vel": [
-                            0.05192314088344574
-                        ],
-                        "effort": [
-                            0.0
-                        ],
-                        "target_pos": [
-                            0.0
-                        ],
-                        "target_vel": [
-                            0.0
-                        ]
-                    }
-                },
-                "non_kin": {
-                    "Temperature": {
-                        "temperature": 23.0
-                    },
-                    "ToggledOn": {
-                        "value": false,
-                        "hand_in_marker_steps": 0
                     }
                 }
             },
@@ -1957,7 +1842,7 @@
                 "root_link": {
                     "pos": [
                         0.039608314633369446,
-                        0.8035104870796204,
+                        1.0235104870796204,
                         0.0023727910593152046
                     ],
                     "ori": [
@@ -2506,15 +2391,15 @@
             "fridge_xyejdx_0": {
                 "root_link": {
                     "pos": [
-                        -0.4801808297634125,
-                        -3.6357784271240234,
-                        0.7401729822158813
+                        0.6043538173491092,
+                        3.2100813640940076, 
+                        0.603870969500921
                     ],
                     "ori": [
                         0.0,
-                        -1.2187229003757238e-10,
-                        1.0000001192092896,
-                        3.91155481338501e-08
+                        0,
+                        0,
+                        1
                     ],
                     "lin_vel": [
                         0.0,
@@ -2609,6 +2494,7 @@
                     }
                 }
             },
+            
             "mirror_pevdqu_0": {
                 "root_link": {
                     "pos": [
@@ -2671,6 +2557,148 @@
                     "MaxTemperature": {
                         "max_temperature": 23.0
                     }
+                }
+            },
+            "box_of_almond_milk_oiiqwq_0": {
+                "root_link": {
+                    "pos": [
+                        -0.22727264472027883, 
+                        3.2001987820814644, 
+                        0.8916660551234111
+                    ],
+                    "ori": [
+                        0,
+                        0,
+                        -0.7426,
+                        0.66973
+                    ],
+                    "lin_vel": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "ang_vel": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                "non_kin": {
+                    "Temperature": {
+                        "temperature": 23.0
+                    },
+                    "MaxTemperature": {
+                        "max_temperature": 23.0
+                    }
+                }
+            },
+            "bag_of_chips_bryahw_0": {
+                "root_link": {
+                    "pos": [
+                        1.2910961961798748, 
+                        1.582927202952699, 
+                        0.45595109319408393
+                    ],
+                    "ori": [
+                        0,
+                        0,
+                        -0.7426,
+                        0.66973
+                    ],
+                    "lin_vel": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "ang_vel": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                },
+                "non_kin": {
+                    "Temperature": {
+                        "temperature": 23.0
+                    },
+                    "MaxTemperature": {
+                        "max_temperature": 23.0
+                    }
+                }
+            },
+
+            "rag_oocmed_0": {
+                "root_link": {
+                    "pos": [
+                        -1.6425701852527215, 
+                        -0.624523305271566, 
+                        0.7927377580303901
+                    ],
+                    "ori": [
+                        0,
+                        0,
+                        -0.7426,
+                        0.66973
+                    ],
+                    "lin_vel": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "ang_vel": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                }
+            },     
+            "plate_amhlqh_0": {
+                "root_link": {
+                    "pos": [
+                        -0.018547181989599246, 
+                        1.1005227123466408, 
+                        0.43405693852385185
+                    ],
+                    "ori": [
+                        0,
+                        0,
+                        -0.7426,
+                        0.66973
+                    ],
+                    "lin_vel": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "ang_vel": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
+                }
+            },
+            "carving_knife_alekva_0": {
+                "root_link": {
+                    "pos": [
+                        0.1151810252610384, 
+                        1.4952044259451544, 
+                        0.5549748771435169
+                    ],
+                    "ori": [
+                        0,
+                        0,
+                        -0.98907,
+                        0.14745
+                    ],
+                    "lin_vel": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "ang_vel": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ]
                 }
             },
             "picture_etixod_0": {
@@ -6873,60 +6901,18 @@
                     "uuid": 28627116
                 }
             },
-            "shelf_njwsoa_1": {
+            "sofa_bskyog_0": {
                 "class_module": "omnigibson.objects.dataset_object",
                 "class_name": "DatasetObject",
                 "args": {
-                    "name": "shelf_njwsoa_1",
-                    "prim_path": "/World/shelf_njwsoa_1",
-                    "category": "shelf",
-                    "model": "njwsoa",
-                    "scale": [
-                        1.5873714342797873,
-                        2.0510858263634995,
-                        1.442388612806053
-                    ],
-                    "fixed_base": false,
-                    "in_rooms": [
-                        "living_room_0"
-                    ],
-                    "bddl_object_scope": null,
-                    "uuid": 30330937
-                }
-            },
-            "shelf_owvfik_0": {
-                "class_module": "omnigibson.objects.dataset_object",
-                "class_name": "DatasetObject",
-                "args": {
-                    "name": "shelf_owvfik_0",
-                    "prim_path": "/World/shelf_owvfik_0",
-                    "category": "shelf",
-                    "model": "owvfik",
-                    "scale": [
-                        1.5948303586703123,
-                        1.5752197276147508,
-                        1.7199159078905804
-                    ],
-                    "fixed_base": false,
-                    "in_rooms": [
-                        "living_room_0"
-                    ],
-                    "bddl_object_scope": null,
-                    "uuid": 53354553
-                }
-            },
-            "sofa_mnfbbh_0": {
-                "class_module": "omnigibson.objects.dataset_object",
-                "class_name": "DatasetObject",
-                "args": {
-                    "name": "sofa_mnfbbh_0",
-                    "prim_path": "/World/sofa_mnfbbh_0",
+                    "name": "sofa_bskyog_0",
+                    "prim_path": "/World/sofa_bskyog_0",
                     "category": "sofa",
-                    "model": "mnfbbh",
+                    "model": "bskyog",
                     "scale": [
-                        1.087136480065697,
-                        1.2567400817266314,
-                        1.1663794534625964
+                        0.547136480065697,
+                        0.6267400817266314,
+                        0.5863794534625964
                     ],
                     "fixed_base": false,
                     "in_rooms": [
@@ -7018,27 +7004,6 @@
                     ],
                     "bddl_object_scope": null,
                     "uuid": 81774205
-                }
-            },
-            "table_lamp_xbfgjc_0": {
-                "class_module": "omnigibson.objects.dataset_object",
-                "class_name": "DatasetObject",
-                "args": {
-                    "name": "table_lamp_xbfgjc_0",
-                    "prim_path": "/World/table_lamp_xbfgjc_0",
-                    "category": "table_lamp",
-                    "model": "xbfgjc",
-                    "scale": [
-                        1.3590325568389083,
-                        1.1551304322237963,
-                        1.3728127026564225
-                    ],
-                    "fixed_base": false,
-                    "in_rooms": [
-                        "living_room_0"
-                    ],
-                    "bddl_object_scope": null,
-                    "uuid": 61187170
                 }
             },
             "trash_can_zotrbg_0": {
@@ -7640,9 +7605,9 @@
                     "category": "fridge",
                     "model": "xyejdx",
                     "scale": [
-                        1.255203227875746,
-                        1.0555772796070941,
-                        0.9015748320766012
+                        1.005203227875746,
+                        0.8555772796070941,
+                        0.7215748320766012
                     ],
                     "fixed_base": true,
                     "in_rooms": [
@@ -7703,6 +7668,96 @@
                         1.5,
                         1.5,
                         1.5
+                    ],
+                    "in_rooms": [
+                        "living_room_0"
+                    ]
+                }
+            },
+            "box_of_almond_milk_oiiqwq_0": {
+                "class_module": "omnigibson.objects.dataset_object",
+                "class_name": "DatasetObject",
+                "args": {
+                    "name": "box_of_almond_milk_oiiqwq_0",
+                    "category": "box_of_almond_milk",
+                    "model": "oiiqwq",
+                    "prim_type": 0,
+                    "scale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "in_rooms": [
+                        "living_room_0"
+                    ]
+                }
+            },
+            "bag_of_chips_bryahw_0": {
+                "class_module": "omnigibson.objects.dataset_object",
+                "class_name": "DatasetObject",
+                "args": {
+                    "name": "bag_of_chips_bryahw_0",
+                    "category": "bag_of_chips",
+                    "model": "bryahw",
+                    "prim_type": 0,
+                    "scale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "in_rooms": [
+                        "living_room_0"
+                    ]
+                }
+            },
+            "rag_oocmed_0": {
+                "class_module": "omnigibson.objects.dataset_object",
+                "class_name": "DatasetObject",
+                "args": {
+                    "name": "rag_oocmed_0",
+                    "category": "rag",
+                    "model": "oocmed",
+                    "prim_type": 0,
+                    "scale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "in_rooms": [
+                        "living_room_0"
+                    ]
+                }
+            },
+            "plate_amhlqh_0": {
+                "class_module": "omnigibson.objects.dataset_object",
+                "class_name": "DatasetObject",
+                "args": {
+                    "name": "plate_amhlqh_0",
+                    "category": "plate",
+                    "model": "amhlqh",
+                    "prim_type": 0,
+                    "scale": [
+                        1,
+                        1,
+                        1
+                    ],
+                    "in_rooms": [
+                        "living_room_0"
+                    ]
+                }
+            },
+            "carving_knife_alekva_0": {
+                "class_module": "omnigibson.objects.dataset_object",
+                "class_name": "DatasetObject",
+                "args": {
+                    "name": "carving_knife_alekva_0",
+                    "category": "carving_knife",
+                    "model": "alekva",
+                    "prim_type": 0,
+                    "scale": [
+                        1.0,
+                        1,
+                        1
                     ],
                     "in_rooms": [
                         "living_room_0"

@@ -277,7 +277,8 @@ class OmnigibsonTiago(OmnigibsonBase):
         )
 
     def set_viewer_camera(self):
-        set_camera_view(eye=[0.68,3.33,1.10], target=[0.30,2.42,0.96], camera_prim_path="/OmniverseKit_Persp")
+        set_camera_view(eye=[-1.66,-1.93,2.06], target=[-1.34,-1.03,1.76], camera_prim_path="/OmniverseKit_Persp")
+        print("dof_names",self.robot.articulation.dof_names)
 
     def load_example_assets(self):
         """Load assets onto the stage and return them so they can be registered with the
@@ -300,13 +301,9 @@ class OmnigibsonTiago(OmnigibsonBase):
 
         # 添加日光
         from pxr import Sdf, UsdLux
-        sphereLight = UsdLux.SphereLight.Define(get_current_stage(), Sdf.Path("/World/SphereLight"))
-        sphereLight.CreateRadiusAttr(2)
-        sphereLight.CreateIntensityAttr(500000)
-        XFormPrim(str(sphereLight.GetPath())).set_world_pose([6.5, 0, 12])
-
-        # 添加一些物体
-        
+        distantLight = UsdLux.DistantLight.Define(get_current_stage(), Sdf.Path("/World/DistantLight"))
+        distantLight.CreateIntensityAttr(2500)
+        XFormPrim(str(distantLight.GetPath())).set_world_pose([6.5, 0, 12])
 
         self.post_load_assets()
         # Return assets that were added to the stage so that they can be registered with the core.World
