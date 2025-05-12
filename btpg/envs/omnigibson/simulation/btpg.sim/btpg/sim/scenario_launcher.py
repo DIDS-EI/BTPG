@@ -1,7 +1,7 @@
 from .utils import SharedStatus, get_isaacsim_asset
 import os
 from .scenarios.base import BaseScenario
-from .scenarios.omnigibson_tiago import OmnigibsonTiago
+from .scenarios.omnigibson_tiago_locomotion import OmnigibsonTiagoLocomotion
 from .scenarios.omnigibson_base import OmnigibsonBase
 
 class ScenarioLauncher:
