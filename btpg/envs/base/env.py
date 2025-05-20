@@ -9,7 +9,7 @@ class Env(object):
     agent_num = 1
     behavior_lib_path = None
     print_ticks = False
-    headless = True
+    headless = False
 
     def __init__(self):
         self.time = 0

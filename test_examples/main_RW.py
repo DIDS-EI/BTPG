@@ -13,6 +13,9 @@ max_goal_num=5
 diffcult_type= "mix" #"single"  #"mix" "multi"
 scene = "RW" # RH RHS RW
 
+headless = False
+
+
 # ===================== RoboWaiter ========================
 goal_gen = RoboWaiterGoalGen()
 goal_ls = goal_gen.random_generate_goals(max_goal_num ,diffcult_type=diffcult_type)
@@ -73,7 +76,6 @@ goal = goal_transfer_str(goal_str)[0]
 print(f"goal: {goal}") # {'IsIn(milk,fridge)', 'IsClose(fridge)'}
 
 
-headless = True
 
 
 if scene in ["VH","RW"]:
