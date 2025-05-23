@@ -11,6 +11,9 @@ max_goal_num=5
 diffcult_type= "mix" #"single"  #"mix" "multi"
 scene = "VH" # RH RHS RW
 
+
+headless = False
+
 # ===================== VirtualHome ========================
 goal_gen = VirtualHomeGoalGen()
 goal_ls = goal_gen.random_generate_goals(max_goal_num ,diffcult_type=diffcult_type)
@@ -178,7 +181,6 @@ bt.draw()
 goal = goal_transfer_str(goal_str)[0]
 print(f"goal: {goal}") # {'IsIn(milk,fridge)', 'IsClose(fridge)'}
 
-headless = True
 
 if scene in ["VH","RW"]:
     if not headless:
