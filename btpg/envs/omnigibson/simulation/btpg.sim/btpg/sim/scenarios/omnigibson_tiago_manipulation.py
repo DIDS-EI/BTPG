@@ -54,8 +54,6 @@ from omni.isaac.core.utils.numpy.rotations import euler_angles_to_quats, quats_t
 from .omnigibson_base import OmnigibsonBase, Robot
 from omni.isaac.occupancy_map.utils.utils import update_location as update_occupancy_map_location
 from omni.isaac.occupancy_map.utils.utils import generate_image as generate_occupancy_map_image,compute_coordinates
-import matplotlib.pyplot as plt
-
 config_folder = "btpg/envs/omnigibson/assets/"
 
 
@@ -84,21 +82,9 @@ class PathNavigator:
         map_pos = (end_grid_x,end_grid_y)
         if self.target_map_pos != map_pos:
             self.target_map_pos = map_pos
-            self.path = a_star_search(self.occupancy_map, (start_grid_x,start_grid_y), self.target_map_pos,robot_size=(1,1))
-            print("calculate path",start_grid_x,start_grid_y,self.target_map_pos, "occupied:", self.occupancy_map[self.target_map_pos[0],self.target_map_pos[1]], "path length:", len(self.path))
-
-            fig_robot = plt.Circle((start_grid_x,start_grid_y), 2, color='blue', fill=True)
-            fig_target = plt.Circle((end_grid_x,end_grid_y), 2, color='red', fill=True)
-            self.save_occupancy_map_figure([fig_robot,fig_target])
+            self.path = a_star_search(self.occupancy_map, (start_grid_x,start_grid_y), self.target_map_pos)
 
         self.target_pos = target_pos
-        
-        if len(self.path) > 0:
-            next_pos = self.path.pop(0)
-            # print("map pos",next_pos)
-            return self.map_to_pos(next_pos[0],next_pos[1],start_pos[2])
-        else:
-            return None
 
     def create_occupancy_map(self):
         import omni
@@ -113,28 +99,15 @@ class PathNavigator:
         # update_occupancy_map_location(self.occupancy_map, (-1,0,0.6), (-1, -1, -0.5), (1., 1., 0.63))
         self.occupancy_map_generator.generate()
         dims = self.occupancy_map_generator.get_dimensions()
-        map_buffer = self.occupancy_map_generator.get_buffer()
-        # image_buffer = generate_occupancy_map_image(self.occupancy_map_generator, [0, 0, 0, 255], [127, 127, 127, 255], [255, 255, 255, 255])
-        # image_array = np.array(image_buffer).reshape(dims[1],dims[0],4)
-        # gray_image_array = np.dot(image_array[..., :3], [0.299, 0.587, 0.114])
-        # self.occupancy_map = gray_image_array < 1
+        image_buffer = generate_occupancy_map_image(self.occupancy_map_generator, [0, 0, 0, 255], [127, 127, 127, 255], [255, 255, 255, 255])
+        image_array = np.array(image_buffer).reshape(dims[1],dims[0],4)
+        gray_image_array = np.dot(image_array[..., :3], [0.299, 0.587, 0.114])
     
-        self.occupancy_map = np.array(map_buffer).reshape(dims[1],dims[0]) == 1
-        self.occupancy_map = np.flip(self.occupancy_map,axis=1)
-        # print(self.occupancy_map)
-        # print(self.occupancy_map[59,117])
         # 将灰度图像转换为二值图像
-        # print(self.occupancy_map)
-        # print(self.occupancy_map[60,110])
-        fig_point = plt.Circle((59,117), 2, color='red', fill=True)
-        self.save_occupancy_map_figure([fig_point])
-
-    def save_occupancy_map_figure(self,fig_point_list:list):
-        plt.imshow(~self.occupancy_map)
-        for fig_point in fig_point_list:
-            plt.gca().add_patch(fig_point)
+        self.occupancy_map = gray_image_array > 1
+        import matplotlib.pyplot as plt
+        plt.imshow(self.occupancy_map)
         plt.savefig("/home/cxl/code/BTPG/outputs/occupancy_map.png")
-        plt.close()
 
 
     def pos_to_map(self,position:np.ndarray):
@@ -142,10 +115,10 @@ class PathNavigator:
         grid_y = int((position[1] - self.min_bound[1]) / self.occupancy_map_cell_size)
         return grid_x,grid_y
 
-    def map_to_pos(self,grid_x:int,grid_y:int,pos_z:float):
-        pos_x = (grid_x+0.5) * self.map_cell_size + self.min_bound[0]
-        pos_y = (grid_y+0.5) * self.map_cell_size + self.min_bound[1]
-        return np.array([pos_x, pos_y,pos_z])
+    def map_to_pos(self,grid_x:int,grid_y:int):
+        pos_x = (grid_x+0.5) * self.map_cell_size + self.min_bound
+        pos_y = (grid_y+0.5) * self.map_cell_size + self.min_bound
+        return pos_x, pos_y
 
 class Tiago(Robot):
     path_navigator = None
@@ -178,7 +151,7 @@ class Tiago(Robot):
         0.0,0.0, 
         0.0,0.0])
 
-        self.init_position = np.array([-1.,0,0])
+        self.init_position = np.array([0.,0,0])
         self.position_offset = np.array([0.,0,0.06])
         self.linear_velocity = np.array([0.,0.,0])
 
@@ -278,14 +251,13 @@ class Tiago(Robot):
             self.path_navigator = PathNavigator(map_center_pos, min_bound, max_bound,cell_size=0.1)
             self.path_navigator.create_occupancy_map()
 
-        next_pos = self.path_navigator.get_next_pos(self.position, target_pos)
-        if next_pos is not None:
-            self.set_position(next_pos)
-            # print(self.position,target_pos,next_pos)
+        target_pos,_ = self._red_cube.get_world_pose()
+        self.path_navigator.get_next_pos(self.position, target_pos)
 
 
 
-class OmnigibsonTiagoLocomotion(OmnigibsonBase):
+
+class OmnigibsonTiagoManipulation(OmnigibsonBase):
     ROBOT_CLS = Tiago
 
     occupancy_map = None
@@ -348,6 +320,7 @@ class OmnigibsonTiagoLocomotion(OmnigibsonBase):
                 if "light" in child_prim.GetName():
                     get_prim_children(child_prim)[0].GetAttribute("inputs:intensity").Set(150000)
 
+
             if scene_json['objects_info']['init_info'][obj_name]["args"].get('fixed_base',False) or "cabinet" in category or "switch" in category:
                 prim = prims_utils.get_prim_at_path(obj_prim.prim_path)
                 
@@ -367,7 +340,7 @@ class OmnigibsonTiagoLocomotion(OmnigibsonBase):
     def create_objects(self):
         self._red_cube = VisualCuboid(
             name="RedCube",
-            position=np.array([0.29, -0.93, 0.48]),
+            position=np.array([0.68, 0.28, 0.48]),
             prim_path="/World/red_cube",
             size=0.05,
             color=np.array([1, 0, 0]),
@@ -381,7 +354,7 @@ class OmnigibsonTiagoLocomotion(OmnigibsonBase):
         )
 
     def set_viewer_camera(self):
-        set_camera_view(eye=[0.46,2.84,1.71], target=[0.34,1.91,1.35], camera_prim_path="/OmniverseKit_Persp")
+        set_camera_view(eye=[-1.66,-1.93,2.06], target=[-1.34,-1.03,1.76], camera_prim_path="/OmniverseKit_Persp")
         print("dof_names",self.robot.articulation.dof_names)
 
     def load_example_assets(self):
@@ -451,12 +424,12 @@ class OmnigibsonTiagoLocomotion(OmnigibsonBase):
 
             # pos_target_lookat_relative = pos_target_relative
             # pos_lookat_relative = pos_lookat_relative
-            # # print(pos_target_lookat_relative)
-            # # print(pos_lookat_relative)
+            # print(pos_target_lookat_relative)
+            # print(pos_lookat_relative)
             # lookat_direction = pos_lookat_relative - pos_target_lookat_relative 
             # euler_lookat = quats_to_euler_angles(quat_lookat)
             # print(lookat_direction)
-            # # 通过位置目标计算 eef 的目标相对位置
+            # 通过位置目标计算 eef 的目标相对位置
             # translation_target = pos_target_relative - pos_robot_relative
 
             # # 通过指向物体计算欧拉角
@@ -467,21 +440,21 @@ class OmnigibsonTiagoLocomotion(OmnigibsonBase):
             orientation_target = euler_angles_to_quats(euler_target)
 
             # 开始控制
-            # self._left_rmpflow.set_end_effector_target(left_translation_target, orientation_target)
-            # self._right_rmpflow.set_end_effector_target(right_translation_target, orientation_target)
+            self._left_rmpflow.set_end_effector_target(left_translation_target, orientation_target)
+            self._right_rmpflow.set_end_effector_target(right_translation_target, orientation_target)
 
-            # self._left_rmpflow.update_world()
-            # self._right_rmpflow.update_world()
-            # left_action = self._left_articulation_motion_policy.get_next_articulation_action(1 / 60)
-            # right_action = self._right_articulation_motion_policy.get_next_articulation_action(1 / 60)
+            self._left_rmpflow.update_world()
+            self._right_rmpflow.update_world()
+            left_action = self._left_articulation_motion_policy.get_next_articulation_action(1 / 60)
+            right_action = self._right_articulation_motion_policy.get_next_articulation_action(1 / 60)
 
             # # action.joint_positions[4] = euler_lookat[0]
             # # print(f"action: {action.joint_positions[0]:.2f}, {action.joint_positions[1]:.2f}, {action.joint_positions[2]:.2f}, {action.joint_positions[3]:.2f}, {action.joint_positions[4]:.2f}, {action.joint_positions[5]:.2f}, {action.joint_positions[6]:.2f}")
-            # self._articulation.apply_action(left_action)
-            # self._articulation.apply_action(right_action)
+            self._articulation.apply_action(left_action)
+            self._articulation.apply_action(right_action)
 
-            target_pos,_ = self._red_cube.get_world_pose()
-            self.robot.step_locomotion(target_pos)
+
+            # self.robot.step_locomotion()
 
             # print(left_action.joint_positions)
             # print(right_action.joint_positions)

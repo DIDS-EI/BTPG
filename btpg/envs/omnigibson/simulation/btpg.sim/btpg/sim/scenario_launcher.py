@@ -2,11 +2,12 @@ from .utils import SharedStatus, get_isaacsim_asset
 import os
 from .scenarios.base import BaseScenario
 from .scenarios.omnigibson_tiago_locomotion import OmnigibsonTiagoLocomotion
+from .scenarios.omnigibson_tiago_manipulation import OmnigibsonTiagoManipulation
 from .scenarios.omnigibson_base import OmnigibsonBase
 
 class ScenarioLauncher:
     def __init__(self,shared_status:SharedStatus):
-        self.scenario:BaseScenario = OmnigibsonTiago(shared_status)
+        self.scenario:BaseScenario = OmnigibsonTiagoLocomotion(shared_status)
 
     def reset(self):
         self.scenario.reset()
