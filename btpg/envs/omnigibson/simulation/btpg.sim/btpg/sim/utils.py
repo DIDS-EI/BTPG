@@ -178,43 +178,83 @@ class SharedStatus:
             self._data.update(kwargs)
 
 
-from pxr import Usd, UsdGeom, UsdPhysics
-import xml.etree.ElementTree as ET
 
-def usd_to_urdf(usd_file, urdf_file):
-    # 打开 USD 文件
-    stage = Usd.Stage.Open(usd_file)
-    root_prim = stage.GetPseudoRoot()
+'''
+===============================
+A*算法
+===============================
+'''
 
-    # 创建 URDF 的根元素
-    urdf_root = ET.Element("robot", name="robot_name")
 
-    # 遍历 USD 中的每个 Prim
-    for prim in root_prim.GetChildren():
-        if prim.IsA(UsdGeom.Xformable):
-            # 提取几何信息
-            geom = UsdGeom.Geometry(prim)
-            if geom:
-                # 创建 URDF 的 link 元素
-                link = ET.SubElement(urdf_root, "link", name=prim.GetName())
-                visual = ET.SubElement(link, "visual")
-                geometry = ET.SubElement(visual, "geometry")
-                mesh = ET.SubElement(geometry, "mesh", filename=geom.GetPath().pathString)
+import heapq
+# 定义A*算法的启发式函数（曼哈顿距离）
+def heuristic(a, b):
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
-                # 提取惯性信息（如果有）
-                if prim.IsA(UsdPhysics.RigidBodyAPI):
-                    inertia = ET.SubElement(link, "inertial")
-                    mass = ET.SubElement(inertia, "mass", value="1.0")  # 示例值
-                    origin = ET.SubElement(inertia, "origin", xyz="0 0 0", rpy="0 0 0")  # 示例值
+# 检查机器人在某个位置时，其5x5区域是否可通行
+def is_passable(grid, x, y,robot_size = (3,3)):
+    for i in range(x, x + robot_size[0]):
+        for j in range(y, y + robot_size[1]):
+            if i >= len(grid) or j >= len(grid[0]) or grid[-i][j] == True:
+                return False
+    return True
 
-            # 提取关节信息
-            if prim.IsA(UsdPhysics.Joint):
-                joint = ET.SubElement(urdf_root, "joint", name=prim.GetName())
-                ET.SubElement(joint, "parent", link=prim.GetAttribute("inputs:parent").Get())
-                ET.SubElement(joint, "child", link=prim.GetAttribute("inputs:child").Get())
-                ET.SubElement(joint, "axis", xyz="0 0 1")  # 示例值
-                ET.SubElement(joint, "limit", lower="-1.57", upper="1.57")  # 示例值
-
-    # 保存 URDF 文件
-    tree = ET.ElementTree(urdf_root)
-    tree.write(urdf_file, encoding="utf-8", xml_declaration=True)
+# A*算法实现
+def a_star_search(grid, start, end,robot_size = (3,3)):
+    # 定义方向数组（上下左右）
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    # 初始化开放列表和关闭列表
+    open_list = []
+    closed_list = set()
+    
+    # 将起点加入开放列表
+    heapq.heappush(open_list, (0, start))
+    
+    # 记录每个节点的g值（从起点到当前节点的实际代价）
+    g_values = {start: 0}
+    
+    # 记录每个节点的父节点
+    came_from = {}
+    while open_list:
+        # 从开放列表中取出f值最小的节点
+        current_f, current_node = heapq.heappop(open_list)
+        
+        # 如果当前节点是终点，构造路径并返回
+        if current_node == end:
+            path = []
+            while current_node in came_from:
+                path.append(current_node)
+                current_node = came_from[current_node]
+            path.append(start)
+            path.reverse()
+            return path
+        
+        # 将当前节点加入关闭列表
+        closed_list.add(current_node)
+        # print(current_node)
+        # 遍历当前节点的邻居节点
+        for direction in directions:
+            neighbor = (current_node[0] + direction[0], current_node[1] + direction[1])
+            
+            # 检查邻居节点是否在网格范围内且其5x5区域可通行
+            if 0 <= neighbor[0] < len(grid) - robot_size[0] and 0 <= neighbor[1] < len(grid[0]) - robot_size[1] and is_passable(grid, neighbor[0], neighbor[1],robot_size):
+                # 计算从起点到邻居节点的g值
+                tentative_g = g_values[current_node] + 1
+                
+                # 如果邻居节点在关闭列表中或g值大于已知的g值，则跳过
+                if neighbor in closed_list or tentative_g >= g_values.get(neighbor, float('inf')):
+                    continue
+                
+                # 更新邻居节点的g值和父节点
+                g_values[neighbor] = tentative_g
+                came_from[neighbor] = current_node
+                
+                # 计算邻居节点的f值（g值 + 启发式函数值）
+                f_value = tentative_g + heuristic(neighbor, end)
+                
+                # 将邻居节点加入开放列表
+                heapq.heappush(open_list, (f_value, neighbor))
+    
+    # 如果无法找到路径，返回空列表
+    return []
