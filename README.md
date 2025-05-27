@@ -1,9 +1,9 @@
-# BTPG: A Platform and Benchmark for Behavior Tree Planning in Everyday Service Robots (IJCAI 2025)
+# BTPG (IJCAI 2025)
 
-A Platform and Benchmark for Behavior Tree Planning in Everyday Service Robots. Based on RoboWaiter, [VirtualHome](http://virtual-home.org/) v2.3.0 and OmniGinson.
+Based on RoboWaiter, [VirtualHome](http://virtual-home.org/) v2.3.0 and OmniGinson.
 <div align="center">
 
-[[Website]](https://dids-ei.github.io/Project/BTPG/)
+<!-- [[Website]](https://dids-ei.github.io/Project/BTPG/) -->
 [[Appendix]](images/_IJCAI_25_BTPG_Appendix.pdf)
 
 ![Python Version](images/python310.svg)
