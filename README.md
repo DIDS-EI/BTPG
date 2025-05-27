@@ -10,7 +10,7 @@ A Platform and Benchmark for Behavior Tree Planning in Everyday Service Robots. 
 ![GitHub license](images/license.svg)
 
 ______________________________________________________________________
-![](images/framework.png)
+<!-- ![](images/framework.png) -->
 </div>
 ## 🛠️ Installation
 
