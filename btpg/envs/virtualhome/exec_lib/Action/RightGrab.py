@@ -2,7 +2,7 @@ from btpg.envs.virtualhome.exec_lib._base.vh_action import VHAction
 from btpg.envs.virtualhome.exec_lib.Action.Grab import Grab
 
 class RightGrab(Grab):
-    can_be_expanded = True
+    can_be_expanded = False
     num_args = 1
     # obj1 is reachable (not inside some closed container)
 

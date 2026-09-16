@@ -3,10 +3,11 @@ import itertools
 from btpg.envs.virtualhome.exec_lib.Action.Grab import Grab
 
 class RightGrabFrom(Grab):
-    can_be_expanded = False
+    can_be_expanded = True
     num_args = 2
     # obj1 is reachable (not inside some closed container)
-    valid_args = list(itertools.product(VHAction.Objects, VHAction.CanOpenPlaces))
+    valid_args = list(itertools.product(
+        VHAction.Objects, sorted(VHAction.CanOpenPlaces | VHAction.SurfacePlaces)))
 
     def __init__(self, *args):
         super().__init__(*args)
@@ -16,13 +17,23 @@ class RightGrabFrom(Grab):
     def action_class_name(self):
         return Grab.__name__
 
+    @property
+    def script_args(self):
+        # VirtualHome's GRAB takes a single object; the place only refines
+        # the planning model.
+        return self.args[:1]
+
     @classmethod
     def get_info(cls,*arg):
         info = {}
-        info["pre"]={"IsRightHandEmpty(self)",f"IsIn({arg[0]},{arg[1]})",f"IsNear(self,{arg[1]})",f"IsOpen({arg[1]})"} # 至少有一只手是空闲的
+        if arg[1] in cls.CanOpenPlaces:
+            info["pre"]={"IsRightHandEmpty(self)",f"IsIn({arg[0]},{arg[1]})",f"IsNear(self,{arg[1]})",f"IsOpen({arg[1]})"}
+        else:
+            info["pre"]={"IsRightHandEmpty(self)",f"IsOn({arg[0]},{arg[1]})",f"IsNear(self,{arg[1]})"}
         info["add"]={f"IsRightHolding(self,{arg[0]})"}
         info["del_set"] = {f"IsRightHandEmpty(self)"}
         info["del_set"] |= {f'IsIn({arg[0]},{place})' for place in cls.CanPutInPlaces}
+        info["del_set"] |= {f'IsOn({arg[0]},{place})' for place in cls.SurfacePlaces}
         info["cost"] = 5
         return info
 
