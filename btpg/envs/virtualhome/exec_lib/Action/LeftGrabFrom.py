@@ -19,7 +19,7 @@ class LeftGrabFrom(Grab):
     def get_info(cls,*arg):
         info = {}
         info["pre"]={"IsLeftHandEmpty(self)",f"IsIn({arg[0]},{arg[1]})",f"IsNear(self,{arg[1]})",f"IsOpen({arg[1]})"} # 至少有一只手是空闲的
-        info["add"]={f"IsLeftHolding(self,{arg[0]})","IsLeftHandFull(self)"}
+        info["add"]={f"IsLeftHolding(self,{arg[0]})"}
         info["del_set"] = {f"IsLeftHandEmpty(self)"}
         info["del_set"] |= {f'IsIn({arg[0]},{place})' for place in cls.CanPutInPlaces}
         info["cost"] = 5
