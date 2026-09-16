@@ -55,11 +55,19 @@ def _load_action_classes():
     return classes
 
 
-def ground(classes):
-    """All grounded actions of the expandable classes, as (class, args, info)."""
+def ground(classes, expandable_only=True):
+    """Grounded actions as (class, args, info).
+
+    The syntactic checks run over every class, not just the ones currently
+    enabled for planning: a class that is disabled today can be enabled later,
+    and the model should be well formed either way. Abstract bases carry no
+    `get_info` and are skipped.
+    """
     out = []
     for name, cls in sorted(classes.items()):
-        if not getattr(cls, 'can_be_expanded', False):
+        if expandable_only and not getattr(cls, 'can_be_expanded', False):
+            continue
+        if not hasattr(cls, 'get_info'):
             continue
         n = getattr(cls, 'num_args', 0)
         args = getattr(cls, 'valid_args', [])
@@ -180,9 +188,10 @@ def check_small_scene_reachable_states(classes, cap=500000):
 
 def main():
     classes = _load_action_classes()
-    grounded = ground(classes)
-    print('loaded %d action classes, %d grounded actions'
-          % (len(classes), len(grounded)))
+    grounded = ground(classes, expandable_only=False)
+    planned = ground(classes)
+    print('loaded %d action classes; %d grounded actions in total, %d enabled for planning'
+          % (len(classes), len(grounded), len(planned)))
 
     results = [
         ('no write-only predicate', check_no_write_only_predicate(grounded)),
