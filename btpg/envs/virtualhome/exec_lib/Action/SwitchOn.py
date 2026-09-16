@@ -16,7 +16,7 @@ class SwitchOn(VHAction):
         info["pre"]={"IsLeftHandEmpty(self)",f"IsNear(self,{arg[0]})",f"IsSwitchedOff({arg[0]})"} # IsLeftHandEmpty()至少有一只手是空闲的
 
         if arg[0] in cls.CAN_OPEN:
-            info["pre"]={f"IsClose({arg[0]})"} #
+            info["pre"]|={f"IsClose({arg[0]})"} #
 
 
         info["add"]={f"IsSwitchedOn({arg[0]})"}
