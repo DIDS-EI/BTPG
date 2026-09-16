@@ -40,6 +40,11 @@ class VHAction(Action):
     SURFACES = SurfacePlaces
     SITTABLE = SittablePlaces
     CAN_OPEN = CanOpenPlaces
+
+    # Optional floor-plane coordinates {place: (x, y)} enabling distance-based
+    # walking; see Action/WalkFromTo.py. Empty by default, which leaves Walk
+    # and the rest of the model unchanged.
+    PLACE_COORD = {}
     CONTAINERS = CanPutInPlaces
     GRABBABLE = Objects
     HAS_SWITCH = HasSwitchObjects
