@@ -78,7 +78,7 @@ class VirtualHomeGoalGen(GoalGenerator):
             A = A.split('-')[0]
             B = B.split('-')[0]
             goal += 'IsIn_' + A + '_' + B
-            if diffcult_type!="single":
+            if diffcult_type != "single":
                 if B in self.CAN_OPEN:
                     goal += ' & IsClose_' + B
         elif condition == 'IsOpen_':
@@ -95,7 +95,36 @@ class VirtualHomeGoalGen(GoalGenerator):
         return goal
 
 
-    def get_goals_string(self,diffcult_type="multi",max_conjuncts=3,max_tries=8):
+    # Number of conjuncts drawn per difficulty. The first three are the original
+    # ones; `many` and `complex` extend the same axis upwards. `store_all` is
+    # handled separately: its size follows the scene rather than a fixed range.
+    DIFFICULTY = {
+        "single": (1, 1),
+        "multi": (2, 3),
+        "mix": (1, 3),
+        "many": (4, 6),
+        "complex": (7, 10),
+    }
+
+    def _store_all_goal(self):
+        """Put every grabbable object into one container and close it.
+
+        A household task whose size follows the scene: `len(GRABBABLE) + 1`
+        conjuncts, all of them served by the same container, so the subgoals are
+        serial rather than independent.
+        """
+        containers = sorted(self.CONTAINERS)
+        if not containers or not self.GRABBABLE:
+            return ''
+        B = random.choice(containers)
+        parts = ['IsIn_%s_%s' % (A, B) for A in sorted(self.GRABBABLE) if A != B]
+        if not parts:
+            return ''
+        if B in self.CAN_OPEN:
+            parts.append('IsClose_' + B)
+        return ' & '.join(parts)
+
+    def get_goals_string(self,diffcult_type="multi",max_conjuncts=None,max_tries=8):
         """A conjunctive goal whose conjuncts occupy distinct mutex slots.
 
         Conjuncts are drawn as before, but a draw is kept only if its slot is
@@ -103,13 +132,17 @@ class VirtualHomeGoalGen(GoalGenerator):
         places, an object to be in two places, or a container to be open and
         closed at once. The put-in-and-close pair is kept together: it is added
         only if both of its slots are free and both fit within the budget.
+
+        The budget defaults to the upper end of the difficulty, so the three
+        original difficulties keep their three-conjunct cap.
         """
-        if diffcult_type == "single":
-            goal_mount = random.randint(1, 1)
-        elif diffcult_type == "multi":
-            goal_mount = random.randint(2, 3)
-        elif diffcult_type == "mix":
-            goal_mount = random.randint(1, 3)
+        if diffcult_type == "store_all":
+            return self._store_all_goal()
+
+        lo, hi = self.DIFFICULTY[diffcult_type]
+        goal_mount = random.randint(lo, hi)
+        if max_conjuncts is None:
+            max_conjuncts = hi
 
         goal_list, used = [], set()
         for _ in range(goal_mount):
