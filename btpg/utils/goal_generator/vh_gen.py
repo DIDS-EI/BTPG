@@ -1,26 +1,30 @@
 import random
+
+from btpg.envs.virtualhome.exec_lib._base.vh_action import VHAction
 from btpg.utils.goal_generator.goal_gen_base import GoalGenerator
 
 
 class VirtualHomeGoalGen(GoalGenerator):
 
     def __init__(self):
+        """Vocabularies are taken from `VHAction` rather than restated here.
+
+        Keeping a second copy let the two drift: this class used to omit `bed`,
+        `sink` and `kitchencabinet` from its surfaces, nine of the grabbable
+        objects, `garbagecan` and `kitchencabinet` from the openable places, and
+        `stove` from the switchable ones. The copies are taken at construction
+        time, so a scene that narrows `VHAction`'s sets before building the
+        generator is picked up.
+        """
         super().__init__()
-        self.SURFACES = {"kitchentable","plate","nightstand","desk","cabinet","bathroomcounter","stove"} # put
-        self.SittablePlaces =  {"bed","sofa","chair","Bench"}  # sit
-        self.CAN_OPEN= {"fridge","dishwasher","microwave","stove","cabinet"}  # open
-        self.CONTAINERS={"fridge","dishwasher","microwave","stove","cabinet"}  # put in
-        self.GRABBABLE={"bananas",'chicken', 'cutlets','breadslice','chips','chocolatesyrup',
-                 'cupcake','milk','juice','wine',
-                 'cutleryknife','fryingpan','dishbowl','plate',
-                 'book',"waterglass"
-                 }  # grab
-        self.HAS_SWITCH = {"tv","faucet","lightswitch","dishwasher","coffeemaker","toaster","microwave",
-                            "tablelamp","computer"}  # switch on #candle  cellphone wallphone washingmachine不行# faucet 浴室龙头
+        self.SURFACES = set(VHAction.SurfacePlaces)             # put
+        self.SittablePlaces = set(VHAction.SittablePlaces)      # sit
+        self.CAN_OPEN = set(VHAction.CanOpenPlaces)             # open
+        self.CONTAINERS = set(VHAction.CanPutInPlaces)          # put in
+        self.GRABBABLE = set(VHAction.Objects)                  # grab
+        self.HAS_SWITCH = set(VHAction.HasSwitchObjects)        # switch on
 
-
-        self.AllObject = self.SURFACES | self.SittablePlaces | self.CAN_OPEN | self.CONTAINERS | self.GRABBABLE |\
-                     self.HAS_SWITCH
+        self.AllObject = self.SURFACES | self.SittablePlaces | self.CAN_OPEN | self.CONTAINERS | self.GRABBABLE |                     self.HAS_SWITCH
 
         self.cond_pred = {'IsOn_', 'IsIn_', 'IsOpen_', 'IsSwitchedOn_', 'IsNear_self_'}
 
