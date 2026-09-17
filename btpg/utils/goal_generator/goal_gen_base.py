@@ -4,7 +4,7 @@ import random
 
 class GoalGenerator:
 
-    def __int__(self):
+    def __init__(self):
         self.SURFACES = {"kitchencabinet", "bed"}
         self.SITTABLE = {"bed"}
         self.CAN_OPEN = {"fridge", "window", "microwave", "kitchencabinet"}
