@@ -15,7 +15,7 @@ class Watch(VHAction):
         info = {}
         info["pre"]={f"IsNear(self,{arg[0]})"}
         info["add"]={f"IsWatching(self,{arg[0]})"}
-        info["del_set"] = {f'"IsWatching(self,{obj})' for obj in cls.valid_args if obj != arg[0]}
+        info["del_set"] = {f'IsWatching(self,{obj})' for obj in cls.valid_args if obj != arg[0]}
         info["cost"] = 2
         return info
 

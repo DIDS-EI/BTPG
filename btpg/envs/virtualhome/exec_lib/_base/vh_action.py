@@ -40,6 +40,11 @@ class VHAction(Action):
     SURFACES = SurfacePlaces
     SITTABLE = SittablePlaces
     CAN_OPEN = CanOpenPlaces
+
+    # Optional floor-plane coordinates {place: (x, y)} enabling distance-based
+    # walking; see Action/WalkFromTo.py. Empty by default, which leaves Walk
+    # and the rest of the model unchanged.
+    PLACE_COORD = {}
     CONTAINERS = CanPutInPlaces
     GRABBABLE = Objects
     HAS_SWITCH = HasSwitchObjects
@@ -61,6 +66,13 @@ class VHAction(Action):
     def action_class_name(self):
         return self.__class__.__name__
 
+    @property
+    def script_args(self):
+        # Arguments passed to the simulator script. Defaults to the planning
+        # arguments; actions whose extra arguments only refine the planning
+        # model override this to match the simulator's action signature.
+        return self.args
+
 
     def change_condition_set(self):
         pass
@@ -73,10 +85,11 @@ class VHAction(Action):
         # else:
         #     script = [f'<char0> [{self.action_class_name.lower()}] <{self.args[0].lower()}> (1) <{self.args[1].lower()}> (1)']
 
-        if self.num_args==1:
-            script = [f'<char0> [{self.action_class_name.lower()}] <{self.args[0].lower()}> (1)']
+        sargs = self.script_args
+        if len(sargs)==1:
+            script = [f'<char0> [{self.action_class_name.lower()}] <{sargs[0].lower()}> (1)']
         else:
-            script = [f'<char0> [{self.action_class_name.lower()}] <{self.args[0].lower()}> (1) <{self.args[1].lower()}> (1)']
+            script = [f'<char0> [{self.action_class_name.lower()}] <{sargs[0].lower()}> (1) <{sargs[1].lower()}> (1)']
 
 
         self.env.run_script(script,verbose=True,camera_mode="PERSON_FROM_BACK") # FIRST_PERSON

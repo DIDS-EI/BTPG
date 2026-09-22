@@ -1,7 +1,7 @@
 from btpg.envs.virtualhome.exec_lib._base.vh_action import VHAction
 
 class Close(VHAction):
-    can_be_expanded = True
+    can_be_expanded = False
     num_args = 1
     valid_args = VHAction.CanOpenPlaces
 
